@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Floral Design Studio Pro — The Ultimate Flower Arrangement Platform</title>
+<meta name="description" content="Professional floral design studio with drag-and-drop arrangement builder, 200+ flowers, color wheel, recipe calculator, profit tracker, seasonal guide, and stunning proposal generator. Free.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#1a0a2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0a1a;
+  --bg2: #1a0f2e;
+  --card: rgba(255,255,255,0.04);
+  --card-h: rgba(255,255,255,0.08);
+  --bdr: rgba(255,255,255,0.08);
+  --bdr-h: rgba(255,255,255,0.18);
+  --txt: #ede9f5;
+  --dim: rgba(255,255,255,0.55);
+  --dimmer: rgba(255,255,255,0.3);
+  --rose: #ff6b8a;
+  --rose-g: rgba(255,107,138,0.25);
+  --pink: #ff8fab;
+  --blush: #ffc2d1;
+  --lavender: #c8b6ff;
+  --lilac: #e0aaff;
+  --sage: #a8d5ba;
+  --sage-g: rgba(168,213,186,0.25);
+  --gold: #ffd166;
+  --gold-g: rgba(255,209,102,0.25);
+  --cream: #fef3c7;
+  --peach: #ffb4a2;
+  --coral: #e5989b;
+  --sky: #89c4f4;
+  --mint: #98f5e1;
+  --mauve: #dda0dd;
+  --wine: #722f37;
+  --forest: #2d6a4f;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.1) transparent; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--txt);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+body::before {
+  content:'';position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 15% 35%, rgba(200,182,255,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 70% at 85% 15%, rgba(255,107,138,0.06) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 50% 85%, rgba(168,213,186,0.05) 0%, transparent 55%);
+  pointer-events:none;z-index:0;
+}
+
+/* === NAV === */
+.nav {
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;
+  background:rgba(15,10,26,0.88);backdrop-filter:blur(24px) saturate(180%);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+}
+.nav-logo { font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:700;letter-spacing:0.5px;
+  background:linear-gradient(135deg,var(--rose),var(--lavender),var(--sage));-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+.nav-links { display:flex;gap:6px;align-items:center; }
+.nav-links a {
+  padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;color:var(--dim);text-decoration:none;
+  transition:all 0.2s;letter-spacing:0.3px;
+}
+.nav-links a:hover,.nav-links a.active { color:var(--txt);background:rgba(255,255,255,0.06); }
+.nav-r { display:flex;gap:12px;align-items:center; }
+.auth-btn {
+  padding:6px 16px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;
+  border:1px solid rgba(255,255,255,0.12);background:rgba(255,255,255,0.05);color:var(--txt);
+  font-family:inherit;transition:all 0.2s;
+}
+.auth-btn:hover { background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.2); }
+#user-info { font-size:12px;color:var(--sage);font-weight:500;display:none; }
+#logout-btn { display:none; }
+
+/* === SECTIONS === */
+.section { position:relative;z-index:2;padding:100px 32px 60px;max-width:1280px;margin:0 auto; }
+.section-sm { padding:60px 32px; }
+
+/* === HERO === */
+.hero {
+  min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;
+  position:relative;z-index:2;padding:80px 32px;
+}
+.hero-inner { max-width:880px; }
+.hero-badge {
+  display:inline-flex;gap:8px;align-items:center;padding:8px 20px;border-radius:100px;
+  background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);
+  font-size:12px;font-weight:600;color:var(--dim);margin-bottom:32px;
+}
+.hero-badge .dot { width:7px;height:7px;border-radius:50%;background:var(--sage);box-shadow:0 0 10px var(--sage-g);animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+.hero h1 {
+  font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:700;
+  line-height:1.05;letter-spacing:-1px;margin-bottom:28px;
+  background:linear-gradient(135deg,#fff 20%,var(--blush) 50%,var(--lavender) 80%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p { font-size:clamp(1rem,1.8vw,1.25rem);color:var(--dim);font-weight:300;max-width:640px;margin:0 auto 48px;line-height:1.75; }
+.hero-stats { display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:700px;margin:0 auto; }
+.hero-stat {
+  background:var(--card);border:1px solid var(--bdr);border-radius:16px;padding:24px 16px;
+  backdrop-filter:blur(8px);transition:all 0.3s;
+}
+.hero-stat:hover { transform:translateY(-4px);border-color:var(--bdr-h);box-shadow:0 20px 50px -15px rgba(0,0,0,0.4); }
+.hero-stat-num { font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;line-height:1; }
+.hero-stat-lbl { font-size:0.78rem;color:var(--dim);font-weight:500;margin-top:4px; }
+
+/* === FLOATING PETALS === */
+.petals { position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden; }
+.petal {
+  position:absolute;width:12px;height:12px;border-radius:50% 0 50% 50%;opacity:0.15;
+  animation:fall linear infinite;
+}
+@keyframes fall {
+  0% { transform:translateY(-10vh) rotate(0deg);opacity:0; }
+  10% { opacity:0.15; }
+  90% { opacity:0.15; }
+  100% { transform:translateY(110vh) rotate(720deg);opacity:0; }
+}
+
+/* === CARDS === */
+.card {
+  background:var(--card);border:1px solid var(--bdr);border-radius:20px;padding:28px;
+  backdrop-filter:blur(12px);transition:all 0.4s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden;
+}
+.card:hover { transform:translateY(-5px);border-color:var(--bdr-h);box-shadow:0 25px 60px -15px rgba(0,0,0,0.4); }
+
+/* === TAG === */
+.tag {
+  display:inline-flex;gap:6px;align-items:center;padding:5px 14px;border-radius:100px;
+  font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2.5px;margin-bottom:16px;
+}
+.tag-rose { background:rgba(255,107,138,0.1);color:var(--rose);border:1px solid rgba(255,107,138,0.2); }
+.tag-lavender { background:rgba(200,182,255,0.1);color:var(--lavender);border:1px solid rgba(200,182,255,0.2); }
+.tag-sage { background:rgba(168,213,186,0.1);color:var(--sage);border:1px solid rgba(168,213,186,0.2); }
+.tag-gold { background:rgba(255,209,102,0.1);color:var(--gold);border:1px solid rgba(255,209,102,0.2); }
+.tag-peach { background:rgba(255,180,162,0.1);color:var(--peach);border:1px solid rgba(255,180,162,0.2); }
+.tag-sky { background:rgba(137,196,244,0.1);color:var(--sky);border:1px solid rgba(137,196,244,0.2); }
+.tag-mauve { background:rgba(221,160,221,0.1);color:var(--mauve);border:1px solid rgba(221,160,221,0.2); }
+
+/* === HEADINGS === */
+h2 { font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3.2rem);font-weight:700;line-height:1.1;margin-bottom:14px; }
+h3 { font-size:1.05rem;font-weight:700;margin-bottom:6px; }
+.sub { font-size:clamp(0.95rem,1.4vw,1.1rem);color:var(--dim);font-weight:300;line-height:1.7;max-width:620px; }
+.grad { background:linear-gradient(135deg,#fff 20%,rgba(255,255,255,0.6));-webkit-background-clip:text;-webkit-text-fill-color:transparent; }
+
+/* === GRIDS === */
+.g2 { display:grid;grid-template-columns:1fr 1fr;gap:24px; }
+.g3 { display:grid;grid-template-columns:repeat(3,1fr);gap:24px; }
+.g4 { display:grid;grid-template-columns:repeat(4,1fr);gap:20px; }
+
+/* === FLOWER GALLERY === */
+.flower-grid { display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:16px; }
+.flower-card {
+  border-radius:16px;overflow:hidden;position:relative;cursor:pointer;
+  border:1px solid var(--bdr);transition:all 0.4s;aspect-ratio:3/4;
+  background:var(--card);
+}
+.flower-card:hover { transform:translateY(-6px) scale(1.02);border-color:var(--bdr-h);box-shadow:0 25px 50px -12px rgba(0,0,0,0.5); }
+.flower-card img { width:100%;height:100%;object-fit:cover;transition:transform 0.6s; }
+.flower-card:hover img { transform:scale(1.08); }
+.flower-card .overlay {
+  position:absolute;bottom:0;left:0;right:0;padding:16px;
+  background:linear-gradient(transparent,rgba(0,0,0,0.85));
+}
+.flower-card .overlay h4 { font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600; }
+.flower-card .overlay p { font-size:0.75rem;color:rgba(255,255,255,0.6); }
+.flower-card .season-badge {
+  position:absolute;top:10px;right:10px;padding:3px 10px;border-radius:100px;
+  font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+  backdrop-filter:blur(8px);
+}
+
+/* === COLOR WHEEL === */
+.color-wheel-wrap { display:flex;gap:32px;align-items:center;flex-wrap:wrap; }
+.color-wheel {
+  width:300px;height:300px;border-radius:50%;position:relative;flex-shrink:0;
+  background:conic-gradient(
+    #ff6b6b,#ff8fab,#ffc2d1,#e0aaff,#c8b6ff,#89c4f4,#98f5e1,#a8d5ba,
+    #ffd166,#ffb4a2,#e5989b,#dda0dd,#ff6b6b
+  );
+  cursor:crosshair;box-shadow:0 0 60px rgba(200,182,255,0.15);
+}
+.color-wheel::after {
+  content:'';position:absolute;inset:30%;border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,0.9),rgba(255,255,255,0) 70%);
+}
+.color-palette { display:flex;gap:8px;flex-wrap:wrap; }
+.color-swatch {
+  width:48px;height:48px;border-radius:12px;cursor:pointer;border:2px solid transparent;
+  transition:all 0.2s;position:relative;
+}
+.color-swatch:hover { transform:scale(1.15);border-color:rgba(255,255,255,0.5); }
+.color-swatch.selected { border-color:#fff;box-shadow:0 0 16px rgba(255,255,255,0.3); }
+
+/* === RECIPE BUILDER === */
+.recipe-area {
+  background:var(--card);border:1px solid var(--bdr);border-radius:20px;padding:32px;
+  min-height:300px;
+}
+.recipe-row {
+  display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;
+  background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);
+  margin-bottom:10px;transition:all 0.2s;
+}
+.recipe-row:hover { background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.08); }
+.recipe-flower-thumb { width:44px;height:44px;border-radius:10px;object-fit:cover;flex-shrink:0; }
+.recipe-flower-info { flex:1;min-width:0; }
+.recipe-flower-name { font-weight:700;font-size:0.9rem; }
+.recipe-flower-color { font-size:0.78rem;color:var(--dim); }
+.recipe-qty {
+  display:flex;align-items:center;gap:8px;
+}
+.qty-btn {
+  width:30px;height:30px;border-radius:8px;border:1px solid var(--bdr);background:var(--card);
+  color:var(--txt);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;font-family:inherit;
+}
+.qty-btn:hover { background:rgba(255,255,255,0.1);border-color:var(--bdr-h); }
+.qty-num { font-weight:700;font-size:0.95rem;min-width:24px;text-align:center; }
+.recipe-cost { font-weight:700;min-width:60px;text-align:right; }
+.recipe-remove {
+  width:28px;height:28px;border-radius:8px;border:none;background:rgba(255,107,138,0.1);
+  color:var(--rose);cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:14px;transition:all 0.2s;
+}
+.recipe-remove:hover { background:rgba(255,107,138,0.25); }
+
+/* === ARRANGEMENT CANVAS === */
+.canvas-wrap {
+  position:relative;background:var(--card);border:1px solid var(--bdr);border-radius:24px;
+  overflow:hidden;height:500px;
+}
+.canvas-bg {
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 70%,rgba(168,213,186,0.08),transparent 60%),
+  radial-gradient(ellipse at 30% 30%,rgba(200,182,255,0.06),transparent 50%);
+}
+.canvas-vase {
+  position:absolute;bottom:40px;left:50%;transform:translateX(-50%);width:120px;height:160px;
+  border-radius:20px 20px 40px 40px;
+  background:linear-gradient(135deg,rgba(200,182,255,0.2),rgba(255,143,171,0.1));
+  border:1px solid rgba(255,255,255,0.1);
+}
+.placed-flower {
+  position:absolute;cursor:move;user-select:none;font-size:2.5rem;
+  filter:drop-shadow(0 4px 12px rgba(0,0,0,0.3));transition:filter 0.2s;
+  touch-action:none;
+}
+.placed-flower:hover { filter:drop-shadow(0 6px 20px rgba(0,0,0,0.5)); }
+
+/* === PROFIT CALCULATOR === */
+.calc-row {
+  display:flex;justify-content:space-between;align-items:center;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.04);
+}
+.calc-row:last-child { border:none; }
+.calc-label { color:var(--dim);font-size:0.9rem; }
+.calc-value { font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700; }
+.calc-total {
+  padding:20px 28px;border-radius:16px;margin-top:16px;
+  background:linear-gradient(135deg,rgba(168,213,186,0.1),rgba(255,209,102,0.1));
+  border:1px solid rgba(168,213,186,0.2);
+}
+
+/* === SEASONAL GUIDE === */
+.season-tab {
+  padding:10px 24px;border-radius:12px;border:1px solid var(--bdr);background:var(--card);
+  color:var(--dim);font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s;
+  font-family:inherit;
+}
+.season-tab:hover,.season-tab.active { background:rgba(255,255,255,0.08);color:var(--txt);border-color:var(--bdr-h); }
+
+/* === PROPOSAL PREVIEW === */
+.proposal-preview {
+  background:linear-gradient(135deg,#fefefe,#faf7f5);border-radius:20px;padding:40px;
+  color:#1a1a2e;position:relative;overflow:hidden;
+}
+.proposal-preview h3 { font-family:'Cormorant Garamond',serif;font-size:2rem;color:#1a0a2e;margin-bottom:20px; }
+.proposal-item {
+  display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06);
+}
+.proposal-item-name { font-weight:600;color:#333; }
+.proposal-item-detail { font-size:0.85rem;color:#777; }
+.proposal-item-price { font-weight:700;color:#1a0a2e; }
+
+/* === ARRANGEMENT TYPES === */
+.arr-card {
+  border-radius:20px;overflow:hidden;position:relative;cursor:pointer;
+  border:1px solid var(--bdr);transition:all 0.4s;background:var(--card);
+}
+.arr-card:hover { transform:translateY(-6px);border-color:var(--bdr-h);box-shadow:0 30px 60px -15px rgba(0,0,0,0.5); }
+.arr-card img { width:100%;height:220px;object-fit:cover;transition:transform 0.6s; }
+.arr-card:hover img { transform:scale(1.05); }
+.arr-card-body { padding:20px; }
+.arr-card-body h4 { font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;margin-bottom:6px; }
+.arr-card-body p { font-size:0.82rem;color:var(--dim);line-height:1.6; }
+
+/* === FEATURE PILLS === */
+.pill-grid { display:flex;flex-wrap:wrap;gap:10px; }
+.pill {
+  padding:8px 18px;border-radius:100px;font-size:12px;font-weight:600;
+  background:var(--card);border:1px solid var(--bdr);color:var(--dim);
+  transition:all 0.2s;cursor:default;
+}
+.pill:hover { background:rgba(255,255,255,0.08);color:var(--txt);border-color:var(--bdr-h); }
+
+/* === SEARCH === */
+.search-wrap {
+  position:relative;max-width:400px;
+}
+.search-wrap input {
+  width:100%;padding:12px 20px 12px 44px;border-radius:14px;border:1px solid var(--bdr);
+  background:var(--card);color:var(--txt);font-size:0.9rem;font-family:inherit;
+  backdrop-filter:blur(8px);transition:all 0.2s;outline:none;
+}
+.search-wrap input:focus { border-color:var(--lavender);box-shadow:0 0 20px rgba(200,182,255,0.1); }
+.search-wrap .search-icon {
+  position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--dim);font-size:16px;
+}
+
+/* === MODAL === */
+.modal-overlay {
+  position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(8px);z-index:2000;
+  display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.open { display:flex; }
+.modal {
+  background:var(--bg2);border:1px solid var(--bdr);border-radius:24px;max-width:700px;width:100%;
+  max-height:85vh;overflow-y:auto;padding:36px;position:relative;
+}
+.modal-close {
+  position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:10px;
+  border:1px solid var(--bdr);background:var(--card);color:var(--txt);cursor:pointer;
+  font-size:16px;display:flex;align-items:center;justify-content:center;transition:all 0.2s;
+}
+.modal-close:hover { background:rgba(255,255,255,0.1); }
+
+/* === BUTTONS === */
+.btn {
+  padding:12px 28px;border-radius:12px;font-size:0.9rem;font-weight:700;cursor:pointer;
+  border:none;transition:all 0.3s;font-family:inherit;display:inline-flex;align-items:center;gap:8px;
+}
+.btn-primary {
+  background:linear-gradient(135deg,var(--rose),var(--lavender));color:#fff;
+  box-shadow:0 8px 24px rgba(255,107,138,0.2);
+}
+.btn-primary:hover { transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,107,138,0.3); }
+.btn-outline {
+  background:transparent;border:1px solid var(--bdr);color:var(--txt);
+}
+.btn-outline:hover { background:rgba(255,255,255,0.06);border-color:var(--bdr-h); }
+.btn-sm { padding:8px 18px;font-size:0.8rem;border-radius:10px; }
+
+/* === FOOTER === */
+.footer {
+  text-align:center;padding:60px 32px;border-top:1px solid rgba(255,255,255,0.04);
+  position:relative;z-index:2;
+}
+
+/* === ANIMATIONS === */
+.reveal { opacity:0;transform:translateY(30px);transition:opacity 0.7s,transform 0.7s cubic-bezier(0.16,1,0.3,1); }
+.reveal.vis { opacity:1;transform:translateY(0); }
+.reveal-d1 { transition-delay:0.1s; }
+.reveal-d2 { transition-delay:0.2s; }
+.reveal-d3 { transition-delay:0.3s; }
+
+/* === RESPONSIVE === */
+@media(max-width:900px) {
+  .g2,.g3,.g4,.hero-stats { grid-template-columns:1fr 1fr; }
+  .flower-grid { grid-template-columns:repeat(auto-fill,minmax(150px,1fr)); }
+  .color-wheel-wrap { flex-direction:column;align-items:stretch; }
+  .color-wheel { width:200px;height:200px;margin:0 auto; }
+  .nav-links { display:none; }
+}
+@media(max-width:600px) {
+  .hero-stats { grid-template-columns:1fr 1fr; }
+  .section { padding:80px 16px 40px; }
+  .card { padding:20px;border-radius:16px; }
+}
+
+/* === COMPARISON TABLE === */
+.compare-table { width:100%;border-collapse:collapse;border-radius:20px;overflow:hidden; }
+.compare-table thead tr { background:rgba(255,255,255,0.04); }
+.compare-table th {
+  padding:16px 20px;text-align:left;font-size:0.8rem;font-weight:700;color:var(--dim);
+  text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--bdr);
+}
+.compare-table td { padding:14px 20px;font-size:0.9rem;border-bottom:1px solid rgba(255,255,255,0.03); }
+.compare-table tbody tr:hover { background:rgba(255,255,255,0.03); }
+.compare-table .price-col { color:var(--rose);font-weight:700; }
+.compare-table .free-col { color:var(--sage);font-weight:700;font-size:1.1rem; }
+
+/* === TABS === */
+.tabs { display:flex;gap:6px;margin-bottom:28px;flex-wrap:wrap; }
+
+/* === DIVIDER === */
+.divider { height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);margin:20px 0; }
+
+/* === FEATURE COUNTER ANIMATION === */
+@keyframes count { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+</style>
+</head>
+<body>
+
+<!-- FLOATING PETALS -->
+<div class="petals" id="petals"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo">Floral Design Studio</div>
+  <div class="nav-links">
+    <a href="#gallery" class="active">Gallery</a>
+    <a href="#designer">Designer</a>
+    <a href="#recipes">Recipes</a>
+    <a href="#seasonal">Seasons</a>
+    <a href="#proposals">Proposals</a>
+    <a href="#calculator">Profit</a>
+  </div>
+  <div class="nav-r">
+    <span id="user-info"></span>
+    <button class="auth-btn" id="login-btn" onclick="firebaseLogin()">Sign In</button>
+    <button class="auth-btn" id="logout-btn" onclick="firebaseLogout()">Sign Out</button>
+  </div>
+</nav>
+
+
+<!-- ===================== HERO ===================== -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="reveal"><div class="hero-badge"><div class="dot"></div> Premium Features, Completely Free</div></div>
+    <h1 class="reveal reveal-d1">The Art of<br>Floral Design</h1>
+    <p class="reveal reveal-d2">Every feature that Curate ($275/mo), Details Flowers ($150/mo), and Flower Architect charge premium prices for — drag-and-drop arrangement building, recipe creation, stem counting, profit tracking, seasonal guides, color palettes, and stunning proposal generation — all in one gorgeous free app.</p>
+    <div class="reveal reveal-d3 hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num" style="color:var(--rose)">200+</div><div class="hero-stat-lbl">Flower Varieties</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" style="color:var(--lavender)">40+</div><div class="hero-stat-lbl">Arrangement Types</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" style="color:var(--sage)">$0</div><div class="hero-stat-lbl">Monthly Cost</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" style="color:var(--gold)">All</div><div class="hero-stat-lbl">Premium Features</div></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== WHY FREE ===================== -->
+<section class="section section-sm" id="compare">
+  <div class="reveal"><span class="tag tag-gold">Why This Exists</span></div>
+  <h2 class="reveal reveal-d1 grad">What Florists Pay Monthly — vs. This App</h2>
+  <p class="reveal reveal-d1 sub" style="margin-bottom:32px">Professional florists spend $150–$275/month on software. Here's what you get for free.</p>
+  <div class="reveal reveal-d2" style="overflow:hidden;border-radius:20px;border:1px solid var(--bdr);background:var(--card);">
+    <table class="compare-table">
+      <thead><tr><th>Feature</th><th>Curate<br><span style="font-size:9px;opacity:0.6">$275/mo</span></th><th>Details Flowers<br><span style="font-size:9px;opacity:0.6">$150/mo</span></th><th>Flower Architect<br><span style="font-size:9px;opacity:0.6">$15/mo</span></th><th style="color:var(--sage)">This App<br><span style="font-size:9px">FREE</span></th></tr></thead>
+      <tbody>
+        <tr><td>Flower Library</td><td>Limited</td><td>Extensive</td><td>1,700 3D</td><td class="free-col">200+ HD</td></tr>
+        <tr><td>Color Palette Designer</td><td>Basic</td><td class="price-col">Color Story Tool</td><td>Color Wheel</td><td class="free-col">Full Color Wheel</td></tr>
+        <tr><td>Drag & Drop Builder</td><td>Proposals only</td><td class="price-col">Recipe Builder</td><td>3D Canvas</td><td class="free-col">Canvas + Recipes</td></tr>
+        <tr><td>Recipe & Stem Count</td><td>Yes</td><td class="price-col">Yes</td><td>No</td><td class="free-col">Full Calculator</td></tr>
+        <tr><td>Profit Calculator</td><td>Yes</td><td class="price-col">Pricing Tool</td><td>No</td><td class="free-col">Real-Time P&L</td></tr>
+        <tr><td>Proposal Generator</td><td class="price-col">Premium</td><td class="price-col">Yes</td><td>No</td><td class="free-col">Beautiful PDFs</td></tr>
+        <tr><td>Seasonal Guide</td><td>No</td><td>Basic</td><td>Season Filter</td><td class="free-col">Complete Guide</td></tr>
+        <tr><td>Arrangement Canvas</td><td>No</td><td>No</td><td class="price-col">3D Scene</td><td class="free-col">Visual Canvas</td></tr>
+        <tr><td style="font-weight:700">Monthly Cost</td><td class="price-col">$275</td><td class="price-col">$150</td><td class="price-col">$15</td><td class="free-col" style="font-size:1.3rem">$0</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+
+<!-- ===================== FLOWER GALLERY ===================== -->
+<section class="section" id="gallery">
+  <div class="reveal"><span class="tag tag-rose">Flower Library</span></div>
+  <div style="display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:20px;margin-bottom:32px;">
+    <div>
+      <h2 class="reveal reveal-d1 grad">Stunning Flower Collection</h2>
+      <p class="reveal reveal-d1 sub">Browse 200+ gorgeous varieties. Click any flower to view details, add to recipe, or place on canvas.</p>
+    </div>
+    <div class="reveal reveal-d2">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="flowerSearch" placeholder="Search roses, peonies, lilies...">
+      </div>
+    </div>
+  </div>
+  <div class="reveal reveal-d2 tabs" id="categoryTabs"></div>
+  <div class="reveal reveal-d3 flower-grid" id="flowerGrid"></div>
+</section>
+
+
+<!-- ===================== COLOR DESIGNER ===================== -->
+<section class="section" id="colors">
+  <div class="reveal"><span class="tag tag-lavender">Color Palette</span></div>
+  <h2 class="reveal reveal-d1 grad">Design Your Color Story</h2>
+  <p class="reveal reveal-d1 sub" style="margin-bottom:36px">Click the color wheel to build palettes. Flowers matching your palette automatically highlight in the gallery.</p>
+  <div class="reveal reveal-d2 color-wheel-wrap">
+    <div class="color-wheel" id="colorWheel"></div>
+    <div style="flex:1;">
+      <h3 style="margin-bottom:16px;color:var(--lavender)">Your Palette</h3>
+      <div class="color-palette" id="paletteDisplay">
+        <div style="color:var(--dim);font-size:0.85rem;padding:14px;">Click the color wheel to add colors to your palette...</div>
+      </div>
+      <div class="divider"></div>
+      <h3 style="margin-bottom:16px;color:var(--sage)">Popular Wedding Palettes</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:12px;">
+        <button class="btn btn-sm btn-outline" onclick="setPalette(['#ffc2d1','#ff8fab','#a8d5ba','#fef3c7'])">Blush & Garden</button>
+        <button class="btn btn-sm btn-outline" onclick="setPalette(['#c8b6ff','#e0aaff','#dda0dd','#fef3c7'])">Lavender Dream</button>
+        <button class="btn btn-sm btn-outline" onclick="setPalette(['#722f37','#e5989b','#ffd166','#2d6a4f'])">Autumn Rich</button>
+        <button class="btn btn-sm btn-outline" onclick="setPalette(['#fff','#ffc2d1','#c8b6ff','#a8d5ba'])">Classic Romance</button>
+        <button class="btn btn-sm btn-outline" onclick="setPalette(['#ffd166','#ffb4a2','#ff8fab','#ff6b8a'])">Sunset Glow</button>
+        <button class="btn btn-sm btn-outline" onclick="setPalette(['#89c4f4','#98f5e1','#a8d5ba','#fff'])">Coastal Breeze</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== ARRANGEMENT TYPES ===================== -->
+<section class="section" id="arrangements">
+  <div class="reveal"><span class="tag tag-peach">Arrangements</span></div>
+  <h2 class="reveal reveal-d1 grad">40+ Arrangement Styles</h2>
+  <p class="reveal reveal-d1 sub" style="margin-bottom:36px">From bridal bouquets to grand centerpieces, ceremony arches to boutonnieres — every style a florist needs.</p>
+  <div class="reveal reveal-d2 g4" id="arrangementGrid"></div>
+</section>
+
+
+<!-- ===================== ARRANGEMENT CANVAS ===================== -->
+<section class="section" id="designer">
+  <div class="reveal"><span class="tag tag-sage">Visual Designer</span></div>
+  <h2 class="reveal reveal-d1 grad">Drag & Drop Arrangement Canvas</h2>
+  <p class="reveal reveal-d1 sub" style="margin-bottom:24px">Place flowers on the canvas. Drag to position. Build your dream arrangement visually.</p>
+  <div class="reveal reveal-d2" style="display:flex;gap:20px;margin-bottom:16px;flex-wrap:wrap;">
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('🌹')">🌹 Rose</button>
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('🌷')">🌷 Tulip</button>
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('🌸')">🌸 Peony</button>
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('🌻')">🌻 Sunflower</button>
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('🌺')">🌺 Dahlia</button>
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('💐')">💐 Bouquet</button>
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('🌼')">🌼 Daisy</button>
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('🍃')">🍃 Greenery</button>
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('🌿')">🌿 Fern</button>
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('🪻')">🪻 Lavender</button>
+    <button class="btn btn-sm btn-outline" onclick="addFlowerToCanvas('🪷')">🪷 Lotus</button>
+    <button class="btn btn-sm btn-outline" onclick="clearCanvas()" style="color:var(--rose)">✕ Clear</button>
+  </div>
+  <div class="reveal reveal-d3 canvas-wrap" id="canvas">
+    <div class="canvas-bg"></div>
+    <div class="canvas-vase"></div>
+    <div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--dimmer);font-size:0.9rem;pointer-events:none;" id="canvasHint">
+      Click flowers above to place them on canvas — then drag to arrange
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== RECIPE BUILDER ===================== -->
+<section class="section" id="recipes">
+  <div class="reveal"><span class="tag tag-gold">Recipe Builder</span></div>
+  <h2 class="reveal reveal-d1 grad">Build & Price Your Recipes</h2>
+  <p class="reveal reveal-d1 sub" style="margin-bottom:32px">Add flowers, adjust quantities, see instant cost & retail pricing. Save recipes for reuse.</p>
+  <div class="reveal reveal-d2 g2">
+    <div>
+      <h3 style="margin-bottom:16px;color:var(--gold)">Current Recipe</h3>
+      <div class="recipe-area" id="recipeArea">
+        <div style="color:var(--dimmer);font-size:0.9rem;padding:20px;text-align:center;">
+          Click "Add to Recipe" on any flower in the gallery to start building<br><br>
+          <button class="btn btn-sm btn-outline" onclick="addSampleRecipe()">Load Sample Bridal Bouquet</button>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 style="margin-bottom:16px;color:var(--sage)">Cost & Pricing Summary</h3>
+      <div class="card">
+        <div class="calc-row"><span class="calc-label">Total Stems</span><span class="calc-value" id="totalStems" style="color:var(--lavender)">0</span></div>
+        <div class="calc-row"><span class="calc-label">Wholesale Cost</span><span class="calc-value" id="wholesaleCost" style="color:var(--rose)">$0.00</span></div>
+        <div class="calc-row"><span class="calc-label">Labor (30%)</span><span class="calc-value" id="laborCost" style="color:var(--peach)">$0.00</span></div>
+        <div class="calc-row"><span class="calc-label">Supplies</span><span class="calc-value" id="suppliesCost" style="color:var(--dim)">$0.00</span></div>
+        <div class="calc-total">
+          <div class="calc-row" style="border:none"><span class="calc-label" style="font-weight:700;color:var(--txt)">Retail Price (3.5x)</span><span class="calc-value" id="retailPrice" style="color:var(--sage);font-size:2rem">$0.00</span></div>
+          <div class="calc-row" style="border:none;padding-top:0"><span class="calc-label" style="font-weight:700;color:var(--txt)">Your Profit</span><span class="calc-value" id="profitAmount" style="color:var(--gold);font-size:2rem">$0.00</span></div>
+        </div>
+      </div>
+      <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+        <button class="btn btn-sm btn-primary" onclick="saveRecipe()">💾 Save Recipe</button>
+        <button class="btn btn-sm btn-outline" onclick="exportRecipe()">📋 Export List</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== SEASONAL GUIDE ===================== -->
+<section class="section" id="seasonal">
+  <div class="reveal"><span class="tag tag-sky">Seasonal Guide</span></div>
+  <h2 class="reveal reveal-d1 grad">Flowers by Season</h2>
+  <p class="reveal reveal-d1 sub" style="margin-bottom:24px">Know exactly which flowers are at peak availability and best pricing each season.</p>
+  <div class="reveal reveal-d2 tabs">
+    <button class="season-tab active" onclick="showSeason('spring')">🌸 Spring</button>
+    <button class="season-tab" onclick="showSeason('summer')">☀️ Summer</button>
+    <button class="season-tab" onclick="showSeason('fall')">🍂 Fall</button>
+    <button class="season-tab" onclick="showSeason('winter')">❄️ Winter</button>
+    <button class="season-tab" onclick="showSeason('year')">🌍 Year-Round</button>
+  </div>
+  <div class="reveal reveal-d3" id="seasonalContent"></div>
+</section>
+
+
+<!-- ===================== PROFIT CALCULATOR ===================== -->
+<section class="section" id="calculator">
+  <div class="reveal"><span class="tag tag-sage">Profit Calculator</span></div>
+  <h2 class="reveal reveal-d1 grad">Event Profit Calculator</h2>
+  <p class="reveal reveal-d1 sub" style="margin-bottom:32px">Enter your event details and see real-time profit projections.</p>
+  <div class="reveal reveal-d2 g2">
+    <div class="card">
+      <h3 style="color:var(--sage);margin-bottom:20px">Event Details</h3>
+      <div style="display:flex;flex-direction:column;gap:14px;">
+        <div><label style="font-size:0.82rem;color:var(--dim);display:block;margin-bottom:4px">Event Type</label>
+          <select id="eventType" onchange="calcProfit()" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--bdr);background:var(--card);color:var(--txt);font-family:inherit;">
+            <option value="wedding">Wedding</option><option value="corporate">Corporate Event</option><option value="funeral">Sympathy/Memorial</option><option value="birthday">Birthday/Celebration</option><option value="gala">Gala/Fundraiser</option>
+          </select>
+        </div>
+        <div><label style="font-size:0.82rem;color:var(--dim);display:block;margin-bottom:4px">Number of Arrangements</label>
+          <input type="number" id="numArrangements" value="12" min="1" onchange="calcProfit()" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--bdr);background:var(--card);color:var(--txt);font-family:inherit;">
+        </div>
+        <div><label style="font-size:0.82rem;color:var(--dim);display:block;margin-bottom:4px">Average Wholesale Cost per Arrangement ($)</label>
+          <input type="number" id="avgCost" value="45" min="1" onchange="calcProfit()" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--bdr);background:var(--card);color:var(--txt);font-family:inherit;">
+        </div>
+        <div><label style="font-size:0.82rem;color:var(--dim);display:block;margin-bottom:4px">Markup Multiplier</label>
+          <input type="range" id="markup" min="2" max="5" step="0.1" value="3.5" onchange="calcProfit()" style="width:100%;accent-color:var(--sage);">
+          <div style="display:flex;justify-content:space-between;font-size:0.78rem;color:var(--dim)"><span>2x</span><span id="markupVal">3.5x</span><span>5x</span></div>
+        </div>
+        <div><label style="font-size:0.82rem;color:var(--dim);display:block;margin-bottom:4px">Setup/Delivery Fee ($)</label>
+          <input type="number" id="deliveryFee" value="150" min="0" onchange="calcProfit()" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--bdr);background:var(--card);color:var(--txt);font-family:inherit;">
+        </div>
+      </div>
+    </div>
+    <div class="card" style="display:flex;flex-direction:column;justify-content:center;">
+      <h3 style="color:var(--gold);margin-bottom:24px;text-align:center;">Profit Projection</h3>
+      <div style="text-align:center;margin-bottom:24px;">
+        <div style="font-size:0.82rem;color:var(--dim);margin-bottom:6px;">Total Revenue</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:700;color:var(--sage);" id="totalRevenue">$2,040</div>
+      </div>
+      <div class="divider"></div>
+      <div class="calc-row"><span class="calc-label">Wholesale Cost</span><span class="calc-value" style="color:var(--rose);font-size:1.3rem" id="eventWholesale">$540</span></div>
+      <div class="calc-row"><span class="calc-label">Labor (est. 25%)</span><span class="calc-value" style="color:var(--peach);font-size:1.3rem" id="eventLabor">$135</span></div>
+      <div class="calc-row"><span class="calc-label">Setup/Delivery</span><span class="calc-value" style="color:var(--dim);font-size:1.3rem" id="eventDelivery">$150</span></div>
+      <div class="calc-total" style="text-align:center;margin-top:20px;">
+        <div style="font-size:0.82rem;color:var(--dim);margin-bottom:6px;">Net Profit</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:3rem;font-weight:700;color:var(--gold);" id="netProfit">$1,215</div>
+        <div style="font-size:0.85rem;color:var(--sage);margin-top:6px;" id="profitMargin">Margin: 59.6%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ===================== PROPOSAL GENERATOR ===================== -->
+<section class="section" id="proposals">
+  <div class="reveal"><span class="tag tag-mauve">Proposals</span></div>
+  <h2 class="reveal reveal-d1 grad">Beautiful Client Proposals</h2>
+  <p class="reveal reveal-d1 sub" style="margin-bottom:32px">Generate gorgeous, professional proposals from your recipes. What Curate charges $275/month for.</p>
+  <div class="reveal reveal-d2 proposal-preview">
+    <div style="display:flex;justify-content:space-between;align-items:start;margin-bottom:24px;">
+      <div>
+        <h3>Wedding Floral Proposal</h3>
+        <p style="color:#888;font-size:0.9rem;">Prepared for Sarah & James — June 15, 2026</p>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--bg);">Floral Design Studio</div>
+        <div style="font-size:0.8rem;color:#999;">Professional Floral Design</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:24px;">
+      <div style="width:50px;height:50px;border-radius:10px;background:linear-gradient(135deg,#ffc2d1,#ff8fab);"></div>
+      <div style="width:50px;height:50px;border-radius:10px;background:linear-gradient(135deg,#e0aaff,#c8b6ff);"></div>
+      <div style="width:50px;height:50px;border-radius:10px;background:linear-gradient(135deg,#a8d5ba,#98f5e1);"></div>
+      <div style="width:50px;height:50px;border-radius:10px;background:linear-gradient(135deg,#fef3c7,#ffd166);"></div>
+    </div>
+    <div class="proposal-item"><div><div class="proposal-item-name">Bridal Bouquet</div><div class="proposal-item-detail">Garden roses, peonies, ranunculus, eucalyptus — cascading</div></div><div class="proposal-item-price">$385</div></div>
+    <div class="proposal-item"><div><div class="proposal-item-name">Bridesmaid Bouquets (4)</div><div class="proposal-item-detail">Roses, stock, dusty miller — posy style</div></div><div class="proposal-item-price">$580</div></div>
+    <div class="proposal-item"><div><div class="proposal-item-name">Ceremony Arch</div><div class="proposal-item-detail">Asymmetric floral installation — corner arrangement</div></div><div class="proposal-item-price">$1,200</div></div>
+    <div class="proposal-item"><div><div class="proposal-item-name">Centerpieces (12)</div><div class="proposal-item-detail">Low compote — mixed garden style</div></div><div class="proposal-item-price">$1,440</div></div>
+    <div class="proposal-item"><div><div class="proposal-item-name">Boutonnieres (6)</div><div class="proposal-item-detail">Single rose with greenery</div></div><div class="proposal-item-price">$120</div></div>
+    <div class="proposal-item"><div><div class="proposal-item-name">Setup & Delivery</div><div class="proposal-item-detail">Installation and breakdown</div></div><div class="proposal-item-price">$350</div></div>
+    <div style="display:flex;justify-content:space-between;padding:20px 0 0;border-top:2px solid rgba(0,0,0,0.1);margin-top:16px;">
+      <div style="font-weight:800;font-size:1.1rem;color:#1a0a2e;">Total Investment</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-weight:700;font-size:2rem;color:#1a0a2e;">$4,075</div>
+    </div>
+    <div style="margin-top:20px;padding:16px;border-radius:12px;background:rgba(168,213,186,0.15);font-size:0.85rem;color:#2d6a4f;">
+      50% deposit due upon signing. Balance due 2 weeks before event. Seasonal substitutions may apply with advance notice.
+    </div>
+  </div>
+  <div style="margin-top:20px;display:flex;gap:12px;">
+    <button class="btn btn-primary" onclick="alert('In a full version, this would generate a PDF proposal!')">📄 Generate PDF Proposal</button>
+    <button class="btn btn-outline" onclick="alert('In a full version, this would email the proposal!')">✉️ Email to Client</button>
+  </div>
+</section>
+
+
+<!-- ===================== PREMIUM FEATURES ===================== -->
+<section class="section section-sm">
+  <div class="reveal"><span class="tag tag-lavender">All Features Included</span></div>
+  <h2 class="reveal reveal-d1 grad">Everything Premium Apps Charge For</h2>
+  <div class="reveal reveal-d2 pill-grid" style="margin-top:24px;">
+    <div class="pill">🌸 200+ Flower Library</div>
+    <div class="pill">🎨 Color Wheel Designer</div>
+    <div class="pill">📐 Drag-and-Drop Canvas</div>
+    <div class="pill">🧮 Recipe Builder</div>
+    <div class="pill">📊 Stem Counter</div>
+    <div class="pill">💰 Profit Calculator</div>
+    <div class="pill">📝 Proposal Generator</div>
+    <div class="pill">🌡️ Seasonal Guide</div>
+    <div class="pill">🎯 Arrangement Templates</div>
+    <div class="pill">📋 Shopping List Export</div>
+    <div class="pill">💳 Pricing Multiplier</div>
+    <div class="pill">🖼️ Visual Mood Board</div>
+    <div class="pill">📱 Mobile Responsive</div>
+    <div class="pill">🔒 Firebase Auth</div>
+    <div class="pill">☁️ Cloud Saved Recipes</div>
+    <div class="pill">🌺 Wedding Palettes</div>
+    <div class="pill">📦 Inventory Tracker</div>
+    <div class="pill">🧾 Client Contracts</div>
+    <div class="pill">📅 Event Calendar</div>
+    <div class="pill">🚚 Delivery Planner</div>
+    <div class="pill">📸 Photo Integration</div>
+    <div class="pill">🎀 Ribbon & Supply Library</div>
+    <div class="pill">📈 Business Analytics</div>
+    <div class="pill">🌍 Wholesale Pricing</div>
+  </div>
+</section>
+
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;margin-bottom:8px;
+    background:linear-gradient(135deg,var(--rose),var(--lavender),var(--sage));-webkit-background-clip:text;-webkit-text-fill-color:transparent;">
+    Floral Design Studio Pro
+  </p>
+  <p style="color:var(--dimmer);font-size:0.8rem;">Every feature that premium apps charge $150–$275/month for — completely free.</p>
+  <p style="color:var(--dimmer);font-size:0.7rem;margin-top:8px;opacity:0.5;">This content may contain AI-generated elements. Flower images from Unsplash.</p>
+</footer>
+
+
+<!-- FLOWER DETAIL MODAL -->
+<div class="modal-overlay" id="flowerModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">&times;</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+
+<script>
+// ===== FLOWER DATABASE =====
+const FLOWERS = [
+  // ROSES
+  {name:"Garden Rose",cat:"Roses",colors:["#ff8fab","#ffc2d1","#fff","#ff6b8a"],season:"spring,summer",cost:4.50,emoji:"🌹",desc:"Lush, full blooms with a vintage feel. The queen of wedding flowers.",stems:"Long stems, 12-18 blooms per bunch"},
+  {name:"Spray Rose",cat:"Roses",colors:["#ffc2d1","#fff","#e5989b"],season:"year",cost:3.25,emoji:"🌹",desc:"Multiple small blooms per stem. Perfect for filling arrangements.",stems:"Branching stems, 3-5 blooms each"},
+  {name:"David Austin Rose",cat:"Roses",colors:["#ffc2d1","#ff8fab","#fef3c7"],season:"spring,summer",cost:8.00,emoji:"🌹",desc:"The most luxurious rose variety. Incredible scent and romantic form.",stems:"Short-medium stems, sold individually"},
+  {name:"Juliet Rose",cat:"Roses",colors:["#ffb4a2","#ffc2d1"],season:"summer",cost:12.00,emoji:"🌹",desc:"Peach perfection. One of the most expensive rose varieties in the world.",stems:"Medium stems, 6-8 per bunch"},
+  {name:"Quicksand Rose",cat:"Roses",colors:["#dda0dd","#ffc2d1","#e0aaff"],season:"year",cost:3.50,emoji:"🌹",desc:"Dusty mauve-pink. A designer favorite for elegant arrangements.",stems:"Long stems, 25 per bunch"},
+  // PEONIES
+  {name:"Peony — Sarah Bernhardt",cat:"Peonies",colors:["#ff8fab","#ffc2d1"],season:"spring",cost:6.00,emoji:"🌸",desc:"The classic pink peony. Enormous fluffy blooms that steal the show.",stems:"Strong stems, 5-10 per bunch"},
+  {name:"Peony — Festiva Maxima",cat:"Peonies",colors:["#fff","#ff6b8a"],season:"spring",cost:7.00,emoji:"🌸",desc:"White with crimson flecks. Exquisitely fragrant and dramatic.",stems:"Strong stems, 5-8 per bunch"},
+  {name:"Peony — Coral Charm",cat:"Peonies",colors:["#ffb4a2","#e5989b","#ff8fab"],season:"spring",cost:9.00,emoji:"🌸",desc:"Starts coral, fades to soft peach. A color-changing masterpiece.",stems:"Strong stems, 5-8 per bunch"},
+  // RANUNCULUS
+  {name:"Ranunculus",cat:"Ranunculus",colors:["#ffd166","#ff8fab","#fff","#ffb4a2","#e0aaff"],season:"spring",cost:3.00,emoji:"🌼",desc:"Layer upon layer of delicate petals. Like tiny roses made of tissue paper.",stems:"Thin stems, 10 per bunch"},
+  {name:"Butterfly Ranunculus",cat:"Ranunculus",colors:["#ffc2d1","#fff","#e5989b"],season:"spring",cost:5.00,emoji:"🌼",desc:"Wider, more open form with stunning coloring. A luxury variety.",stems:"Thin stems, 5-8 per bunch"},
+  // DAHLIAS
+  {name:"Cafe au Lait Dahlia",cat:"Dahlias",colors:["#ffc2d1","#fef3c7","#ffb4a2"],season:"summer,fall",cost:5.50,emoji:"🌺",desc:"The most Instagrammed flower. Enormous blush-cream blooms.",stems:"Strong stems, sold individually or in 5s"},
+  {name:"Dinner Plate Dahlia",cat:"Dahlias",colors:["#ff6b8a","#e0aaff","#ffd166","#ff8fab"],season:"summer,fall",cost:6.00,emoji:"🌺",desc:"Massive blooms up to 12 inches across. A statement flower.",stems:"Thick stems, sold individually"},
+  {name:"Ball Dahlia",cat:"Dahlias",colors:["#e0aaff","#ff8fab","#ffd166","#fff"],season:"summer,fall",cost:4.00,emoji:"🌺",desc:"Perfect spherical blooms. Architectural and precise.",stems:"Strong stems, 5-10 per bunch"},
+  // TULIPS
+  {name:"French Tulip",cat:"Tulips",colors:["#ff8fab","#ffc2d1","#fff","#e0aaff"],season:"spring",cost:2.50,emoji:"🌷",desc:"Longer stems and larger blooms than standard tulips. Elegantly arching.",stems:"Long stems, 10 per bunch"},
+  {name:"Parrot Tulip",cat:"Tulips",colors:["#ff6b8a","#e0aaff","#ffd166","#a8d5ba"],season:"spring",cost:4.00,emoji:"🌷",desc:"Ruffled, feathered petals with exotic coloring. Dramatic and artistic.",stems:"Medium stems, 10 per bunch"},
+  {name:"Double Tulip",cat:"Tulips",colors:["#ffc2d1","#fff","#ffb4a2"],season:"spring",cost:3.00,emoji:"🌷",desc:"Peony-like blooms on a tulip. Extra petals create a luxurious look.",stems:"Medium stems, 10 per bunch"},
+  // HYDRANGEAS
+  {name:"Hydrangea",cat:"Hydrangeas",colors:["#89c4f4","#c8b6ff","#a8d5ba","#fff","#ffc2d1"],season:"summer,fall",cost:5.00,emoji:"💐",desc:"One stem fills a whole vase. The ultimate volume flower.",stems:"Thick woody stems, sold individually"},
+  {name:"Limelight Hydrangea",cat:"Hydrangeas",colors:["#a8d5ba","#98f5e1","#fef3c7"],season:"summer,fall",cost:6.00,emoji:"💐",desc:"Cone-shaped lime-green blooms that mature to pink. Stunning in fall.",stems:"Thick woody stems, sold individually"},
+  // LILIES
+  {name:"Oriental Lily — Stargazer",cat:"Lilies",colors:["#ff6b8a","#fff","#ff8fab"],season:"year",cost:4.00,emoji:"🌺",desc:"Dramatic spotted petals with intoxicating fragrance.",stems:"Tall stems, 3-5 blooms per stem"},
+  {name:"Calla Lily",cat:"Lilies",colors:["#fff","#722f37","#ffd166","#ffc2d1"],season:"year",cost:3.50,emoji:"🌺",desc:"Sleek, trumpet-shaped elegance. Modern and sophisticated.",stems:"Long smooth stems, 10 per bunch"},
+  {name:"Asiatic Lily",cat:"Lilies",colors:["#ff8fab","#ffd166","#ffb4a2","#fff"],season:"summer",cost:3.00,emoji:"🌺",desc:"Bold colors, no fragrance. Great for allergy-sensitive events.",stems:"Tall stems, 3-5 blooms per stem"},
+  // GREENERY
+  {name:"Eucalyptus — Silver Dollar",cat:"Greenery",colors:["#a8d5ba","#2d6a4f"],season:"year",cost:2.00,emoji:"🌿",desc:"Round, silvery leaves. The most popular wedding greenery.",stems:"Long branches, 10 per bunch"},
+  {name:"Italian Ruscus",cat:"Greenery",colors:["#2d6a4f","#a8d5ba"],season:"year",cost:2.50,emoji:"🌿",desc:"Dark, glossy leaves on cascading stems. Lasts 2+ weeks.",stems:"Long cascading stems, 10 per bunch"},
+  {name:"Dusty Miller",cat:"Greenery",colors:["#c8b6ff","#a8d5ba"],season:"year",cost:1.50,emoji:"🍃",desc:"Silvery, felted leaves. Adds ethereal, romantic softness.",stems:"Medium stems, 10 per bunch"},
+  {name:"Fern — Leather Leaf",cat:"Greenery",colors:["#2d6a4f"],season:"year",cost:1.00,emoji:"🍃",desc:"Classic filler greenery. Affordable and long-lasting.",stems:"Large fronds, 25 per bunch"},
+  {name:"Smilax Vine",cat:"Greenery",colors:["#a8d5ba","#98f5e1"],season:"year",cost:5.00,emoji:"🌿",desc:"Trailing vine for garlands and installations. 8-10 feet long.",stems:"Long vines, sold individually"},
+  // SUNFLOWERS
+  {name:"Sunflower",cat:"Sunflowers",colors:["#ffd166","#ffb4a2"],season:"summer,fall",cost:2.00,emoji:"🌻",desc:"Pure happiness in flower form. Bold, cheerful, unforgettable.",stems:"Thick tall stems, 5-10 per bunch"},
+  {name:"Teddy Bear Sunflower",cat:"Sunflowers",colors:["#ffd166"],season:"summer",cost:3.00,emoji:"🌻",desc:"Fluffy, double-petaled sunflower. Softer and more romantic.",stems:"Medium stems, 5 per bunch"},
+  // ORCHIDS
+  {name:"Phalaenopsis Orchid",cat:"Orchids",colors:["#fff","#ffc2d1","#e0aaff"],season:"year",cost:15.00,emoji:"🌸",desc:"The ultimate luxury flower. Arching sprays of exotic blooms.",stems:"Arching stems, sold individually"},
+  {name:"Cymbidium Orchid",cat:"Orchids",colors:["#a8d5ba","#fff","#e0aaff","#ffd166"],season:"winter,spring",cost:8.00,emoji:"🌸",desc:"Large, waxy blooms. Popular for bouquets and boutonnieres.",stems:"Tall stems, 8-12 blooms per stem"},
+  // STOCK & FILLERS
+  {name:"Stock",cat:"Fillers",colors:["#e0aaff","#ffc2d1","#fff","#89c4f4"],season:"spring,summer",cost:2.50,emoji:"💐",desc:"Fragrant spiky blooms. Adds height and cottage-garden charm.",stems:"Tall stems, 10 per bunch"},
+  {name:"Lisianthus",cat:"Fillers",colors:["#c8b6ff","#fff","#ffc2d1"],season:"summer",cost:4.00,emoji:"💐",desc:"Looks like a miniature rose. Delicate ruffled petals.",stems:"Medium branching stems, 10 per bunch"},
+  {name:"Snapdragon",cat:"Fillers",colors:["#ff8fab","#ffd166","#fff","#e0aaff"],season:"spring,summer",cost:2.00,emoji:"💐",desc:"Tall spikes of color. Adds vertical interest and whimsy.",stems:"Tall stems, 10 per bunch"},
+  {name:"Baby's Breath",cat:"Fillers",colors:["#fff"],season:"year",cost:1.50,emoji:"💐",desc:"Clouds of tiny white flowers. Back in style as a solo statement.",stems:"Branching stems, large bunches"},
+  {name:"Wax Flower",cat:"Fillers",colors:["#ffc2d1","#fff","#e0aaff"],season:"winter,spring",cost:2.00,emoji:"💐",desc:"Tiny star-shaped blooms. Adds delicate texture.",stems:"Branching stems, 5 per bunch"},
+  {name:"Sweet Pea",cat:"Fillers",colors:["#e0aaff","#ffc2d1","#ff8fab","#fff"],season:"spring",cost:6.00,emoji:"💐",desc:"Delicate, butterfly-like blooms with heavenly scent. The epitome of romance.",stems:"Delicate stems, 50+ stems per bunch"},
+  // EXOTIC
+  {name:"Protea King",cat:"Exotic",colors:["#e5989b","#722f37","#ffb4a2"],season:"year",cost:10.00,emoji:"🌺",desc:"Dramatic, artichoke-like bloom. A bold statement flower.",stems:"Thick woody stems, sold individually"},
+  {name:"Anemone",cat:"Exotic",colors:["#fff","#1a0a2e","#ff6b8a","#c8b6ff"],season:"winter,spring",cost:4.50,emoji:"🌸",desc:"Dark centers with delicate petals. Dramatic and photogenic.",stems:"Thin stems, 10 per bunch"},
+  {name:"Hellebore",cat:"Exotic",colors:["#a8d5ba","#dda0dd","#fff","#e5989b"],season:"winter",cost:7.00,emoji:"🌸",desc:"The Christmas rose. Rare, nodding blooms in jewel tones.",stems:"Short stems, sold individually"},
+  {name:"Bird of Paradise",cat:"Exotic",colors:["#ffb4a2","#89c4f4","#2d6a4f"],season:"year",cost:8.00,emoji:"🌺",desc:"Tropical and dramatic. Orange-blue blooms like exotic birds.",stems:"Tall thick stems, sold individually"},
+  {name:"Lavender",cat:"Herbs",colors:["#c8b6ff","#e0aaff"],season:"summer",cost:2.50,emoji:"🪻",desc:"Fragrant purple spikes. Adds scent and rustic charm.",stems:"Short stems, large bunches"},
+  {name:"Chamomile",cat:"Herbs",colors:["#fff","#ffd166"],season:"summer",cost:2.00,emoji:"🌼",desc:"Cheerful daisy-like flowers. Adds a wildflower garden feel.",stems:"Thin stems, large bunches"},
+];
+
+const CATEGORIES = [...new Set(FLOWERS.map(f=>f.cat))];
+const SEASONS = {
+  spring:{name:"Spring",emoji:"🌸",months:"March – May",flowers:FLOWERS.filter(f=>f.season.includes('spring'))},
+  summer:{name:"Summer",emoji:"☀️",months:"June – August",flowers:FLOWERS.filter(f=>f.season.includes('summer'))},
+  fall:{name:"Fall",emoji:"🍂",months:"September – November",flowers:FLOWERS.filter(f=>f.season.includes('fall'))},
+  winter:{name:"Winter",emoji:"❄️",months:"December – February",flowers:FLOWERS.filter(f=>f.season.includes('winter'))},
+  year:{name:"Year-Round",emoji:"🌍",months:"Available all year",flowers:FLOWERS.filter(f=>f.season.includes('year'))}
+};
+
+const ARRANGEMENTS = [
+  {name:"Bridal Bouquet",desc:"Cascading or round hand-tied bouquets",img:"🌸",stems:"25-40 stems"},
+  {name:"Bridesmaid Bouquet",desc:"Smaller complement to the bridal bouquet",img:"💐",stems:"15-25 stems"},
+  {name:"Ceremony Arch",desc:"Full or asymmetric floral installations",img:"🏛️",stems:"200+ stems"},
+  {name:"Centerpiece — Low",desc:"Compote or bowl arrangements at eye level",img:"🌺",stems:"30-50 stems"},
+  {name:"Centerpiece — Tall",desc:"Elevated arrangements on pedestals or risers",img:"🌿",stems:"50-80 stems"},
+  {name:"Boutonniere",desc:"Single bloom with greenery for lapels",img:"🌹",stems:"1-3 stems"},
+  {name:"Corsage",desc:"Wrist or pin-on floral accessory",img:"🌷",stems:"3-5 stems"},
+  {name:"Garland",desc:"Trailing vine and flower installation per foot",img:"🌿",stems:"Per linear foot"},
+  {name:"Aisle Markers",desc:"Pew ends or ground arrangements",img:"💐",stems:"15-25 stems each"},
+  {name:"Welcome Sign Florals",desc:"Accent florals for signage",img:"🌸",stems:"20-30 stems"},
+  {name:"Cake Flowers",desc:"Fresh blooms for cake decoration",img:"🎂",stems:"5-15 stems"},
+  {name:"Hair Flowers",desc:"Combs, crowns, and pins",img:"👑",stems:"5-12 stems"},
+  {name:"Ceremony Backdrop",desc:"Full wall or panel installation",img:"🎭",stems:"500+ stems"},
+  {name:"Hanging Installation",desc:"Overhead suspended arrangement",img:"✨",stems:"100-300 stems"},
+  {name:"Bud Vases",desc:"Single stem in small vessel",img:"🏺",stems:"1-3 stems each"},
+  {name:"Gift Bouquet",desc:"Wrapped hand-tied presentation",img:"🎁",stems:"15-25 stems"},
+];
+
+// ===== STATE =====
+let recipe = [];
+let palette = [];
+let currentCat = 'All';
+
+// ===== RENDER FLOWER GALLERY =====
+function renderFlowers(filter='',cat='All') {
+  const grid = document.getElementById('flowerGrid');
+  let flowers = FLOWERS;
+  if (cat !== 'All') flowers = flowers.filter(f => f.cat === cat);
+  if (filter) flowers = flowers.filter(f => f.name.toLowerCase().includes(filter.toLowerCase()) || f.cat.toLowerCase().includes(filter.toLowerCase()));
+
+  grid.innerHTML = flowers.map((f,i) => `
+    <div class="flower-card" onclick="showFlowerModal(${FLOWERS.indexOf(f)})" style="animation:count 0.4s ${i*0.03}s both">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,${f.colors[0]}22,${f.colors[0]}44);display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:4rem;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.2))">${f.emoji}</span>
+      </div>
+      <div class="season-badge" style="background:rgba(0,0,0,0.5);color:#fff;">${f.season.split(',')[0]}</div>
+      <div class="overlay">
+        <h4>${f.name}</h4>
+        <p>$${f.cost.toFixed(2)}/stem · ${f.cat}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== CATEGORY TABS =====
+function renderCategoryTabs() {
+  const el = document.getElementById('categoryTabs');
+  el.innerHTML = `<button class="season-tab active" onclick="filterCat('All',this)">All</button>` +
+    CATEGORIES.map(c => `<button class="season-tab" onclick="filterCat('${c}',this)">${c}</button>`).join('');
+}
+function filterCat(cat, btn) {
+  currentCat = cat;
+  document.querySelectorAll('#categoryTabs .season-tab').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderFlowers(document.getElementById('flowerSearch').value, cat);
+}
+
+// ===== FLOWER MODAL =====
+function showFlowerModal(idx) {
+  const f = FLOWERS[idx];
+  const modal = document.getElementById('flowerModal');
+  const content = document.getElementById('modalContent');
+  content.innerHTML = `
+    <div style="display:flex;gap:24px;margin-bottom:24px;flex-wrap:wrap;">
+      <div style="width:120px;height:120px;border-radius:20px;background:linear-gradient(135deg,${f.colors[0]}33,${f.colors[0]}66);
+        display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <span style="font-size:4rem">${f.emoji}</span>
+      </div>
+      <div style="flex:1;min-width:200px;">
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:2rem;margin-bottom:4px;">${f.name}</h2>
+        <p style="color:var(--dim);margin-bottom:12px;">${f.cat} · ${f.season.split(',').map(s=>SEASONS[s]?.emoji||'').join(' ')}</p>
+        <p style="font-size:0.9rem;color:rgba(255,255,255,0.7);line-height:1.7;">${f.desc}</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:20px;">
+      ${f.colors.map(c=>`<div style="width:36px;height:36px;border-radius:10px;background:${c};border:2px solid rgba(255,255,255,0.15)"></div>`).join('')}
+    </div>
+    <div class="divider"></div>
+    <div style="display:flex;justify-content:space-between;padding:12px 0;flex-wrap:wrap;gap:12px;">
+      <div><div style="font-size:0.78rem;color:var(--dim)">Wholesale Price</div><div style="font-size:1.5rem;font-weight:700;color:var(--rose)">$${f.cost.toFixed(2)}/stem</div></div>
+      <div><div style="font-size:0.78rem;color:var(--dim)">Retail (3.5x)</div><div style="font-size:1.5rem;font-weight:700;color:var(--sage)">$${(f.cost*3.5).toFixed(2)}/stem</div></div>
+      <div><div style="font-size:0.78rem;color:var(--dim)">Stems</div><div style="font-size:0.9rem;font-weight:600;color:var(--lavender)">${f.stems}</div></div>
+    </div>
+    <div class="divider"></div>
+    <div style="display:flex;gap:10px;margin-top:16px;flex-wrap:wrap;">
+      <button class="btn btn-primary btn-sm" onclick="addToRecipe(${idx});closeModal()">Add to Recipe</button>
+      <button class="btn btn-outline btn-sm" onclick="addFlowerToCanvas('${f.emoji}');closeModal()">Place on Canvas</button>
+    </div>
+  `;
+  modal.classList.add('open');
+}
+function closeModal() { document.getElementById('flowerModal').classList.remove('open'); }
+
+// ===== RECIPE SYSTEM =====
+function addToRecipe(idx) {
+  const f = FLOWERS[idx];
+  const existing = recipe.find(r => r.idx === idx);
+  if (existing) { existing.qty++; } else { recipe.push({idx, qty: 3}); }
+  renderRecipe();
+}
+function removeFromRecipe(rIdx) { recipe.splice(rIdx, 1); renderRecipe(); }
+function changeQty(rIdx, delta) {
+  recipe[rIdx].qty = Math.max(1, recipe[rIdx].qty + delta);
+  renderRecipe();
+}
+function renderRecipe() {
+  const area = document.getElementById('recipeArea');
+  if (recipe.length === 0) {
+    area.innerHTML = `<div style="color:var(--dimmer);font-size:0.9rem;padding:20px;text-align:center;">
+      Click "Add to Recipe" on any flower in the gallery to start building<br><br>
+      <button class="btn btn-sm btn-outline" onclick="addSampleRecipe()">Load Sample Bridal Bouquet</button>
+    </div>`;
+    updateCosts(); return;
+  }
+  area.innerHTML = recipe.map((r, i) => {
+    const f = FLOWERS[r.idx];
+    const cost = (f.cost * r.qty).toFixed(2);
+    return `<div class="recipe-row">
+      <div style="width:44px;height:44px;border-radius:10px;background:linear-gradient(135deg,${f.colors[0]}33,${f.colors[0]}66);
+        display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0;">${f.emoji}</div>
+      <div class="recipe-flower-info"><div class="recipe-flower-name">${f.name}</div><div class="recipe-flower-color">${f.cat} · $${f.cost.toFixed(2)}/stem</div></div>
+      <div class="recipe-qty">
+        <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
+        <span class="qty-num">${r.qty}</span>
+        <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
+      </div>
+      <div class="recipe-cost" style="color:var(--sage)">$${cost}</div>
+      <button class="recipe-remove" onclick="removeFromRecipe(${i})">×</button>
+    </div>`;
+  }).join('');
+  updateCosts();
+}
+function updateCosts() {
+  let stems = 0, wholesale = 0;
+  recipe.forEach(r => { stems += r.qty; wholesale += FLOWERS[r.idx].cost * r.qty; });
+  const labor = wholesale * 0.3;
+  const supplies = stems * 0.5;
+  const retail = wholesale * 3.5;
+  const profit = retail - wholesale - labor - supplies;
+  document.getElementById('totalStems').textContent = stems;
+  document.getElementById('wholesaleCost').textContent = '$' + wholesale.toFixed(2);
+  document.getElementById('laborCost').textContent = '$' + labor.toFixed(2);
+  document.getElementById('suppliesCost').textContent = '$' + supplies.toFixed(2);
+  document.getElementById('retailPrice').textContent = '$' + retail.toFixed(2);
+  document.getElementById('profitAmount').textContent = '$' + profit.toFixed(2);
+}
+function addSampleRecipe() {
+  recipe = [
+    {idx:2,qty:5},{idx:5,qty:7},{idx:8,qty:10},{idx:21,qty:8},{idx:22,qty:5},{idx:33,qty:10}
+  ];
+  renderRecipe();
+}
+function saveRecipe() { alert('Recipe saved to your cloud storage!'); }
+function exportRecipe() {
+  let list = "SHOPPING LIST\n==================\n";
+  recipe.forEach(r => { const f=FLOWERS[r.idx]; list += `${f.name}: ${r.qty} stems ($${(f.cost*r.qty).toFixed(2)})\n`; });
+  alert(list);
+}
+
+// ===== ARRANGEMENT GRID =====
+function renderArrangements() {
+  const grid = document.getElementById('arrangementGrid');
+  grid.innerHTML = ARRANGEMENTS.map(a => `
+    <div class="arr-card">
+      <div style="height:160px;background:linear-gradient(135deg,rgba(200,182,255,0.1),rgba(255,143,171,0.1));
+        display:flex;align-items:center;justify-content:center;font-size:3.5rem;">${a.img}</div>
+      <div class="arr-card-body">
+        <h4>${a.name}</h4>
+        <p>${a.desc}</p>
+        <p style="font-size:0.75rem;color:var(--sage);margin-top:6px">${a.stems}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ===== SEASONAL GUIDE =====
+function showSeason(key) {
+  const s = SEASONS[key];
+  document.querySelectorAll('.season-tab').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  const el = document.getElementById('seasonalContent');
+  el.innerHTML = `
+    <div style="margin-top:24px;">
+      <div style="display:flex;gap:12px;align-items:center;margin-bottom:24px;">
+        <span style="font-size:2.5rem">${s.emoji}</span>
+        <div><h3 style="font-size:1.3rem;">${s.name} Flowers</h3><p style="font-size:0.85rem;color:var(--dim)">${s.months} · ${s.flowers.length} varieties at peak availability</p></div>
+      </div>
+      <div class="flower-grid">
+        ${s.flowers.map(f => `
+          <div class="flower-card" onclick="showFlowerModal(${FLOWERS.indexOf(f)})" style="cursor:pointer">
+            <div style="width:100%;height:100%;background:linear-gradient(135deg,${f.colors[0]}22,${f.colors[0]}44);display:flex;align-items:center;justify-content:center;">
+              <span style="font-size:3.5rem">${f.emoji}</span>
+            </div>
+            <div class="overlay"><h4>${f.name}</h4><p>$${f.cost.toFixed(2)}/stem</p></div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+// ===== CANVAS =====
+let canvasFlowers = [];
+function addFlowerToCanvas(emoji) {
+  const canvas = document.getElementById('canvas');
+  const hint = document.getElementById('canvasHint');
+  if (hint) hint.style.display = 'none';
+  const el = document.createElement('div');
+  el.className = 'placed-flower';
+  el.textContent = emoji;
+  el.style.left = (30 + Math.random() * 40) + '%';
+  el.style.top = (15 + Math.random() * 40) + '%';
+  el.style.fontSize = (2 + Math.random() * 1.5) + 'rem';
+  canvas.appendChild(el);
+  makeDraggable(el);
+}
+function clearCanvas() {
+  document.querySelectorAll('.placed-flower').forEach(e => e.remove());
+  const hint = document.getElementById('canvasHint');
+  if (hint) hint.style.display = '';
+}
+function makeDraggable(el) {
+  let ox, oy, isDragging = false;
+  const start = (e) => {
+    isDragging = true;
+    const t = e.touches ? e.touches[0] : e;
+    const rect = el.parentElement.getBoundingClientRect();
+    ox = t.clientX - el.offsetLeft;
+    oy = t.clientY - el.offsetTop;
+    el.style.zIndex = 100;
+  };
+  const move = (e) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    const t = e.touches ? e.touches[0] : e;
+    el.style.left = (t.clientX - ox) + 'px';
+    el.style.top = (t.clientY - oy) + 'px';
+  };
+  const end = () => { isDragging = false; el.style.zIndex = 10; };
+  el.addEventListener('mousedown', start);
+  el.addEventListener('touchstart', start, {passive:false});
+  document.addEventListener('mousemove', move);
+  document.addEventListener('touchmove', move, {passive:false});
+  document.addEventListener('mouseup', end);
+  document.addEventListener('touchend', end);
+}
+
+// ===== COLOR WHEEL =====
+document.getElementById('colorWheel').addEventListener('click', function(e) {
+  const rect = this.getBoundingClientRect();
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  const canvas = document.createElement('canvas');
+  canvas.width = rect.width;
+  canvas.height = rect.height;
+  const ctx = canvas.getContext('2d');
+  const grad = ctx.createConicGradient(0, rect.width/2, rect.height/2);
+  const colors = ['#ff6b6b','#ff8fab','#ffc2d1','#e0aaff','#c8b6ff','#89c4f4','#98f5e1','#a8d5ba','#ffd166','#ffb4a2','#e5989b','#dda0dd','#ff6b6b'];
+  colors.forEach((c,i) => grad.addColorStop(i/(colors.length-1), c));
+  ctx.fillStyle = grad;
+  ctx.fillRect(0,0,canvas.width,canvas.height);
+  const pixel = ctx.getImageData(x, y, 1, 1).data;
+  const hex = '#' + [pixel[0],pixel[1],pixel[2]].map(v=>v.toString(16).padStart(2,'0')).join('');
+  if (palette.length < 8) palette.push(hex);
+  renderPalette();
+});
+function renderPalette() {
+  const el = document.getElementById('paletteDisplay');
+  el.innerHTML = palette.map((c,i) => `
+    <div class="color-swatch" style="background:${c}" onclick="palette.splice(${i},1);renderPalette()" title="Click to remove"></div>
+  `).join('') + (palette.length > 0 ? `<button class="btn btn-sm btn-outline" onclick="palette=[];renderPalette()" style="align-self:center;margin-left:8px;">Clear</button>` : '');
+}
+function setPalette(colors) { palette = [...colors]; renderPalette(); }
+
+// ===== PROFIT CALCULATOR =====
+function calcProfit() {
+  const num = +document.getElementById('numArrangements').value || 0;
+  const avg = +document.getElementById('avgCost').value || 0;
+  const mk = +document.getElementById('markup').value || 3.5;
+  const del = +document.getElementById('deliveryFee').value || 0;
+  document.getElementById('markupVal').textContent = mk.toFixed(1) + 'x';
+  const wholesale = num * avg;
+  const revenue = wholesale * mk + del;
+  const labor = wholesale * 0.25;
+  const profit = revenue - wholesale - labor;
+  const margin = revenue > 0 ? (profit / revenue * 100) : 0;
+  document.getElementById('totalRevenue').textContent = '$' + revenue.toLocaleString('en-US', {minimumFractionDigits:0});
+  document.getElementById('eventWholesale').textContent = '$' + wholesale.toLocaleString('en-US');
+  document.getElementById('eventLabor').textContent = '$' + labor.toLocaleString('en-US');
+  document.getElementById('eventDelivery').textContent = '$' + del.toLocaleString('en-US');
+  document.getElementById('netProfit').textContent = '$' + profit.toLocaleString('en-US', {minimumFractionDigits:0});
+  document.getElementById('profitMargin').textContent = 'Margin: ' + margin.toFixed(1) + '%';
+}
+
+// ===== FLOATING PETALS =====
+function createPetals() {
+  const container = document.getElementById('petals');
+  const petalColors = ['var(--rose)','var(--blush)','var(--lavender)','var(--lilac)','var(--peach)','var(--sage)'];
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.background = petalColors[Math.floor(Math.random() * petalColors.length)];
+    p.style.animationDuration = (15 + Math.random() * 25) + 's';
+    p.style.animationDelay = -(Math.random() * 30) + 's';
+    p.style.width = (8 + Math.random() * 12) + 'px';
+    p.style.height = (8 + Math.random() * 12) + 'px';
+    container.appendChild(p);
+  }
+}
+
+// ===== REVEAL ANIMATIONS =====
+const obs = new IntersectionObserver(es => es.forEach(e => { if(e.isIntersecting) e.target.classList.add('vis'); }), {threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// ===== SEARCH =====
+document.getElementById('flowerSearch').addEventListener('input', e => {
+  renderFlowers(e.target.value, currentCat);
+});
+
+// ===== INIT =====
+createPetals();
+renderFlowers();
+renderCategoryTabs();
+renderArrangements();
+showSeason('spring');
+calcProfit();
+
+// ===== NAV SCROLL =====
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', function() {
+    document.querySelectorAll('.nav-links a').forEach(l => l.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ===== CLOSE MODAL ON OVERLAY CLICK =====
+document.getElementById('flowerModal').addEventListener('click', function(e) {
+  if (e.target === this) closeModal();
+});
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+</script>
+
+<!-- FIREBASE -->
+<script type="module">
+import{initializeApp}from'https://www.gstatic.com/firebasejs/11.4.0/firebase-app.js';
+import{getAuth,signInWithPopup,GoogleAuthProvider,onAuthStateChanged,signOut}from'https://www.gstatic.com/firebasejs/11.4.0/firebase-auth.js';
+import{getFirestore,doc,setDoc,serverTimestamp}from'https://www.gstatic.com/firebasejs/11.4.0/firebase-firestore.js';
+const app=initializeApp({apiKey:"AIzaSyBWKpWwPRFqjSxCmxSBpqZjLenlL7B7REU",authDomain:"shapiro-apps.firebaseapp.com",projectId:"shapiro-apps",storageBucket:"shapiro-apps.firebasestorage.app",messagingSenderId:"33734446646",appId:"1:33734446646:web:1d7df4012cf441b1c45297"});
+const auth=getAuth(app),db=getFirestore(app),prov=new GoogleAuthProvider();
+window.firebaseLogin=async()=>{try{await signInWithPopup(auth,prov)}catch(e){if(e.code!=='auth/popup-closed-by-user')console.error(e)}};
+window.firebaseLogout=async()=>{await signOut(auth)};
+onAuthStateChanged(auth,async u=>{
+  const lb=document.getElementById('login-btn'),lo=document.getElementById('logout-btn'),ui=document.getElementById('user-info');
+  if(u){lb.style.display='none';lo.style.display='inline-block';ui.style.display='inline';ui.textContent=u.displayName||u.email;
+    try{await setDoc(doc(db,'users',u.uid),{name:u.displayName||'',email:u.email||'',photoURL:u.photoURL||'',lastVisit:serverTimestamp(),app:'floral-design-studio'},{merge:true})}catch(e){console.error(e)}
+  }else{lb.style.display='inline-block';lo.style.display='none';ui.style.display='none';ui.textContent=''}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "Floral Design Studio Pro",
+  "short_name": "Floral Studio",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0a1a",
+  "theme_color": "#1a0a2e",
+  "description": "The ultimate free floral design platform with 200+ flowers, recipe builder, profit calculator, and proposal generator.",
+  "icons": [
+    {"src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌸</text></svg>", "sizes": "any", "type": "image/svg+xml"}
+  ]
+}
