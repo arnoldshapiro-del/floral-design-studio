@@ -883,10 +883,356 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
   </div>
 </section>
 
+<!-- ============= PHOTO BANNER — DESIGN TOOLS ============= -->
+<div class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1564046710162-5959a502ffe6?w=1920&q=85" alt="Flower market" loading="lazy">
+  <div class="overlay-text"><h2>Interactive Design Studio</h2></div>
+</div>
+
+<!-- ================= 1. INTERACTIVE BOUQUET BUILDER ================= -->
+<section class="section" id="bouquet-builder">
+  <span class="tag tag-rose">Interactive Tool</span>
+  <h2 class="grad">Build Your Dream Bouquet</h2>
+  <p class="sub" style="margin-bottom:32px">Pick flowers from the grid below. Watch your bouquet come to life with a gorgeous photo preview, live stem count, and instant pricing. What flwrsAI and Flower Architect charge for.</p>
+  <div class="g2">
+    <div>
+      <h3 style="color:var(--rose);margin-bottom:12px">Choose Your Flowers <span style="font-size:0.75rem;color:var(--dim);font-weight:400">(click to add)</span></h3>
+      <div id="bqFlowerGrid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px">
+      </div>
+    </div>
+    <div>
+      <h3 style="color:var(--sage);margin-bottom:12px">Your Bouquet</h3>
+      <div class="card" id="bqPreview" style="text-align:center;min-height:400px">
+        <div id="bqPreviewImg" style="width:100%;height:280px;border-radius:16px;overflow:hidden;margin-bottom:16px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center">
+          <div style="color:var(--dimmer);font-size:0.9rem">Click flowers to start building →</div>
+        </div>
+        <div id="bqSelected" style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:16px"></div>
+        <div class="divider"></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center;margin-top:12px">
+          <div><div style="font-size:0.7rem;color:var(--dim)">Stems</div><div id="bqStems" style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--lavender)">0</div></div>
+          <div><div style="font-size:0.7rem;color:var(--dim)">Cost</div><div id="bqCost" style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--rose)">$0</div></div>
+          <div><div style="font-size:0.7rem;color:var(--dim)">Retail</div><div id="bqRetail" style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--sage)">$0</div></div>
+        </div>
+        <div style="display:flex;gap:8px;justify-content:center;margin-top:16px">
+          <button class="btn btn-outline btn-sm" onclick="clearBouquet()">Clear All</button>
+          <button class="btn btn-primary btn-sm" onclick="saveBouquet()">Save Bouquet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 2. FLOWER PAIRING ENGINE ================= -->
+<section class="section" id="pairing">
+  <span class="tag tag-lavender">Pairing Engine</span>
+  <h2 class="grad">"What Goes With...?" — Perfect Pairs</h2>
+  <p class="sub" style="margin-bottom:32px">Select any flower and instantly see its best companions. Professional pairing knowledge that takes years to learn — with gorgeous photos of each combination.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px" id="pairingBtns">
+  </div>
+  <div id="pairingResult" style="display:none">
+    <div id="pairingHeader" style="margin-bottom:20px"></div>
+    <div id="pairingGrid" class="photo-grid"></div>
+  </div>
+</section>
+
+<!-- ================= 3. COLOR WHEEL DESIGNER ================= -->
+<section class="section" id="colorwheel">
+  <span class="tag tag-gold">Color Theory</span>
+  <h2 class="grad">Interactive Floral Color Wheel</h2>
+  <p class="sub" style="margin-bottom:32px">Master the art of color harmony. Click any color scheme to see which flowers create that palette — with warm/cool tone guidance and real photo examples.</p>
+  <div class="g2">
+    <div>
+      <div style="position:relative;width:300px;height:300px;margin:0 auto">
+        <div style="width:300px;height:300px;border-radius:50%;background:conic-gradient(#ff0000,#ff8800,#ffff00,#00cc00,#0066ff,#8800ff,#ff0088,#ff0000);opacity:0.8"></div>
+        <div style="position:absolute;inset:80px;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:700">Color<br>Wheel</div>
+          <div style="font-size:0.7rem;color:var(--dim)">Click a scheme →</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:24px">
+        <button class="btn btn-outline btn-sm" onclick="showColorScheme('complementary')" style="justify-content:flex-start"><span style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#8800ff,#ffff00);flex-shrink:0"></span> Complementary (opposite colors)</button>
+        <button class="btn btn-outline btn-sm" onclick="showColorScheme('analogous')" style="justify-content:flex-start"><span style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#ff0088,#ff0000,#ff8800);flex-shrink:0"></span> Analogous (neighboring colors)</button>
+        <button class="btn btn-outline btn-sm" onclick="showColorScheme('monochromatic')" style="justify-content:flex-start"><span style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#ffccdd,#ff6699,#cc0044);flex-shrink:0"></span> Monochromatic (one color, many shades)</button>
+        <button class="btn btn-outline btn-sm" onclick="showColorScheme('triadic')" style="justify-content:flex-start"><span style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#ff0000,#0066ff,#ffff00);flex-shrink:0"></span> Triadic (three equally spaced)</button>
+        <button class="btn btn-outline btn-sm" onclick="showColorScheme('warmcool')" style="justify-content:flex-start"><span style="width:14px;height:14px;border-radius:50%;background:linear-gradient(135deg,#ff6644,#4488ff);flex-shrink:0"></span> Warm vs Cool Tones</button>
+      </div>
+    </div>
+    <div id="colorSchemeResult" class="card" style="min-height:300px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center">
+      <div style="color:var(--dimmer);font-size:0.9rem">← Click a color scheme to see<br>which flowers create that harmony</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 4. STYLE QUIZ ================= -->
+<section class="section" id="quiz">
+  <span class="tag tag-peach">Style Quiz</span>
+  <h2 class="grad">Find Your Perfect Bouquet Style</h2>
+  <p class="sub" style="margin-bottom:32px">Answer 5 questions and get a personalized bouquet recommendation with photos, flower list, and pricing. What Curate's $500/month consultation process does — free.</p>
+  <div class="card" id="quizArea">
+    <div id="quizQ" style="text-align:center">
+      <div style="font-size:0.75rem;color:var(--dim);margin-bottom:8px">Question <span id="quizNum">1</span> of 5</div>
+      <h3 id="quizQuestion" style="margin-bottom:20px;font-size:1.2rem">What's the occasion?</h3>
+      <div id="quizOptions" style="display:flex;flex-wrap:wrap;gap:10px;justify-content:center"></div>
+    </div>
+    <div id="quizResult" style="display:none"></div>
+  </div>
+</section>
+
+<!-- ================= 5. ARRANGEMENT SHAPE EXPLORER ================= -->
+<section class="section" id="shapes">
+  <span class="tag tag-sky">Shapes & Styles</span>
+  <h2 class="grad">Arrangement Shape Explorer</h2>
+  <p class="sub" style="margin-bottom:32px">Every professional arrangement shape — with gorgeous example photos, best-use occasions, and flower recommendations for each style.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px" id="shapeBtns">
+  </div>
+  <div id="shapeResult" class="g2" style="display:none"></div>
+</section>
+
+<!-- ================= 6. SEASONAL BOUQUET GENERATOR ================= -->
+<section class="section" id="seasonal-gen">
+  <span class="tag tag-sage">Seasonal Generator</span>
+  <h2 class="grad">Seasonal Bouquet Generator</h2>
+  <p class="sub" style="margin-bottom:32px">Pick a month — get 3 perfect bouquets with photos, recipes, pricing, and exactly which flowers are at peak availability.</p>
+  <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px">
+    <button class="season-tab" onclick="genSeason(this,'jan')">Jan</button>
+    <button class="season-tab" onclick="genSeason(this,'feb')">Feb</button>
+    <button class="season-tab active" onclick="genSeason(this,'mar')">Mar</button>
+    <button class="season-tab" onclick="genSeason(this,'apr')">Apr</button>
+    <button class="season-tab" onclick="genSeason(this,'may')">May</button>
+    <button class="season-tab" onclick="genSeason(this,'jun')">Jun</button>
+    <button class="season-tab" onclick="genSeason(this,'jul')">Jul</button>
+    <button class="season-tab" onclick="genSeason(this,'aug')">Aug</button>
+    <button class="season-tab" onclick="genSeason(this,'sep')">Sep</button>
+    <button class="season-tab" onclick="genSeason(this,'oct')">Oct</button>
+    <button class="season-tab" onclick="genSeason(this,'nov')">Nov</button>
+    <button class="season-tab" onclick="genSeason(this,'dec')">Dec</button>
+  </div>
+  <div id="seasonGenResult" class="g3"></div>
+</section>
+
+<!-- ================= 7. BUDGET BOUQUET CALCULATOR ================= -->
+<section class="section" id="budget-calc">
+  <span class="tag tag-gold">Budget Tool</span>
+  <h2 class="grad">Budget Bouquet Calculator</h2>
+  <p class="sub" style="margin-bottom:32px">Set any budget — get the most gorgeous arrangement possible with photos and a complete recipe. Maximizes beauty per dollar.</p>
+  <div class="g2">
+    <div class="card">
+      <h3 style="color:var(--gold);margin-bottom:16px">Set Your Budget</h3>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px">
+        <span style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:700;color:var(--gold)" id="budgetVal">$150</span>
+      </div>
+      <input type="range" id="budgetSlider" min="30" max="500" step="10" value="150" oninput="calcBudgetBouquet()" style="width:100%;accent-color:var(--gold);margin-bottom:16px">
+      <div style="display:flex;justify-content:space-between;font-size:0.75rem;color:var(--dim)"><span>$30</span><span>$150</span><span>$300</span><span>$500</span></div>
+      <div style="margin-top:20px">
+        <div style="font-size:0.82rem;color:var(--dim);margin-bottom:8px">Occasion:</div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          <button class="btn btn-outline btn-sm bud-occ active" onclick="setBudOcc(this,'wedding')">Wedding</button>
+          <button class="btn btn-outline btn-sm bud-occ" onclick="setBudOcc(this,'birthday')">Birthday</button>
+          <button class="btn btn-outline btn-sm bud-occ" onclick="setBudOcc(this,'sympathy')">Sympathy</button>
+          <button class="btn btn-outline btn-sm bud-occ" onclick="setBudOcc(this,'everyday')">Everyday</button>
+        </div>
+      </div>
+    </div>
+    <div class="card" id="budgetResult">
+      <h3 style="color:var(--sage);margin-bottom:4px">Your $150 Wedding Bouquet</h3>
+      <div style="font-size:0.78rem;color:var(--dim);margin-bottom:16px">Maximum beauty for your budget</div>
+      <div style="display:flex;flex-direction:column;gap:8px" id="budgetRecipe">
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.03);font-size:0.85rem"><span>5× Garden Rose (Blush)</span><span style="color:var(--sage)">$22.50</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.03);font-size:0.85rem"><span>3× Peony (White)</span><span style="color:var(--sage)">$18.00</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.03);font-size:0.85rem"><span>8× Ranunculus (Pink)</span><span style="color:var(--sage)">$24.00</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.03);font-size:0.85rem"><span>5× Sweet Pea (White)</span><span style="color:var(--sage)">$6.00</span></div>
+        <div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.03);font-size:0.85rem"><span>6× Eucalyptus (Silver)</span><span style="color:var(--sage)">$12.00</span></div>
+      </div>
+      <div class="calc-total" style="margin-top:12px">
+        <div style="display:flex;justify-content:space-between"><span style="color:var(--dim)">Wholesale</span><span style="font-weight:700">$82.50</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:6px"><span style="color:var(--dim)">Labor & Supplies</span><span style="font-weight:700">$44.75</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.08)"><span style="font-weight:700">Retail Price</span><span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--sage)">$150</span></div>
+        <div style="display:flex;justify-content:space-between;margin-top:4px"><span style="color:var(--dim)">Your Profit</span><span style="font-weight:700;color:var(--gold)">$22.75</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 8. TEXTURE MIXING GUIDE ================= -->
+<section class="section" id="texture">
+  <span class="tag tag-mauve">Texture Guide</span>
+  <h2 class="grad">Texture Mixing Masterclass</h2>
+  <p class="sub" style="margin-bottom:32px">The secret to professional arrangements: mixing textures. Spiky + round + trailing + filler = perfection. With photo examples of each texture type.</p>
+  <div class="g2" style="margin-bottom:24px">
+    <div class="card" style="border-top:3px solid var(--rose)">
+      <h3 style="color:var(--rose);margin-bottom:8px">Focal Flowers (Round/Star)</h3>
+      <p style="font-size:0.82rem;color:var(--dim);margin-bottom:12px">The stars of the show. Large, eye-catching blooms that draw attention.</p>
+      <div class="pill-grid"><div class="pill">Roses</div><div class="pill">Peonies</div><div class="pill">Dahlias</div><div class="pill">Ranunculus</div><div class="pill">Hydrangea</div><div class="pill">Orchids</div></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--lavender)">
+      <h3 style="color:var(--lavender);margin-bottom:8px">Line Flowers (Spiky/Vertical)</h3>
+      <p style="font-size:0.82rem;color:var(--dim);margin-bottom:12px">Add height, drama, and movement. Create visual direction.</p>
+      <div class="pill-grid"><div class="pill">Delphiniums</div><div class="pill">Snapdragons</div><div class="pill">Foxglove</div><div class="pill">Larkspur</div><div class="pill">Stock</div><div class="pill">Gladiolus</div></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--sage)">
+      <h3 style="color:var(--sage);margin-bottom:8px">Filler Flowers (Airy/Spray)</h3>
+      <p style="font-size:0.82rem;color:var(--dim);margin-bottom:12px">Fill gaps, add airiness, and create a sense of abundance.</p>
+      <div class="pill-grid"><div class="pill">Baby's Breath</div><div class="pill">Wax Flower</div><div class="pill">Sweet Peas</div><div class="pill">Queen Anne's</div><div class="pill">Astilbe</div><div class="pill">Scabiosa</div></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--gold)">
+      <h3 style="color:var(--gold);margin-bottom:8px">Greenery (Trailing/Textural)</h3>
+      <p style="font-size:0.82rem;color:var(--dim);margin-bottom:12px">The foundation. Creates flow, movement, and natural elegance.</p>
+      <div class="pill-grid"><div class="pill">Eucalyptus</div><div class="pill">Italian Ruscus</div><div class="pill">Ferns</div><div class="pill">Olive Branch</div><div class="pill">Smilax</div><div class="pill">Dusty Miller</div></div>
+    </div>
+  </div>
+  <div class="card" style="background:linear-gradient(135deg,rgba(255,107,138,0.05),rgba(200,182,255,0.05),rgba(168,213,186,0.05))">
+    <h3 style="text-align:center;margin-bottom:12px">The Perfect Texture Formula</h3>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;font-size:1rem">
+      <span style="padding:10px 20px;border-radius:12px;background:rgba(255,107,138,0.1);color:var(--rose);font-weight:700">3-5 Focal</span>
+      <span style="color:var(--dimmer);font-size:1.5rem">+</span>
+      <span style="padding:10px 20px;border-radius:12px;background:rgba(200,182,255,0.1);color:var(--lavender);font-weight:700">2-3 Line</span>
+      <span style="color:var(--dimmer);font-size:1.5rem">+</span>
+      <span style="padding:10px 20px;border-radius:12px;background:rgba(168,213,186,0.1);color:var(--sage);font-weight:700">5-8 Filler</span>
+      <span style="color:var(--dimmer);font-size:1.5rem">+</span>
+      <span style="padding:10px 20px;border-radius:12px;background:rgba(255,209,102,0.1);color:var(--gold);font-weight:700">5-8 Greenery</span>
+      <span style="color:var(--dimmer);font-size:1.5rem">=</span>
+      <span style="padding:10px 20px;border-radius:12px;background:linear-gradient(135deg,var(--rose),var(--lavender));color:#fff;font-weight:700">Perfection</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 9. FLOWER SUBSTITUTION FINDER ================= -->
+<section class="section" id="substitutions">
+  <span class="tag tag-peach">Substitutions</span>
+  <h2 class="grad">Flower Substitution Finder</h2>
+  <p class="sub" style="margin-bottom:32px">Out of season? Too expensive? Find the perfect look-alike with comparison photos, pricing, and availability. What Details Flowers charges $150/month to help with.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px" id="subBtns"></div>
+  <div id="subResult" class="g3" style="display:none"></div>
+</section>
+
+<!-- ================= 10. OCCASION DESIGN GALLERY ================= -->
+<section class="section" id="occasions">
+  <span class="tag tag-sky">By Occasion</span>
+  <h2 class="grad">Designs by Occasion</h2>
+  <p class="sub" style="margin-bottom:32px">Perfect flowers for every life event — with photos, flower lists, and pricing guides for each occasion.</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px" id="occBtns"></div>
+  <div id="occResult"></div>
+</section>
+
+<!-- ================= 11. VASE LIFE COMPATIBILITY ================= -->
+<section class="section" id="vaselife">
+  <span class="tag tag-sage">Vase Life</span>
+  <h2 class="grad">Vase Life Compatibility Checker</h2>
+  <p class="sub" style="margin-bottom:32px">Never mix short-lived flowers with long-lasting ones again. See exactly how long each flower lasts and which ones pair well together for maximum freshness.</p>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:8px 14px;font-size:0.7rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--bdr)">
+      <span>Flower</span><span>Vase Life</span><span>Tier</span><span>Best Paired With</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:12px 14px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center">
+      <span style="font-weight:600">Orchid</span><span style="color:var(--sage);font-weight:700">14-21 days</span><span style="padding:2px 8px;border-radius:100px;font-size:0.7rem;background:rgba(168,213,186,0.15);color:var(--sage);font-weight:700">Marathon</span><span style="font-size:0.78rem;color:var(--dim)">Calla lily, anthurium</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:12px 14px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center">
+      <span style="font-weight:600">Chrysanthemum</span><span style="color:var(--sage);font-weight:700">14-21 days</span><span style="padding:2px 8px;border-radius:100px;font-size:0.7rem;background:rgba(168,213,186,0.15);color:var(--sage);font-weight:700">Marathon</span><span style="font-size:0.78rem;color:var(--dim)">Orchid, carnation</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:12px 14px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center">
+      <span style="font-weight:600">Carnation</span><span style="color:var(--sage);font-weight:700">10-14 days</span><span style="padding:2px 8px;border-radius:100px;font-size:0.7rem;background:rgba(168,213,186,0.15);color:var(--sage);font-weight:700">Marathon</span><span style="font-size:0.78rem;color:var(--dim)">Mum, rose, alstroemeria</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:12px 14px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center">
+      <span style="font-weight:600">Rose</span><span style="color:var(--lavender);font-weight:700">7-10 days</span><span style="padding:2px 8px;border-radius:100px;font-size:0.7rem;background:rgba(200,182,255,0.15);color:var(--lavender);font-weight:700">Standard</span><span style="font-size:0.78rem;color:var(--dim)">Peony, ranunculus, hydrangea</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:12px 14px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center">
+      <span style="font-weight:600">Hydrangea</span><span style="color:var(--lavender);font-weight:700">7-14 days</span><span style="padding:2px 8px;border-radius:100px;font-size:0.7rem;background:rgba(200,182,255,0.15);color:var(--lavender);font-weight:700">Standard</span><span style="font-size:0.78rem;color:var(--dim)">Rose, delphinium, stock</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:12px 14px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center">
+      <span style="font-weight:600">Lily</span><span style="color:var(--lavender);font-weight:700">7-10 days</span><span style="padding:2px 8px;border-radius:100px;font-size:0.7rem;background:rgba(200,182,255,0.15);color:var(--lavender);font-weight:700">Standard</span><span style="font-size:0.78rem;color:var(--dim)">Rose, snapdragon, fern</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:12px 14px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center">
+      <span style="font-weight:600">Tulip</span><span style="color:var(--gold);font-weight:700">5-7 days</span><span style="padding:2px 8px;border-radius:100px;font-size:0.7rem;background:rgba(255,209,102,0.15);color:var(--gold);font-weight:700">Medium</span><span style="font-size:0.78rem;color:var(--dim)">Ranunculus, anemone, hyacinth</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:12px 14px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center">
+      <span style="font-weight:600">Peony</span><span style="color:var(--gold);font-weight:700">5-7 days</span><span style="padding:2px 8px;border-radius:100px;font-size:0.7rem;background:rgba(255,209,102,0.15);color:var(--gold);font-weight:700">Medium</span><span style="font-size:0.78rem;color:var(--dim)">Garden rose, ranunculus, sweet pea</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:12px 14px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03);align-items:center">
+      <span style="font-weight:600">Dahlia</span><span style="color:var(--rose);font-weight:700">3-5 days</span><span style="padding:2px 8px;border-radius:100px;font-size:0.7rem;background:rgba(255,107,138,0.15);color:var(--rose);font-weight:700">Short</span><span style="font-size:0.78rem;color:var(--dim)">Cosmos, zinnia, amaranthus</span>
+    </div>
+    <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:12px 14px;font-size:0.85rem;align-items:center">
+      <span style="font-weight:600">Sweet Pea</span><span style="color:var(--rose);font-weight:700">3-5 days</span><span style="padding:2px 8px;border-radius:100px;font-size:0.7rem;background:rgba(255,107,138,0.15);color:var(--rose);font-weight:700">Short</span><span style="font-size:0.78rem;color:var(--dim)">Ranunculus, peony, clematis</span>
+    </div>
+  </div>
+  <div style="margin-top:16px;padding:16px 20px;border-radius:14px;background:rgba(255,107,138,0.06);border:1px solid rgba(255,107,138,0.12);font-size:0.85rem;color:var(--dim)">
+    <strong style="color:var(--rose)">Pro Tip:</strong> Never mix Marathon-tier flowers (14+ days) with Short-tier flowers (3-5 days) in a client arrangement. The short flowers will die while the long ones are still perfect. Pair within 1 tier for best results. <strong style="color:var(--gold)">Exception:</strong> Dahlias are short-lived but SO gorgeous for events that many designers add them day-of for maximum wow factor.
+  </div>
+</section>
+
+<!-- ================= 12. SCENT PAIRING GUIDE ================= -->
+<section class="section" id="scent">
+  <span class="tag tag-lavender">Scent Guide</span>
+  <h2 class="grad">Scent Pairing Guide</h2>
+  <p class="sub" style="margin-bottom:32px">Which flowers smell incredible together — and which ones clash. Professional knowledge most florists learn only after years of experience.</p>
+  <div class="g3">
+    <div class="card" style="border-top:3px solid var(--sage)">
+      <h3 style="color:var(--sage);font-size:0.95rem;margin-bottom:10px">Heavenly Combos</h3>
+      <div style="font-size:0.82rem;color:var(--dim);line-height:1.8">
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Gardenia + Jasmine</strong> — Rich, creamy, intoxicating</div>
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Peony + Sweet Pea</strong> — Delicate, romantic, divine</div>
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Rose + Lavender</strong> — Classic, calming, timeless</div>
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Hyacinth + Freesia</strong> — Sweet, springtime bliss</div>
+        <div><strong style="color:var(--txt)">Tuberose + Lily</strong> — Bold, exotic, unforgettable</div>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--rose)">
+      <h3 style="color:var(--rose);font-size:0.95rem;margin-bottom:10px">Avoid Together</h3>
+      <div style="font-size:0.82rem;color:var(--dim);line-height:1.8">
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Lily + Narcissus</strong> — Overwhelming, compete for attention</div>
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Gardenia + Tuberose</strong> — Too intense when combined</div>
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Marigold + anything delicate</strong> — Pungent, overpowers</div>
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Chrysanthemum + sweet scents</strong> — Earthy smell clashes</div>
+        <div><strong style="color:var(--txt)">Multiple strong scents</strong> — Max 2 fragrant flowers per bouquet</div>
+      </div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--gold)">
+      <h3 style="color:var(--gold);font-size:0.95rem;margin-bottom:10px">Pro Scent Rules</h3>
+      <div style="font-size:0.82rem;color:var(--dim);line-height:1.8">
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Rule 1:</strong> Max 2 strongly scented flowers per arrangement</div>
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Rule 2:</strong> Unscented fillers (roses, ranunculus) balance fragrant stars</div>
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Rule 3:</strong> Ask about allergies — lilies and tuberose are common triggers</div>
+        <div style="margin-bottom:6px"><strong style="color:var(--txt)">Rule 4:</strong> Dinner table arrangements should be lightly scented or unscented</div>
+        <div><strong style="color:var(--txt)">Rule 5:</strong> Eucalyptus adds scent without overwhelming — nature's air freshener</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= 13. DESIGN PRINCIPLES ================= -->
+<section class="section" id="principles">
+  <span class="tag tag-peach">Design School</span>
+  <h2 class="grad">7 Principles of Floral Design</h2>
+  <p class="sub" style="margin-bottom:32px">Master these 7 principles and you'll design like a professional. What Team Flower's expensive education platform teaches — free.</p>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px">
+    <div class="card" style="border-left:3px solid var(--rose)"><h3 style="color:var(--rose);font-size:0.95rem;margin-bottom:6px">1. Balance</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">Visual weight distributed evenly. Symmetrical = formal elegance. Asymmetrical = modern, artistic. Use heavier blooms (roses, peonies) low and center. Lighter flowers (sweet peas, grasses) at the edges.</p></div>
+    <div class="card" style="border-left:3px solid var(--lavender)"><h3 style="color:var(--lavender);font-size:0.95rem;margin-bottom:6px">2. Proportion</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">The arrangement should be 1.5-2× the height of its container. Flowers should relate to each other in size — don't put a tiny spray rose next to an enormous dahlia without transitional sizes between.</p></div>
+    <div class="card" style="border-left:3px solid var(--sage)"><h3 style="color:var(--sage);font-size:0.95rem;margin-bottom:6px">3. Rhythm</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">Your eye should flow naturally through the design. Create rhythm by repeating colors, shapes, or textures at intervals. Place the same flower in 3 spots to create a visual triangle.</p></div>
+    <div class="card" style="border-left:3px solid var(--gold)"><h3 style="color:var(--gold);font-size:0.95rem;margin-bottom:6px">4. Focal Point</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">Every arrangement needs ONE star. Place your most stunning bloom slightly off-center and lower than other flowers. The eye should land here first, then travel outward.</p></div>
+    <div class="card" style="border-left:3px solid var(--sky)"><h3 style="color:var(--sky);font-size:0.95rem;margin-bottom:6px">5. Contrast</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">Mix opposites: light/dark, large/small, round/spiky, smooth/textured. Contrast creates visual interest. A monochrome arrangement needs extra texture contrast to avoid looking flat.</p></div>
+    <div class="card" style="border-left:3px solid var(--peach)"><h3 style="color:var(--peach);font-size:0.95rem;margin-bottom:6px">6. Harmony</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">All elements should feel like they belong together. A wildflower meadow bouquet shouldn't include a formal orchid. Match flower personality to the overall style and occasion.</p></div>
+    <div class="card" style="border-left:3px solid var(--mauve)"><h3 style="color:var(--mauve);font-size:0.95rem;margin-bottom:6px">7. Unity</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">The arrangement reads as one composition, not individual flowers stuck together. Overlap stems, nestle blooms close, let greenery weave through. The finished piece should feel organic and intentional.</p></div>
+  </div>
+</section>
+
+<!-- ================= 14. TREND FORECAST 2026 ================= -->
+<section class="section" id="trends">
+  <span class="tag tag-rose">2026 Trends</span>
+  <h2 class="grad">Floral Design Trends 2026</h2>
+  <p class="sub" style="margin-bottom:32px">What's hot this year in the floral world. Stay ahead of every trend — knowledge that Florists' Review subscription provides.</p>
+  <div class="g3">
+    <div class="card"><h3 style="color:var(--rose);font-size:0.95rem;margin-bottom:8px">Meadow-to-Vase</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">Wild, gathered, just-picked-from-the-field look. Loose, asymmetric, with unexpected elements like grasses, herbs, and seed pods. Anti-perfection is the new perfection.</p></div>
+    <div class="card"><h3 style="color:var(--lavender);font-size:0.95rem;margin-bottom:8px">Monochromatic Luxe</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">All one color in many shades. All-white, all-blush, or all-burgundy. Focuses on texture variation instead of color contrast. Ultra-sophisticated.</p></div>
+    <div class="card"><h3 style="color:var(--sage);font-size:0.95rem;margin-bottom:8px">Sustainability Focus</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">Locally grown, seasonal-only, no floral foam. Chicken wire mechanics, reusable vessels. Clients asking about carbon footprint of imported flowers.</p></div>
+    <div class="card"><h3 style="color:var(--gold);font-size:0.95rem;margin-bottom:8px">Dried + Fresh Mix</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">Pampas grass with garden roses. Dried bunny tails with fresh peonies. The contrast of preserved and living flowers creates incredible texture and visual interest.</p></div>
+    <div class="card"><h3 style="color:var(--peach);font-size:0.95rem;margin-bottom:8px">Terracotta & Earth Tones</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">Warm, earthy palettes replacing the cool blush tones of recent years. Think rust, cinnamon, caramel, and sage — inspired by desert landscapes and natural clay.</p></div>
+    <div class="card"><h3 style="color:var(--sky);font-size:0.95rem;margin-bottom:8px">Floral Installations</h3><p style="font-size:0.82rem;color:var(--dim);line-height:1.7">Giant hanging clouds of flowers, floral chandeliers, flower walls, and ceiling installations. The "wow factor" that makes events go viral on social media.</p></div>
+  </div>
+</section>
+
 <!-- ================= FEATURES ================= -->
 <section class="section" style="padding-top:60px">
   <span class="tag tag-lavender">All Premium Features Included</span>
-  <h2 class="grad">Everything $275/month Apps Charge For</h2>
+  <h2 class="grad">Everything $500/month Apps Charge For</h2>
   <div class="pill-grid" style="margin-top:24px">
     <div class="pill">80+ Real Flower Photos</div>
     <div class="pill">12 Photo Galleries</div>
@@ -1672,6 +2018,671 @@ function filterCare(q){
     c.style.display=text.includes(query)?'block':'none';
   });
 }
+
+// ========================================================================
+// 1. INTERACTIVE BOUQUET BUILDER
+// ========================================================================
+const bqFlowers=[
+  {name:'Garden Rose',cat:'focal',price:4.50,img:'1582794543139-8ac9cb0f7b11'},
+  {name:'Red Rose',cat:'focal',price:3.75,img:'1490750967868-88aa4f44baee'},
+  {name:'Blush Rose',cat:'focal',price:4.00,img:'1530906622963-8a60586a49c7'},
+  {name:'Peony',cat:'focal',price:7.00,img:'1511201173873-c327e63eb6c4'},
+  {name:'Pink Peony',cat:'focal',price:7.50,img:'1560256608-43f0b6f7588e'},
+  {name:'Dahlia',cat:'focal',price:5.00,img:'1601021215663-ee72b7063578'},
+  {name:'Burgundy Dahlia',cat:'focal',price:5.50,img:'1533907650686-70576141c030'},
+  {name:'Ranunculus',cat:'focal',price:3.50,img:'1490750967868-88aa4f44baee'},
+  {name:'Hydrangea',cat:'focal',price:5.50,img:'1623201530307-c1d678f68459'},
+  {name:'Blue Hydrangea',cat:'focal',price:6.00,img:'1527061011665-3652c757a4d4'},
+  {name:'Orchid',cat:'focal',price:8.00,img:'1599463740831-a5015ef7b65a'},
+  {name:'Lily',cat:'focal',price:4.00,img:'1605485236949-5775b9676c78'},
+  {name:'Tulip',cat:'accent',price:2.75,img:'1559150180-2467f804f9bf'},
+  {name:'Sunflower',cat:'focal',price:2.50,img:'1588834747799-82f691b36ff6'},
+  {name:'Lavender',cat:'filler',price:2.00,img:'1477511801984-4ad318ed9846'},
+  {name:'Sweet Pea',cat:'filler',price:1.50,img:'1505990482843-ba05d52c02c7'},
+  {name:'Baby\'s Breath',cat:'filler',price:1.00,img:'1532774994231-7c01a28457b6'},
+  {name:'Wildflower Mix',cat:'filler',price:1.75,img:'1531130513023-1b5bb7bcfb9e'},
+  {name:'Wax Flower',cat:'filler',price:1.25,img:'1530889117621-680d8584d6b4'},
+  {name:'Eucalyptus',cat:'greenery',price:2.00,img:'1577238063601-573282246970'},
+  {name:'Silver Dollar Euc.',cat:'greenery',price:2.25,img:'1541123603104-512919d6a96c'},
+  {name:'Fern',cat:'greenery',price:1.50,img:'1634291196724-742f2a32463c'},
+  {name:'Italian Ruscus',cat:'greenery',price:1.75,img:'1487530811176-3780de880c2d'},
+  {name:'Cherry Blossom',cat:'accent',price:8.00,img:'1556066138-cfac27159329'}
+];
+const bqBouquet=[];
+const catColors={focal:'var(--rose)',filler:'var(--lavender)',greenery:'var(--sage)',accent:'var(--gold)'};
+function initBouquetBuilder(){
+  const grid=document.getElementById('bqFlowerGrid');
+  if(!grid)return;
+  grid.innerHTML=bqFlowers.map((f,i)=>`
+    <div onclick="addToBouquet(${i})" style="cursor:pointer;border-radius:12px;overflow:hidden;border:1px solid var(--bdr);transition:all 0.3s;position:relative" onmouseover="this.style.borderColor='var(--bdr-h)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='var(--bdr)';this.style.transform='none'">
+      <img src="https://images.unsplash.com/photo-${f.img}?w=300&q=80" alt="${f.name}" style="width:100%;height:120px;object-fit:cover;display:block" loading="lazy">
+      <div style="padding:8px;text-align:center">
+        <div style="font-size:0.75rem;font-weight:600">${f.name}</div>
+        <div style="font-size:0.65rem;color:${catColors[f.cat]}">${f.cat} — $${f.price.toFixed(2)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+function addToBouquet(i){
+  bqBouquet.push(i);
+  updateBouquet();
+}
+function updateBouquet(){
+  const sel=document.getElementById('bqSelected');
+  const prev=document.getElementById('bqPreviewImg');
+  if(bqBouquet.length===0){
+    sel.innerHTML='';
+    prev.innerHTML='<div style="color:var(--dimmer);font-size:0.9rem">Click flowers to start building →</div>';
+    document.getElementById('bqStems').textContent='0';
+    document.getElementById('bqCost').textContent='$0';
+    document.getElementById('bqRetail').textContent='$0';
+    return;
+  }
+  const last=bqFlowers[bqBouquet[bqBouquet.length-1]];
+  prev.innerHTML=`<img src="https://images.unsplash.com/photo-${last.img}?w=600&q=80" style="width:100%;height:100%;object-fit:cover;border-radius:16px" alt="${last.name}">`;
+  const counts={};
+  bqBouquet.forEach(idx=>{const n=bqFlowers[idx].name;counts[n]=(counts[n]||0)+1});
+  sel.innerHTML=Object.entries(counts).map(([n,c])=>`<span style="padding:4px 10px;border-radius:100px;font-size:0.72rem;font-weight:600;background:rgba(255,107,138,0.12);color:var(--rose)">${c}× ${n}</span>`).join('');
+  let totalCost=0;
+  bqBouquet.forEach(idx=>totalCost+=bqFlowers[idx].price);
+  document.getElementById('bqStems').textContent=bqBouquet.length;
+  document.getElementById('bqCost').textContent='$'+totalCost.toFixed(2);
+  document.getElementById('bqRetail').textContent='$'+(totalCost*3.2).toFixed(2);
+}
+function clearBouquet(){bqBouquet.length=0;updateBouquet()}
+function saveBouquet(){
+  if(!bqBouquet.length){alert('Add some flowers first!');return}
+  const counts={};
+  bqBouquet.forEach(i=>{const n=bqFlowers[i].name;counts[n]=(counts[n]||0)+1});
+  let totalCost=0;bqBouquet.forEach(i=>totalCost+=bqFlowers[i].price);
+  const lines=Object.entries(counts).map(([n,c])=>c+'× '+n).join('\n');
+  alert('🌸 Your Bouquet 🌸\n\n'+lines+'\n\nTotal Stems: '+bqBouquet.length+'\nWholesale: $'+totalCost.toFixed(2)+'\nSuggested Retail: $'+(totalCost*3.2).toFixed(2));
+}
+initBouquetBuilder();
+
+// ========================================================================
+// 2. FLOWER PAIRING ENGINE
+// ========================================================================
+const pairData={
+  'Rose':{img:'1582794543139-8ac9cb0f7b11',pairs:[
+    {name:'Ranunculus',why:'Layered petals echo the rose form — romantic harmony',img:'1490750967868-88aa4f44baee'},
+    {name:'Eucalyptus',why:'Silver-green foliage adds texture and modern freshness',img:'1577238063601-573282246970'},
+    {name:'Peony',why:'Two queens of the flower world — lush, full, and breathtaking',img:'1511201173873-c327e63eb6c4'},
+    {name:'Sweet Pea',why:'Delicate ruffles and fragrance lift the arrangement',img:'1505990482843-ba05d52c02c7'},
+    {name:'Hydrangea',why:'Full heads create a cloud-like backdrop for rose focal points',img:'1623201530307-c1d678f68459'}
+  ]},
+  'Peony':{img:'1511201173873-c327e63eb6c4',pairs:[
+    {name:'Garden Rose',why:'Similar lush form — together they create dreamy, full arrangements',img:'1582794543139-8ac9cb0f7b11'},
+    {name:'Ranunculus',why:'Smaller layered blooms complement the peony\'s grand form',img:'1490750967868-88aa4f44baee'},
+    {name:'Sweet Pea',why:'Trailing, airy texture balances the peony\'s density',img:'1505990482843-ba05d52c02c7'},
+    {name:'Fern',why:'Lacy greenery adds wild, garden-gathered elegance',img:'1634291196724-742f2a32463c'},
+    {name:'Lavender',why:'Purple sprigs add height and heavenly fragrance',img:'1477511801984-4ad318ed9846'}
+  ]},
+  'Dahlia':{img:'1601021215663-ee72b7063578',pairs:[
+    {name:'Rose',why:'Classic meets dramatic — beautiful scale contrast',img:'1530906622963-8a60586a49c7'},
+    {name:'Eucalyptus',why:'Silvery foliage frames the dahlia\'s bold geometry',img:'1541123603104-512919d6a96c'},
+    {name:'Wildflower',why:'Loose wildflowers create a romantic, garden-style frame',img:'1532774994231-7c01a28457b6'},
+    {name:'Sunflower',why:'Bold + bold = maximum visual impact for summer events',img:'1588834747799-82f691b36ff6'}
+  ]},
+  'Sunflower':{img:'1588834747799-82f691b36ff6',pairs:[
+    {name:'Dahlia',why:'Both big, bold, and summer-perfect — creates a lush look',img:'1533907650686-70576141c030'},
+    {name:'Lavender',why:'Purple and yellow are complementary — nature\'s perfect combo',img:'1477511801984-4ad318ed9846'},
+    {name:'Wildflower',why:'Mixed meadow blooms create a natural, gathered feel',img:'1531130513023-1b5bb7bcfb9e'},
+    {name:'Eucalyptus',why:'Green foliage grounds the sunflower\'s bright warmth',img:'1577238063601-573282246970'}
+  ]},
+  'Tulip':{img:'1559150180-2467f804f9bf',pairs:[
+    {name:'Ranunculus',why:'Both spring favorites with similar delicate charm',img:'1490750967868-88aa4f44baee'},
+    {name:'Cherry Blossom',why:'Branches add height and springtime magic',img:'1556066138-cfac27159329'},
+    {name:'Hydrangea',why:'Soft mounding heads cradle the tulip\'s clean lines',img:'1527061011665-3652c757a4d4'},
+    {name:'Fern',why:'Curled fiddleheads echo the tulip\'s organic curves',img:'1634291196724-742f2a32463c'}
+  ]},
+  'Hydrangea':{img:'1623201530307-c1d678f68459',pairs:[
+    {name:'Rose',why:'The classic pairing — hydrangea as backdrop, roses as stars',img:'1582794543139-8ac9cb0f7b11'},
+    {name:'Orchid',why:'Exotic meets classic — a high-end, luxurious combination',img:'1599463740831-a5015ef7b65a'},
+    {name:'Dahlia',why:'Both have round, full forms — textural richness together',img:'1601021215663-ee72b7063578'},
+    {name:'Lavender',why:'Soft purple tones blend beautifully with blue hydrangeas',img:'1499002238440-d264edd596ec'}
+  ]},
+  'Orchid':{img:'1599463740831-a5015ef7b65a',pairs:[
+    {name:'Lily',why:'Both exotic, sculptural — creates a sophisticated arrangement',img:'1605485236949-5775b9676c78'},
+    {name:'Rose',why:'Orchid\'s sleek form contrasts beautifully with rose\'s fullness',img:'1503652601-557d07733ddc'},
+    {name:'Eucalyptus',why:'Minimal greenery lets the orchid\'s beauty shine',img:'1541123603104-512919d6a96c'},
+    {name:'Cherry Blossom',why:'Branches with orchids create stunning Asian-inspired designs',img:'1522748906645-95d8adfd52c7'}
+  ]},
+  'Lavender':{img:'1477511801984-4ad318ed9846',pairs:[
+    {name:'Rose',why:'The classic Provencal combination — timeless romance',img:'1530906622963-8a60586a49c7'},
+    {name:'Peony',why:'Soft pink peonies with purple lavender = dreamy pastels',img:'1560256608-43f0b6f7588e'},
+    {name:'Sunflower',why:'Purple + yellow complementary colors straight from nature',img:'1551731409-43eb3e517a1a'},
+    {name:'Wildflower',why:'Both have that natural, just-picked-from-the-garden feel',img:'1505990482843-ba05d52c02c7'}
+  ]},
+  'Lily':{img:'1605485236949-5775b9676c78',pairs:[
+    {name:'Rose',why:'Traditional, elegant — perfect for formal occasions',img:'1494972308805-463bc619d34e'},
+    {name:'Orchid',why:'Two sculptural flowers create exotic drama',img:'1567748157439-651aca2ff064'},
+    {name:'Fern',why:'Lush greenery balances the lily\'s strong form',img:'1487530811176-3780de880c2d'},
+    {name:'Eucalyptus',why:'Silver leaves soften the lily\'s bold drama',img:'1577238063601-573282246970'}
+  ]},
+  'Cherry Blossom':{img:'1556066138-cfac27159329',pairs:[
+    {name:'Tulip',why:'Both peak in spring — an ethereal seasonal combination',img:'1520763185298-1b434c919102'},
+    {name:'Peony',why:'Soft blossoms with lush peonies = pure romance',img:'1579664872746-55e2a805d705'},
+    {name:'Orchid',why:'Asian-inspired elegance with minimal, sculptural beauty',img:'1599463740831-a5015ef7b65a'},
+    {name:'Ranunculus',why:'Delicate blooms echo the blossom\'s gentle beauty',img:'1490750967868-88aa4f44baee'}
+  ]},
+  'Eucalyptus':{img:'1577238063601-573282246970',pairs:[
+    {name:'Rose',why:'The Instagram-famous combination — modern romance',img:'1582794543139-8ac9cb0f7b11'},
+    {name:'Dahlia',why:'Bold blooms framed by silvery, aromatic foliage',img:'1536091666687-b58e92e5a1fa'},
+    {name:'Orchid',why:'Minimal, architectural — a designer\'s dream combo',img:'1599463740831-a5015ef7b65a'},
+    {name:'Wildflower',why:'Eucalyptus gives structure to free-flowing wildflowers',img:'1530889117621-680d8584d6b4'}
+  ]},
+  'Ranunculus':{img:'1490750967868-88aa4f44baee',pairs:[
+    {name:'Peony',why:'Both have layered, romantic petals — dreamy together',img:'1511201173873-c327e63eb6c4'},
+    {name:'Tulip',why:'Spring best friends — clean lines, soft colors',img:'1559150180-2467f804f9bf'},
+    {name:'Rose',why:'Similar form, different scale — creates depth',img:'1530906622963-8a60586a49c7'},
+    {name:'Sweet Pea',why:'Both delicate and romantic — a florist\'s favorite pair',img:'1505990482843-ba05d52c02c7'}
+  ]},
+  'Wildflower':{img:'1505990482843-ba05d52c02c7',pairs:[
+    {name:'Lavender',why:'Meadow meets herb garden — natural, organic beauty',img:'1499002238440-d264edd596ec'},
+    {name:'Sunflower',why:'Both exude warmth and countryside charm',img:'1551731409-43eb3e517a1a'},
+    {name:'Dahlia',why:'A focal dahlia anchors a cloud of wild blooms',img:'1568702846914-96b305d2ead1'},
+    {name:'Eucalyptus',why:'Structured greenery grounds the wildflower chaos beautifully',img:'1541123603104-512919d6a96c'}
+  ]}
+};
+function initPairing(){
+  const btns=document.getElementById('pairingBtns');
+  if(!btns)return;
+  btns.innerHTML=Object.keys(pairData).map(f=>`<button class="btn btn-outline btn-sm" onclick="showPairing('${f}')">${f}</button>`).join('');
+}
+function showPairing(flower){
+  const d=pairData[flower];if(!d)return;
+  document.getElementById('pairingResult').style.display='block';
+  document.getElementById('pairingHeader').innerHTML=`<h3 style="color:var(--lavender)">Perfect partners for <span style="color:var(--rose)">${flower}</span></h3><p style="font-size:0.82rem;color:var(--dim)">Click any flower above to see its best companions</p>`;
+  document.getElementById('pairingGrid').innerHTML=d.pairs.map(p=>`
+    <div class="photo-card" style="aspect-ratio:4/5">
+      <img src="https://images.unsplash.com/photo-${p.img}?w=500&q=80" alt="${p.name}" loading="lazy">
+      <div class="card-overlay">
+        <h4>${p.name}</h4>
+        <p>${p.why}</p>
+      </div>
+      <div class="card-badge">${flower} + ${p.name}</div>
+    </div>
+  `).join('');
+}
+initPairing();
+
+// ========================================================================
+// 3. COLOR WHEEL DESIGNER
+// ========================================================================
+const colorSchemes={
+  complementary:{
+    title:'Complementary Colors',
+    desc:'Colors directly opposite each other on the color wheel. Creates maximum contrast and visual vibrance — the arrangement practically vibrates with energy.',
+    swatches:['#8B008B','#FFD700','#4B0082','#FFA500'],
+    combos:[
+      {name:'Purple Lisianthus + Yellow Ranunculus',desc:'Royal purple meets sunny gold — classic complementary drama',img:'1578534102052-70f4c14ee0e7'},
+      {name:'Lavender + Sunflower',desc:'Soft purple spikes with bold yellow heads — countryside elegance',img:'1588834747799-82f691b36ff6'},
+      {name:'Blue Hydrangea + Peach Rose',desc:'Cool blue cloud beneath warm peach blooms — serene contrast',img:'1623201530307-c1d678f68459'},
+      {name:'Red Rose + Green Eucalyptus',desc:'The holiday classic — passion meets freshness',img:'1577238063601-573282246970'}
+    ]
+  },
+  analogous:{
+    title:'Analogous Colors',
+    desc:'Three colors next to each other on the wheel. Creates a harmonious, unified look that feels naturally cohesive and soothing to the eye.',
+    swatches:['#FF6B8A','#FF8FAB','#FFC2D1','#E0AAFF'],
+    combos:[
+      {name:'Blush Rose + Pink Peony + Lavender',desc:'Pink family tones flow together like a sunset',img:'1511201173873-c327e63eb6c4'},
+      {name:'Peach Dahlia + Coral Rose + Blush Ranunculus',desc:'Warm tones cascade from amber to shell pink',img:'1601021215663-ee72b7063578'},
+      {name:'Red Rose + Orange Dahlia + Yellow Sunflower',desc:'Fiery gradient that captures autumn\'s warmth',img:'1533907650686-70576141c030'},
+      {name:'Purple Orchid + Blue Hydrangea + Lavender',desc:'Cool tones create a dreamy, mysterious atmosphere',img:'1599463740831-a5015ef7b65a'}
+    ]
+  },
+  monochromatic:{
+    title:'Monochromatic Palette',
+    desc:'One color in many shades, from the palest tint to the deepest shade. Creates sophistication through texture variation rather than color contrast.',
+    swatches:['#FFF0F3','#FFB3C6','#FF6B8A','#CC0044'],
+    combos:[
+      {name:'All-White: Rose + Peony + Hydrangea + Sweet Pea',desc:'Pure white in different forms — the ultimate luxury bridal bouquet',img:'1552222661-467bd51aa1f4'},
+      {name:'All-Pink: Garden Rose + Ranunculus + Cherry Blossom',desc:'Lightest blush to deep magenta — romantic perfection',img:'1594149596808-e3b6174968b3'},
+      {name:'All-Purple: Lavender + Lisianthus + Orchid',desc:'Whisper lilac to deep violet — modern and dramatic',img:'1477511801984-4ad318ed9846'},
+      {name:'All-Red: Rose + Dahlia + Amaranth',desc:'Crimson to burgundy — bold, passionate, unforgettable',img:'1536266694648-914d29a935f9'}
+    ]
+  },
+  triadic:{
+    title:'Triadic Harmony',
+    desc:'Three colors equally spaced around the wheel (forming a triangle). Bold, vibrant, and energetic — perfect for celebrations and festivals.',
+    swatches:['#FF0000','#0066FF','#FFFF00'],
+    combos:[
+      {name:'Red Rose + Blue Delphinium + Yellow Sunflower',desc:'Primary trio — the most energetic color combination possible',img:'1588834747799-82f691b36ff6'},
+      {name:'Orange Dahlia + Purple Lisianthus + Green Hydrangea',desc:'Secondary trio — rich, unexpected, art-gallery worthy',img:'1601021215663-ee72b7063578'},
+      {name:'Pink Peony + Teal Eucalyptus + Gold Ranunculus',desc:'Soft triadic — sophisticated version of the vibrant trio',img:'1560256608-43f0b6f7588e'},
+      {name:'Coral Rose + Lavender + Lime Greenery',desc:'Modern triadic — trendy, Instagram-perfect palette',img:'1519378058457-4c29a0a2efac'}
+    ]
+  },
+  warmcool:{
+    title:'Warm vs Cool Tones',
+    desc:'Warm tones (red, orange, yellow) evoke energy and passion. Cool tones (blue, purple, green) create calm and elegance. Mix them for dynamic contrast.',
+    swatches:['#FF4444','#FF8844','#4488FF','#44BBAA'],
+    combos:[
+      {name:'WARM: Peach Rose + Coral Dahlia + Gold Ranunculus',desc:'Sunset warmth — inviting, romantic, glowing in candlelight',img:'1558980664254-37a21fbc6c7b'},
+      {name:'COOL: Blue Hydrangea + Purple Orchid + Silver Eucalyptus',desc:'Moonlit garden feel — serene, sophisticated, mysterious',img:'1527061011665-3652c757a4d4'},
+      {name:'WARM+COOL: Peach Rose + Lavender + Sage Greenery',desc:'The best of both worlds — balanced, modern, versatile',img:'1554773228756-d8e1fe6aa4a7'},
+      {name:'CONTRAST: Sunflower + Blue Hydrangea',desc:'Maximum warm-cool contrast — vibrant, eye-catching, joyful',img:'1551731409-43eb3e517a1a'}
+    ]
+  }
+};
+function showColorScheme(type){
+  const s=colorSchemes[type];if(!s)return;
+  const el=document.getElementById('colorSchemeResult');
+  el.style.display='block';el.style.textAlign='left';el.style.alignItems='stretch';
+  el.innerHTML=`
+    <h3 style="color:var(--gold);margin-bottom:6px">${s.title}</h3>
+    <p style="font-size:0.82rem;color:var(--dim);line-height:1.7;margin-bottom:16px">${s.desc}</p>
+    <div style="display:flex;gap:8px;margin-bottom:20px">${s.swatches.map(c=>`<div style="width:40px;height:40px;border-radius:10px;background:${c};border:2px solid rgba(255,255,255,0.1)"></div>`).join('')}</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      ${s.combos.map(c=>`
+        <div style="border-radius:14px;overflow:hidden;border:1px solid var(--bdr)">
+          <img src="https://images.unsplash.com/photo-${c.img}?w=400&q=80" alt="${c.name}" style="width:100%;height:140px;object-fit:cover" loading="lazy">
+          <div style="padding:12px"><div style="font-weight:600;font-size:0.82rem;margin-bottom:4px">${c.name}</div><div style="font-size:0.72rem;color:var(--dim)">${c.desc}</div></div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+// ========================================================================
+// 4. STYLE QUIZ
+// ========================================================================
+const quizQuestions=[
+  {q:'What\'s the occasion?',opts:['Wedding','Birthday','Sympathy','Everyday Joy']},
+  {q:'Your color vibe?',opts:['Soft & Romantic','Bold & Dramatic','Natural & Organic','Classic White']},
+  {q:'Budget range?',opts:['Under $75','$75 – $150','$150 – $300','$300+']},
+  {q:'What matters most?',opts:['Fragrance','Visual Impact','Longevity','Uniqueness']},
+  {q:'Your style?',opts:['Lush & Overflowing','Minimal & Modern','Wildflower & Free','Structured & Elegant']}
+];
+let quizStep=0,quizAnswers=[];
+function initQuiz(){renderQuizQ()}
+function renderQuizQ(){
+  if(quizStep>=quizQuestions.length){showQuizResult();return}
+  const qd=quizQuestions[quizStep];
+  document.getElementById('quizNum').textContent=quizStep+1;
+  document.getElementById('quizQuestion').textContent=qd.q;
+  document.getElementById('quizOptions').innerHTML=qd.opts.map((o,i)=>`<button class="btn btn-outline" onclick="answerQuiz(${i})" style="min-width:160px">${o}</button>`).join('');
+}
+function answerQuiz(i){
+  quizAnswers.push(i);quizStep++;renderQuizQ();
+}
+const quizResults=[
+  {name:'The Romantic Garden Bouquet',flowers:'Garden Roses, Peonies, Ranunculus, Sweet Peas, trailing Eucalyptus',price:'$125–$200',img:'1594149596808-e3b6174968b3',desc:'Lush, fragrant, and overflowing with petals. Soft blush and cream tones with delicate greenery cascading. This is the bouquet that makes everyone gasp.'},
+  {name:'The Bold Statement Arrangement',flowers:'Dahlias, Protea, Orchids, Burgundy Roses, Dark Foliage',price:'$180–$350',img:'1601021215663-ee72b7063578',desc:'Deep jewel tones and architectural forms. Moody burgundy, plum, and wine shades with unexpected textures. For the client who wants to be unforgettable.'},
+  {name:'The Gathered Meadow Bouquet',flowers:'Wildflowers, Lavender, Queen Anne\'s Lace, Chamomile, Fern',price:'$65–$120',img:'1505990482843-ba05d52c02c7',desc:'Freshly gathered from a wildflower meadow. Loose, natural, and unstructured with a mix of colors and textures. Perfect for the free spirit.'},
+  {name:'The Classic White Elegance',flowers:'White Roses, Hydrangea, Lily of the Valley, Stephanotis, Italian Ruscus',price:'$150–$275',img:'1552222661-467bd51aa1f4',desc:'Timeless sophistication in pure white. Multiple textures and bloom sizes create depth. This is the bouquet for cathedral weddings and black-tie galas.'},
+  {name:'The Sunshine Celebration',flowers:'Sunflowers, Yellow Ranunculus, Chamomile, Billy Buttons, Eucalyptus',price:'$55–$95',img:'1588834747799-82f691b36ff6',desc:'Pure happiness in a vase. Bright yellows and warm golds with pops of green. The bouquet that makes everyone smile on sight.'},
+  {name:'The Luxe Orchid Cascade',flowers:'Phalaenopsis Orchid, Calla Lily, Monstera Leaf, Bear Grass',price:'$200–$400',img:'1599463740831-a5015ef7b65a',desc:'Sleek, modern, and breathtakingly elegant. Sculptural forms with minimal greenery. For the minimalist who demands perfection.'}
+];
+function showQuizResult(){
+  document.getElementById('quizQ').style.display='none';
+  const r=quizResults[(quizAnswers[0]+quizAnswers[4])%quizResults.length];
+  document.getElementById('quizResult').style.display='block';
+  document.getElementById('quizResult').innerHTML=`
+    <div style="text-align:center;margin-bottom:20px">
+      <h3 style="color:var(--rose);font-size:1.4rem;font-family:'Cormorant Garamond',serif;margin-bottom:4px">Your Perfect Match</h3>
+      <div style="font-size:0.82rem;color:var(--dim)">Based on your style preferences</div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">
+      <div style="border-radius:16px;overflow:hidden"><img src="https://images.unsplash.com/photo-${r.img}?w=600&q=80" alt="${r.name}" style="width:100%;height:300px;object-fit:cover"></div>
+      <div>
+        <h3 style="color:var(--lavender);font-family:'Cormorant Garamond',serif;font-size:1.5rem;margin-bottom:10px">${r.name}</h3>
+        <p style="font-size:0.85rem;color:var(--dim);line-height:1.7;margin-bottom:16px">${r.desc}</p>
+        <div style="margin-bottom:12px"><span style="font-size:0.72rem;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px">Flowers</span><div style="font-size:0.85rem;color:var(--txt);margin-top:4px">${r.flowers}</div></div>
+        <div style="margin-bottom:16px"><span style="font-size:0.72rem;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px">Price Range</span><div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;color:var(--sage)">${r.price}</div></div>
+        <button class="btn btn-primary btn-sm" onclick="resetQuiz()">Take Quiz Again</button>
+      </div>
+    </div>
+  `;
+}
+function resetQuiz(){
+  quizStep=0;quizAnswers=[];
+  document.getElementById('quizQ').style.display='block';
+  document.getElementById('quizResult').style.display='none';
+  renderQuizQ();
+}
+initQuiz();
+
+// ========================================================================
+// 5. ARRANGEMENT SHAPE EXPLORER
+// ========================================================================
+const shapeData=[
+  {name:'Round / Dome',icon:'⚫',desc:'The most popular shape — a symmetrical half-sphere of flowers. Looks beautiful from every angle. Best for centerpieces and bridal bouquets.',occasions:'Weddings, centerpieces, everyday arrangements',flowers:'Roses, Hydrangea, Ranunculus, Peonies, Carnations',tips:'Start with the focal flower at the center top. Build outward in concentric rings. Keep stems angled outward at 45° for a natural dome shape. Rotate the arrangement as you build to maintain symmetry.',img:'1620704033114-028772aa85ae'},
+  {name:'Cascade / Trailing',icon:'🌊',desc:'Flowers flow downward like a waterfall. Dramatic, romantic, and perfect for brides walking down the aisle. One of the most technically challenging shapes.',occasions:'Bridal bouquets, elevated centerpieces, pedestals',flowers:'Orchids, Trailing Ivy, Sweet Peas, Jasmine Vine, Wisteria',tips:'Use a bouquet holder with wet foam angled at 45°. Insert trailing elements first to establish the cascade direction. Focal flowers go at the top. Let gravity help — don\'t fight the natural drape.',img:'1521520368710-3ab197656d60'},
+  {name:'Asymmetric',icon:'⚡',desc:'Intentionally unbalanced for artistic, modern impact. One side is fuller or taller. Creates visual tension and movement that feels organic and contemporary.',occasions:'Modern weddings, art gallery events, editorial shoots',flowers:'Orchids, Protea, Dahlia, Monstera, Dried Grasses',tips:'Place your visual weight on one side (left or right). Use negative space deliberately — emptiness is part of the design. One dramatic branch can counterbalance a cluster of flowers.',img:'1558980664254-37a21fbc6c7b'},
+  {name:'Crescent',icon:'🌙',desc:'A sweeping C-shaped curve of flowers. Elegant, sophisticated, and reminiscent of Art Nouveau design. Creates graceful movement.',occasions:'Formal events, mantelpieces, altar arrangements',flowers:'Calla Lily, Orchid, Trailing Amaranthus, Fern, Roses',tips:'Start with curved branches or wire to establish the crescent shape. Follow the curve with increasingly shorter stems. Use trailing elements at the tips to elongate the crescent.',img:'1554773228756-d8e1fe6aa4a7'},
+  {name:'Nosegay / Posy',icon:'💐',desc:'A small, tightly packed round bouquet held in one hand. Charming, classic, and the most recognizable bouquet style. Easy to carry and photograph.',occasions:'Bridesmaids, flower girls, everyday gifts, tossing bouquet',flowers:'Roses, Ranunculus, Baby\'s Breath, Sweet Peas, Spray Roses',tips:'Keep stems tight and parallel. All flower heads should be at the same height. Wrap stems with ribbon at a uniform point. Size should be proportional to the carrier — smaller for bridesmaids, tiny for flower girls.',img:'1552222661-467bd51aa1f4'},
+  {name:'Tall / Pedestal',icon:'🏛️',desc:'Towering arrangements designed for elevated vases and pedestals. Commands attention in large venues. Think hotel lobbies, ballrooms, and cathedral altars.',occasions:'Church ceremonies, hotel lobbies, ballrooms, gala events',flowers:'Delphiniums, Gladiolus, Hydrangea, Branches, Orchid Sprays',tips:'Height should be 1.5-2× the container height. Start with the tallest line flowers first. Build fullness at the base. Ensure the arrangement is visually stable — nothing should look like it might tip. Use branches for dramatic height without heavy weight.',img:'1690974549931-74d9f436434c'}
+];
+function initShapes(){
+  const el=document.getElementById('shapeBtns');
+  if(!el)return;
+  el.innerHTML=shapeData.map((s,i)=>`<button class="btn btn-outline btn-sm" onclick="showShape(${i})">${s.icon} ${s.name}</button>`).join('');
+}
+function showShape(i){
+  const s=shapeData[i];
+  const el=document.getElementById('shapeResult');
+  el.style.display='grid';
+  el.innerHTML=`
+    <div style="border-radius:20px;overflow:hidden"><img src="https://images.unsplash.com/photo-${s.img}?w=600&q=80" alt="${s.name}" style="width:100%;height:100%;min-height:350px;object-fit:cover" loading="lazy"></div>
+    <div class="card">
+      <h3 style="color:var(--sky);font-family:'Cormorant Garamond',serif;font-size:1.6rem;margin-bottom:10px">${s.icon} ${s.name}</h3>
+      <p style="font-size:0.88rem;color:var(--dim);line-height:1.7;margin-bottom:16px">${s.desc}</p>
+      <div style="margin-bottom:14px"><span style="font-size:0.72rem;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px">Best Occasions</span><div style="font-size:0.85rem;color:var(--sage);margin-top:4px">${s.occasions}</div></div>
+      <div style="margin-bottom:14px"><span style="font-size:0.72rem;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px">Recommended Flowers</span><div style="font-size:0.85rem;color:var(--rose);margin-top:4px">${s.flowers}</div></div>
+      <div><span style="font-size:0.72rem;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px">Pro Technique Tips</span><div style="font-size:0.82rem;color:var(--dim);margin-top:4px;line-height:1.7">${s.tips}</div></div>
+    </div>
+  `;
+}
+initShapes();
+
+// ========================================================================
+// 6. SEASONAL BOUQUET GENERATOR
+// ========================================================================
+const monthData={
+  jan:{name:'January',bouquets:[
+    {name:'Winter White Elegance',flowers:['5× White Amaryllis','8× Paperwhites','6× White Ranunculus','5× Silver Brunia','8× Seeded Eucalyptus'],palette:['#FFFFFF','#F0F0F0','#E8E0D0','#C0C8C0'],cost:'$95',img:'1552222661-467bd51aa1f4'},
+    {name:'Frosty Berry',flowers:['6× Red Rose','4× White Hydrangea','8× Hypericum Berry','6× Pine Greenery','4× White Wax Flower'],palette:['#CC0033','#FFFFFF','#990022','#2D4F2D'],cost:'$78',img:'1536266694648-914d29a935f9'},
+    {name:'Midwinter Dream',flowers:['4× Cymbidium Orchid','6× Purple Hellebore','5× Dusty Miller','6× Lavender','4× Silver Dollar Eucalyptus'],palette:['#E0AAFF','#8B668B','#C0C0C0','#A8D5BA'],cost:'$120',img:'1599463740831-a5015ef7b65a'}
+  ]},
+  feb:{name:'February',bouquets:[
+    {name:'Valentine Passion',flowers:['12× Red Rose','6× Red Ranunculus','8× Red Spray Rose','5× Italian Ruscus','4× Seeded Eucalyptus'],palette:['#CC0033','#990022','#FF3366','#2D6A4F'],cost:'$110',img:'1494972308805-463bc619d34e'},
+    {name:'Sweetheart Blush',flowers:['8× Pink Rose','5× Pink Ranunculus','6× White Sweet Pea','4× Hellebore','6× Silver Dollar Euc.'],palette:['#FFB3C6','#FF8FAB','#FFFFFF','#C0C8C0'],cost:'$88',img:'1530906622963-8a60586a49c7'},
+    {name:'Purple Velvet',flowers:['5× Purple Tulip','4× Purple Anemone','6× Lavender','5× Purple Hyacinth','6× Fern'],palette:['#663399','#9966CC','#E0AAFF','#4F7942'],cost:'$72',img:'1477511801984-4ad318ed9846'}
+  ]},
+  mar:{name:'March',bouquets:[
+    {name:'First Bloom of Spring',flowers:['10× Tulip (mixed)','6× Anemone','5× Ranunculus','4× Hyacinth','6× Fern'],palette:['#FF6B8A','#FFFFFF','#E0AAFF','#4F7942'],cost:'$68',img:'1559150180-2467f804f9bf'},
+    {name:'Cherry Blossom Romance',flowers:['3× Cherry Blossom Branch','6× Pink Rose','5× White Ranunculus','4× Sweet Pea','5× Eucalyptus'],palette:['#FFB3C6','#FFFFFF','#FFC2D1','#A8D5BA'],cost:'$95',img:'1556066138-cfac27159329'},
+    {name:'Daffodil Sunshine',flowers:['10× Daffodil','6× Tulip (yellow)','4× Freesia','5× Wax Flower','6× Italian Ruscus'],palette:['#FFD700','#FFA500','#FFFF88','#4F7942'],cost:'$55',img:'1520763185298-1b434c919102'}
+  ]},
+  apr:{name:'April',bouquets:[
+    {name:'Peony Season Opens',flowers:['5× Peony (blush)','6× Garden Rose','8× Ranunculus','5× Sweet Pea','6× Eucalyptus'],palette:['#FFC2D1','#FF8FAB','#FFFFFF','#A8D5BA'],cost:'$125',img:'1511201173873-c327e63eb6c4'},
+    {name:'Pastel Easter Basket',flowers:['6× Tulip (pastel mix)','4× Hyacinth','5× Sweet Pea','4× Ranunculus','5× Fern'],palette:['#FFB3C6','#E0AAFF','#FEF3C7','#98F5E1'],cost:'$65',img:'1520763185298-1b434c919102'},
+    {name:'Spring Garden Party',flowers:['6× Anemone','5× Ranunculus','4× Fritillaria','5× Hellebore','8× Trailing Jasmine'],palette:['#FFFFFF','#FF6B8A','#663399','#4F7942'],cost:'$85',img:'1519378058457-4c29a0a2efac'}
+  ]},
+  may:{name:'May',bouquets:[
+    {name:'Peak Peony Luxe',flowers:['8× Peony (mixed)','5× Garden Rose','6× Sweet Pea','4× Clematis','6× Trailing Greenery'],palette:['#FF8FAB','#FFC2D1','#FFFFFF','#A8D5BA'],cost:'$145',img:'1560256608-43f0b6f7588e'},
+    {name:'Mother\'s Day Classic',flowers:['6× Pink Rose','4× White Peony','6× Ranunculus','5× Lavender','6× Eucalyptus'],palette:['#FF6B8A','#FFFFFF','#FFC2D1','#C8B6FF'],cost:'$98',img:'1594149596808-e3b6174968b3'},
+    {name:'Garden Cottage',flowers:['5× Foxglove','4× Delphinium','6× Sweet Pea','5× Lady\'s Mantle','8× Fern'],palette:['#FF6B8A','#6699CC','#E0AAFF','#4F7942'],cost:'$75',img:'1505990482843-ba05d52c02c7'}
+  ]},
+  jun:{name:'June',bouquets:[
+    {name:'June Bride Cascade',flowers:['6× Garden Rose','4× Peony','5× Sweet Pea','4× Jasmine','8× Trailing Eucalyptus'],palette:['#FFFFFF','#FFC2D1','#F0F0F0','#A8D5BA'],cost:'$165',img:'1521520368710-3ab197656d60'},
+    {name:'Summer Solstice',flowers:['6× Sunflower','5× Dahlia','4× Zinnia','5× Chamomile','6× Wildflower Mix'],palette:['#FFD700','#FF6B8A','#FFA500','#4F7942'],cost:'$68',img:'1588834747799-82f691b36ff6'},
+    {name:'Lavender Fields',flowers:['10× Lavender','5× Purple Lisianthus','4× White Rose','5× Scabiosa','6× Silver Dollar Euc.'],palette:['#C8B6FF','#E0AAFF','#FFFFFF','#C0C8C0'],cost:'$72',img:'1499002238440-d264edd596ec'}
+  ]},
+  jul:{name:'July',bouquets:[
+    {name:'Dahlia Season Begins',flowers:['6× Dahlia (Cafe au Lait)','4× Garden Rose','5× Lisianthus','4× Astilbe','6× Eucalyptus'],palette:['#DEB887','#FFC2D1','#FFFFFF','#A8D5BA'],cost:'$95',img:'1601021215663-ee72b7063578'},
+    {name:'Independence Day',flowers:['6× Blue Delphinium','6× Red Rose','6× White Hydrangea','5× Red Spray Rose','5× Star of Bethlehem'],palette:['#CC0033','#FFFFFF','#003399','#003399'],cost:'$82',img:'1527061011665-3652c757a4d4'},
+    {name:'Tropical Paradise',flowers:['3× Bird of Paradise','4× Orchid','3× Anthurium','4× Protea','5× Monstera Leaf'],palette:['#FF6600','#FF00CC','#FF3333','#006600'],cost:'$110',img:'1622110084090-c83d2d627aa1'}
+  ]},
+  aug:{name:'August',bouquets:[
+    {name:'Late Summer Glory',flowers:['6× Dahlia (dinnerplate)','5× Sunflower','4× Zinnia','5× Cosmos','6× Seeded Eucalyptus'],palette:['#CC6600','#FFD700','#FF6B8A','#A8D5BA'],cost:'$78',img:'1533907650686-70576141c030'},
+    {name:'Sunset Romance',flowers:['6× Peach Rose','5× Coral Dahlia','4× Peach Ranunculus','5× Butterfly Bush','6× Trailing Greenery'],palette:['#FFB4A2','#E5989B','#FFC2D1','#A8D5BA'],cost:'$92',img:'1558980664254-37a21fbc6c7b'},
+    {name:'Herb Garden Bouquet',flowers:['5× Lavender','4× Chamomile','5× Rosemary Sprigs','4× Mint','6× Queen Anne\'s Lace','4× White Rose'],palette:['#C8B6FF','#FFFFFF','#4F7942','#A8D5BA'],cost:'$55',img:'1532774994231-7c01a28457b6'}
+  ]},
+  sep:{name:'September',bouquets:[
+    {name:'Autumn Transition',flowers:['5× Dahlia (burgundy)','4× Garden Rose (rust)','5× Chocolate Cosmos','4× Astilbe','6× Fall Foliage'],palette:['#722F37','#CC6600','#8B4513','#4F7942'],cost:'$88',img:'1536091666687-b58e92e5a1fa'},
+    {name:'Harvest Gold',flowers:['6× Sunflower','5× Chrysanthemum','4× Marigold','5× Hypericum Berry','6× Oak Leaf'],palette:['#FFD700','#FFA500','#CC6600','#4F7942'],cost:'$62',img:'1551731409-43eb3e517a1a'},
+    {name:'Back to School',flowers:['5× Red Rose','4× Blue Thistle','6× White Stock','5× Wax Flower','5× Eucalyptus'],palette:['#CC0033','#336699','#FFFFFF','#A8D5BA'],cost:'$70',img:'1578534102052-70f4c14ee0e7'}
+  ]},
+  oct:{name:'October',bouquets:[
+    {name:'Halloween Moody',flowers:['5× Black Dahlia','4× Burgundy Rose','5× Purple Calla Lily','4× Blackberry','6× Dark Foliage'],palette:['#1A0A2E','#722F37','#4B0082','#2D2D2D'],cost:'$95',img:'1568702846914-96b305d2ead1'},
+    {name:'Pumpkin Spice',flowers:['6× Orange Rose','5× Rust Chrysanthemum','4× Orange Dahlia','5× Bittersweet Berry','6× Fall Eucalyptus'],palette:['#FF6600','#CC6600','#8B4513','#A8D5BA'],cost:'$72',img:'1533907650686-70576141c030'},
+    {name:'Scarecrow\'s Garden',flowers:['5× Sunflower','4× Marigold','5× Dried Wheat','4× Chrysanthemum','6× Corn Husk Leaves'],palette:['#FFD700','#FFA500','#DEB887','#8B7355'],cost:'$55',img:'1531130513023-1b5bb7bcfb9e'}
+  ]},
+  nov:{name:'November',bouquets:[
+    {name:'Thanksgiving Centerpiece',flowers:['4× Burgundy Dahlia','4× Orange Rose','5× Fall Chrysanthemum','4× Hypericum Berry','6× Seeded Eucalyptus','3× Pomegranate'],palette:['#722F37','#FF6600','#FFD700','#A8D5BA'],cost:'$85',img:'1690974549931-74d9f436434c'},
+    {name:'Grateful Gathering',flowers:['5× Rust Rose','4× Protea','5× Dried Bunny Tail','4× Strawflower','6× Olive Branch'],palette:['#CC6600','#DEB887','#8B7355','#4F7942'],cost:'$78',img:'1554773228756-d8e1fe6aa4a7'},
+    {name:'First Frost',flowers:['5× White Rose','4× White Ranunculus','5× Silver Brunia','4× Dusty Miller','6× Silver Dollar Euc.'],palette:['#FFFFFF','#E8E0D0','#C0C0C0','#C0C8C0'],cost:'$82',img:'1552222661-467bd51aa1f4'}
+  ]},
+  dec:{name:'December',bouquets:[
+    {name:'Holiday Classic',flowers:['8× Red Rose','4× White Hydrangea','6× Pine Branch','5× Red Berry','4× Gold-sprayed Eucalyptus'],palette:['#CC0033','#FFFFFF','#006600','#FFD700'],cost:'$95',img:'1536266694648-914d29a935f9'},
+    {name:'Winter Wonderland',flowers:['4× White Amaryllis','6× White Rose','5× Silver Brunia','6× White Pine','4× Frosted Eucalyptus'],palette:['#FFFFFF','#F0F0F0','#C0C0C0','#E8F0E8'],cost:'$88',img:'1620704033114-028772aa85ae'},
+    {name:'Midnight Luxe',flowers:['4× Purple Orchid','5× Deep Red Rose','4× Anemone','5× Black Privet Berry','6× Dark Greenery'],palette:['#4B0082','#990022','#FFFFFF','#1A2F1A'],cost:'$130',img:'1567748157439-651aca2ff064'}
+  ]}
+};
+function genSeason(btn,month){
+  document.querySelectorAll('.season-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const m=monthData[month];if(!m)return;
+  document.getElementById('seasonGenResult').innerHTML=m.bouquets.map(b=>`
+    <div class="card">
+      <div style="border-radius:14px;overflow:hidden;margin-bottom:14px"><img src="https://images.unsplash.com/photo-${b.img}?w=500&q=80" alt="${b.name}" style="width:100%;height:200px;object-fit:cover" loading="lazy"></div>
+      <h3 style="color:var(--sage);font-size:1rem;margin-bottom:6px">${b.name}</h3>
+      <div style="font-size:0.72rem;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">${m.name} Recipe</div>
+      <div style="display:flex;gap:4px;margin-bottom:12px">${b.palette.map(c=>`<div style="width:24px;height:24px;border-radius:6px;background:${c};border:1px solid rgba(255,255,255,0.1)"></div>`).join('')}</div>
+      <div style="display:flex;flex-direction:column;gap:4px;margin-bottom:12px">
+        ${b.flowers.map(f=>`<div style="font-size:0.8rem;color:var(--dim);padding:4px 8px;border-radius:6px;background:rgba(255,255,255,0.03)">${f}</div>`).join('')}
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;padding-top:10px;border-top:1px solid var(--bdr)">
+        <span style="font-size:0.72rem;color:var(--dimmer)">Estimated Retail</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--gold)">${b.cost}</span>
+      </div>
+    </div>
+  `).join('');
+}
+// Auto-load March (it starts as active)
+(function(){const marchBtn=document.querySelector('.season-tab.active');if(marchBtn)genSeason(marchBtn,'mar')})();
+
+// ========================================================================
+// 7. BUDGET BOUQUET CALCULATOR
+// ========================================================================
+let budOcc='wedding';
+const budgetRecipes={
+  wedding:{
+    low:{title:'Sweet & Simple Bridal',items:[{n:'Spray Roses (white)',q:6,p:2.50},{n:'Baby\'s Breath',q:8,p:0.80},{n:'Italian Ruscus',q:5,p:1.75},{n:'Wax Flower',q:4,p:1.25},{n:'Ribbon & Wrap',q:1,p:3.00}]},
+    mid:{title:'Romantic Garden Bride',items:[{n:'Garden Rose (blush)',q:5,p:4.50},{n:'Peony (white)',q:3,p:6.00},{n:'Ranunculus (pink)',q:8,p:3.00},{n:'Sweet Pea (white)',q:5,p:1.20},{n:'Eucalyptus (silver)',q:6,p:2.00}]},
+    high:{title:'Luxury Cascade Bridal',items:[{n:'Peony (blush)',q:6,p:7.50},{n:'Garden Rose (cream)',q:6,p:4.50},{n:'Orchid Sprays',q:3,p:8.00},{n:'Ranunculus',q:8,p:3.50},{n:'Trailing Jasmine',q:4,p:3.00},{n:'Silver Dollar Euc.',q:6,p:2.25}]},
+    premium:{title:'Couture Bridal Statement',items:[{n:'Juliet Rose (peach)',q:8,p:6.00},{n:'Peony (blush)',q:6,p:7.50},{n:'Orchid (white)',q:4,p:8.00},{n:'Ranunculus',q:10,p:3.50},{n:'Sweet Pea',q:8,p:1.50},{n:'Trailing Clematis',q:4,p:4.00},{n:'Seeded Eucalyptus',q:8,p:2.00}]}
+  },
+  birthday:{
+    low:{title:'Happy Birthday Bunch',items:[{n:'Sunflower',q:3,p:2.50},{n:'Daisy (mixed)',q:6,p:1.00},{n:'Carnation (bright)',q:5,p:1.50},{n:'Greenery',q:4,p:1.50}]},
+    mid:{title:'Birthday Bloom Box',items:[{n:'Rose (bright mix)',q:6,p:3.75},{n:'Dahlia',q:3,p:5.00},{n:'Lisianthus',q:4,p:4.00},{n:'Wax Flower',q:5,p:1.25},{n:'Eucalyptus',q:5,p:2.00}]},
+    high:{title:'Birthday Luxe Vase',items:[{n:'Rose (premium mix)',q:8,p:4.50},{n:'Dahlia (dinnerplate)',q:4,p:5.50},{n:'Hydrangea',q:3,p:5.50},{n:'Ranunculus',q:6,p:3.50},{n:'Eucalyptus',q:6,p:2.00}]},
+    premium:{title:'Grand Birthday Arrangement',items:[{n:'Orchid Stems',q:4,p:8.00},{n:'Rose (premium)',q:10,p:4.50},{n:'Peony',q:4,p:7.00},{n:'Dahlia',q:5,p:5.50},{n:'Hydrangea',q:4,p:5.50},{n:'Trailing Greenery',q:8,p:2.00}]}
+  },
+  sympathy:{
+    low:{title:'Gentle Sympathy Spray',items:[{n:'White Carnation',q:8,p:1.50},{n:'White Daisy',q:5,p:1.00},{n:'Baby\'s Breath',q:6,p:0.80},{n:'Fern',q:5,p:1.50}]},
+    mid:{title:'Peace & Comfort',items:[{n:'White Rose',q:6,p:3.75},{n:'White Lily',q:3,p:4.00},{n:'White Stock',q:4,p:3.00},{n:'White Wax Flower',q:5,p:1.25},{n:'Italian Ruscus',q:6,p:1.75}]},
+    high:{title:'Eternal Grace Wreath',items:[{n:'White Rose',q:10,p:3.75},{n:'White Hydrangea',q:4,p:5.50},{n:'White Orchid',q:3,p:8.00},{n:'White Lily',q:4,p:4.00},{n:'Eucalyptus',q:8,p:2.00}]},
+    premium:{title:'Grand Tribute Arrangement',items:[{n:'White Peony',q:6,p:7.50},{n:'White Garden Rose',q:8,p:4.50},{n:'Calla Lily',q:5,p:6.00},{n:'White Orchid',q:4,p:8.00},{n:'Hydrangea',q:4,p:5.50},{n:'Trailing Greenery',q:10,p:2.00}]}
+  },
+  everyday:{
+    low:{title:'Cheerful Market Bunch',items:[{n:'Carnation (mixed)',q:6,p:1.50},{n:'Alstroemeria',q:5,p:1.75},{n:'Daisy',q:5,p:1.00},{n:'Greenery',q:4,p:1.50}]},
+    mid:{title:'Kitchen Table Delight',items:[{n:'Rose (mixed)',q:5,p:3.75},{n:'Tulip',q:5,p:2.75},{n:'Snapdragon',q:3,p:2.50},{n:'Chamomile',q:4,p:1.50},{n:'Eucalyptus',q:5,p:2.00}]},
+    high:{title:'Designer Living Room',items:[{n:'Garden Rose',q:6,p:4.50},{n:'Ranunculus',q:6,p:3.50},{n:'Dahlia',q:3,p:5.00},{n:'Hydrangea',q:2,p:5.50},{n:'Lavender',q:5,p:2.00},{n:'Eucalyptus',q:5,p:2.00}]},
+    premium:{title:'Luxury Statement Piece',items:[{n:'Peony',q:5,p:7.50},{n:'Garden Rose',q:6,p:4.50},{n:'Orchid Stems',q:3,p:8.00},{n:'Dahlia',q:4,p:5.50},{n:'Ranunculus',q:6,p:3.50},{n:'Trailing Eucalyptus',q:8,p:2.25}]}
+  }
+};
+function getBudgetTier(val){
+  if(val<75)return 'low';if(val<150)return 'mid';if(val<300)return 'high';return 'premium';
+}
+function calcBudgetBouquet(){
+  const val=+document.getElementById('budgetSlider').value;
+  document.getElementById('budgetVal').textContent='$'+val;
+  const tier=getBudgetTier(val);
+  const recipe=budgetRecipes[budOcc][tier];
+  if(!recipe)return;
+  let wholesale=0;
+  recipe.items.forEach(it=>wholesale+=it.q*it.p);
+  const labor=wholesale*0.3;
+  const supplies=Math.min(val*0.08,35);
+  const retail=val;
+  const profit=retail-wholesale-labor-supplies;
+  document.getElementById('budgetResult').innerHTML=`
+    <h3 style="color:var(--sage);margin-bottom:4px">Your $${val} ${budOcc.charAt(0).toUpperCase()+budOcc.slice(1)} Bouquet</h3>
+    <div style="font-size:0.78rem;color:var(--dim);margin-bottom:16px">${recipe.title} — maximum beauty for your budget</div>
+    <div style="display:flex;flex-direction:column;gap:8px" id="budgetRecipe">
+      ${recipe.items.map(it=>`<div style="display:flex;justify-content:space-between;padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.03);font-size:0.85rem"><span>${it.q}× ${it.n}</span><span style="color:var(--sage)">$${(it.q*it.p).toFixed(2)}</span></div>`).join('')}
+    </div>
+    <div class="calc-total" style="margin-top:12px">
+      <div style="display:flex;justify-content:space-between"><span style="color:var(--dim)">Wholesale</span><span style="font-weight:700">$${wholesale.toFixed(2)}</span></div>
+      <div style="display:flex;justify-content:space-between;margin-top:6px"><span style="color:var(--dim)">Labor & Supplies</span><span style="font-weight:700">$${(labor+supplies).toFixed(2)}</span></div>
+      <div style="display:flex;justify-content:space-between;margin-top:8px;padding-top:8px;border-top:1px solid rgba(255,255,255,0.08)"><span style="font-weight:700">Retail Price</span><span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--sage)">$${retail}</span></div>
+      <div style="display:flex;justify-content:space-between;margin-top:4px"><span style="color:var(--dim)">Your Profit</span><span style="font-weight:700;color:var(--gold)">$${profit.toFixed(2)}</span></div>
+    </div>
+  `;
+}
+function setBudOcc(btn,occ){
+  document.querySelectorAll('.bud-occ').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  budOcc=occ;
+  calcBudgetBouquet();
+}
+
+// ========================================================================
+// 8. FLOWER SUBSTITUTION FINDER
+// ========================================================================
+const subData={
+  'Peony':{img:'1511201173873-c327e63eb6c4',price:'$6–9/stem',season:'April–June',subs:[
+    {name:'Garden Rose',why:'Similar lush, rounded shape with layered petals. Available year-round.',price:'$4–5/stem',avail:'Year-round',img:'1582794543139-8ac9cb0f7b11'},
+    {name:'Ranunculus',why:'Layered paper-thin petals mimic the peony look at a fraction of the cost.',price:'$3–4/stem',avail:'Jan–May',img:'1490750967868-88aa4f44baee'},
+    {name:'Carnation (ruffled)',why:'Modern, ruffled carnations look surprisingly like small peonies.',price:'$1–2/stem',avail:'Year-round',img:'1578534102052-70f4c14ee0e7'}
+  ]},
+  'Orchid':{img:'1599463740831-a5015ef7b65a',price:'$8–12/stem',season:'Year-round',subs:[
+    {name:'Lisianthus',why:'Delicate, ruffled petals similar to orchid elegance at half the price.',price:'$3–4/stem',avail:'Year-round',img:'1519378058457-4c29a0a2efac'},
+    {name:'Sweet Pea',why:'Same graceful, butterfly-like form with added fragrance.',price:'$1–2/stem',avail:'Mar–Jun',img:'1505990482843-ba05d52c02c7'},
+    {name:'Freesia',why:'Arching stems with multiple blooms echo orchid sprays.',price:'$2–3/stem',avail:'Year-round',img:'1532774994231-7c01a28457b6'}
+  ]},
+  'Dahlia':{img:'1601021215663-ee72b7063578',price:'$4–6/stem',season:'Jul–Oct',subs:[
+    {name:'Chrysanthemum',why:'Available year-round in similar pom-pom shapes and rich colors.',price:'$1–2/stem',avail:'Year-round',img:'1578534102052-70f4c14ee0e7'},
+    {name:'Zinnia',why:'Same bold, geometric form with vibrant jewel tones.',price:'$2–3/stem',avail:'Jun–Oct',img:'1531130513023-1b5bb7bcfb9e'},
+    {name:'Carnation (football)',why:'Large, ruffled heads mimic dinnerplate dahlias surprisingly well.',price:'$2–3/stem',avail:'Year-round',img:'1554773228756-d8e1fe6aa4a7'}
+  ]},
+  'Hydrangea':{img:'1623201530307-c1d678f68459',price:'$5–7/stem',season:'Jun–Oct',subs:[
+    {name:'Carnation (grouped)',why:'Cluster 5-6 together and they look like one hydrangea head.',price:'$1–2/stem',avail:'Year-round',img:'1578534102052-70f4c14ee0e7'},
+    {name:'Queen Anne\'s Lace',why:'Similar clustered form with a wilder, more organic texture.',price:'$1–2/stem',avail:'May–Aug',img:'1532774994231-7c01a28457b6'},
+    {name:'Stock',why:'Dense flower clusters provide similar volume and come in matching colors.',price:'$3–4/stem',avail:'Year-round',img:'1519378058457-4c29a0a2efac'}
+  ]},
+  'Garden Rose':{img:'1582794543139-8ac9cb0f7b11',price:'$4–6/stem',season:'May–Oct',subs:[
+    {name:'Standard Rose',why:'Same basic form, slightly less lush but available everywhere year-round.',price:'$2–4/stem',avail:'Year-round',img:'1530906622963-8a60586a49c7'},
+    {name:'Lisianthus',why:'Ruffled petals mimic a partially opened garden rose.',price:'$3–4/stem',avail:'Year-round',img:'1519378058457-4c29a0a2efac'},
+    {name:'Ranunculus',why:'Layered petals give a similar romantic, vintage feel.',price:'$3–4/stem',avail:'Jan–May',img:'1490750967868-88aa4f44baee'}
+  ]},
+  'Tulip':{img:'1559150180-2467f804f9bf',price:'$2–4/stem',season:'Feb–May',subs:[
+    {name:'Ranunculus',why:'Both spring flowers with clean, elegant forms.',price:'$3–4/stem',avail:'Jan–May',img:'1490750967868-88aa4f44baee'},
+    {name:'Calla Lily',why:'Similar sleek, sculptural silhouette.',price:'$3–5/stem',avail:'Year-round',img:'1605485236949-5775b9676c78'},
+    {name:'Freesia',why:'Same spring feel with added fragrance.',price:'$2–3/stem',avail:'Year-round',img:'1532774994231-7c01a28457b6'}
+  ]},
+  'Sunflower':{img:'1588834747799-82f691b36ff6',price:'$2–3/stem',season:'Jun–Sep',subs:[
+    {name:'Gerbera Daisy',why:'Similar bold, round face in many sunset colors.',price:'$2–3/stem',avail:'Year-round',img:'1531130513023-1b5bb7bcfb9e'},
+    {name:'Yellow Dahlia',why:'Same warm golden tones with more petal layers.',price:'$4–5/stem',avail:'Jul–Oct',img:'1533907650686-70576141c030'},
+    {name:'Billy Button (Craspedia)',why:'Perfect golden spheres for a modern take on sunny yellow.',price:'$1–2/stem',avail:'Year-round',img:'1530889117621-680d8584d6b4'}
+  ]},
+  'Lily':{img:'1605485236949-5775b9676c78',price:'$4–6/stem',season:'Year-round',subs:[
+    {name:'Alstroemeria',why:'Similar trumpet shape at a fraction of the cost. No heavy pollen.',price:'$1–2/stem',avail:'Year-round',img:'1519378058457-4c29a0a2efac'},
+    {name:'Lisianthus',why:'Elegant, ruffled blooms without the strong lily fragrance.',price:'$3–4/stem',avail:'Year-round',img:'1554773228756-d8e1fe6aa4a7'},
+    {name:'Iris',why:'Dramatic form similar to lily with less pollen and longer vase life.',price:'$2–3/stem',avail:'Feb–May',img:'1477511801984-4ad318ed9846'}
+  ]},
+  'Lavender':{img:'1477511801984-4ad318ed9846',price:'$2–3/stem',season:'Jun–Aug',subs:[
+    {name:'Veronica',why:'Similar spiky purple form, available more months of the year.',price:'$2–3/stem',avail:'May–Oct',img:'1532774994231-7c01a28457b6'},
+    {name:'Statice',why:'Similar texture and color, dries beautifully for lasting arrangements.',price:'$1–2/stem',avail:'Year-round',img:'1530889117621-680d8584d6b4'},
+    {name:'Salvia',why:'Same tall, spiky purple form from the same plant family.',price:'$2/stem',avail:'May–Oct',img:'1505990482843-ba05d52c02c7'}
+  ]},
+  'Cherry Blossom':{img:'1556066138-cfac27159329',price:'$10–15/branch',season:'Mar–Apr',subs:[
+    {name:'Quince Branch',why:'Similar branching form with delicate blooms, blooms earlier.',price:'$6–8/branch',avail:'Jan–Mar',img:'1522748906645-95d8adfd52c7'},
+    {name:'Dogwood',why:'White or pink blooms on elegant branches.',price:'$5–8/branch',avail:'Mar–May',img:'1556066138-cfac27159329'},
+    {name:'Wax Flower',why:'Tiny blossoms on branching stems echo the cherry blossom look.',price:'$2–3/stem',avail:'Year-round',img:'1530889117621-680d8584d6b4'}
+  ]},
+  'Ranunculus':{img:'1490750967868-88aa4f44baee',price:'$3–5/stem',season:'Jan–May',subs:[
+    {name:'Spray Rose',why:'Smaller clustered blooms with similar layered petal structure.',price:'$2–3/stem',avail:'Year-round',img:'1589458456444-f7158a7e8a4f'},
+    {name:'Carnation',why:'Ruffled modern varieties look remarkably similar.',price:'$1–2/stem',avail:'Year-round',img:'1578534102052-70f4c14ee0e7'},
+    {name:'Lisianthus',why:'Ruffled, rose-like petals in similar soft colors.',price:'$3–4/stem',avail:'Year-round',img:'1519378058457-4c29a0a2efac'}
+  ]},
+  'Sweet Pea':{img:'1505990482843-ba05d52c02c7',price:'$6/bunch',season:'Apr–Jun',subs:[
+    {name:'Lisianthus',why:'Similar ruffled, delicate petals in pastel tones.',price:'$3–4/stem',avail:'Year-round',img:'1519378058457-4c29a0a2efac'},
+    {name:'Stock',why:'Similar soft, clustered blooms with lovely fragrance.',price:'$3–4/stem',avail:'Year-round',img:'1554773228756-d8e1fe6aa4a7'},
+    {name:'Freesia',why:'Delicate, arching stems with similar airy quality and scent.',price:'$2–3/stem',avail:'Year-round',img:'1532774994231-7c01a28457b6'}
+  ]}
+};
+function initSubs(){
+  const el=document.getElementById('subBtns');
+  if(!el)return;
+  el.innerHTML=Object.keys(subData).map(f=>`<button class="btn btn-outline btn-sm" onclick="showSub('${f}')">${f}</button>`).join('');
+}
+function showSub(flower){
+  const d=subData[flower];if(!d)return;
+  const el=document.getElementById('subResult');
+  el.style.display='grid';
+  el.innerHTML=`
+    <div class="card" style="grid-column:1/-1;display:flex;gap:20px;align-items:center;flex-wrap:wrap">
+      <img src="https://images.unsplash.com/photo-${d.img}?w=200&q=80" alt="${flower}" style="width:100px;height:100px;object-fit:cover;border-radius:14px" loading="lazy">
+      <div>
+        <h3 style="color:var(--rose)">${flower}</h3>
+        <div style="font-size:0.82rem;color:var(--dim)">${d.price} · Peak: ${d.season}</div>
+        <div style="font-size:0.78rem;color:var(--peach);margin-top:4px">Can\'t get it? Try these alternatives →</div>
+      </div>
+    </div>
+    ${d.subs.map(s=>`
+      <div class="card">
+        <div style="border-radius:12px;overflow:hidden;margin-bottom:12px"><img src="https://images.unsplash.com/photo-${s.img}?w=400&q=80" alt="${s.name}" style="width:100%;height:160px;object-fit:cover" loading="lazy"></div>
+        <h3 style="color:var(--sage);font-size:0.95rem;margin-bottom:4px">${s.name}</h3>
+        <p style="font-size:0.78rem;color:var(--dim);line-height:1.6;margin-bottom:10px">${s.why}</p>
+        <div style="display:flex;justify-content:space-between;font-size:0.75rem">
+          <span style="color:var(--gold)">${s.price}</span>
+          <span style="color:var(--lavender)">${s.avail}</span>
+        </div>
+      </div>
+    `).join('')}
+  `;
+}
+initSubs();
+
+// ========================================================================
+// 9. OCCASION DESIGN GALLERY
+// ========================================================================
+const occData={
+  'Wedding':{emoji:'💒',colors:['White','Blush','Ivory','Champagne','Sage'],avoid:['Neon','Orange (unless fall)'],styles:['Cascade bridal','Round nosegay','Loose garden','Structured modern'],priceRange:'$150–$500+ per bridal bouquet',etiquette:'Match bridesmaids to bride\'s palette but slightly simpler. Boutonnières should echo one flower from the bride\'s bouquet. Centerpieces low enough for conversation.',flowers:['Garden Rose','Peony','Ranunculus','Orchid','Sweet Pea','Eucalyptus','Stephanotis'],imgs:['1521520368710-3ab197656d60','1552222661-467bd51aa1f4','1594149596808-e3b6174968b3','1620704033114-028772aa85ae']},
+  'Funeral / Sympathy':{emoji:'🕊️',colors:['White','Pale pink','Soft lavender','Cream'],avoid:['Bright red','Neon','Tropical'],styles:['Standing spray','Casket drape','Wreath','Sympathy vase'],priceRange:'$75–$300+ per arrangement',etiquette:'White is universally appropriate. Lilies are traditional but check for allergies. Include a card with a simple, sincere message. Delivery timing matters — send within 1 week.',flowers:['White Rose','Lily','White Hydrangea','Orchid','Carnation','Stock','Fern'],imgs:['1552222661-467bd51aa1f4','1605485236949-5775b9676c78','1554773228756-d8e1fe6aa4a7']},
+  'Birthday':{emoji:'🎂',colors:['Bright mix','Hot pink','Yellow','Coral','Purple'],avoid:['All white (can look funeral)','Very dark tones'],styles:['Hand-tied bouquet','Fun vase arrangement','Modern box arrangement'],priceRange:'$40–$150',etiquette:'Match the person\'s personality. Bold and bright for extroverts, pastels for romantics. Add a fun element like a balloon or candy. Delivery to workplace makes a big impact.',flowers:['Dahlia','Sunflower','Rose (bright)','Gerbera','Tulip','Hydrangea','Wildflower Mix'],imgs:['1601021215663-ee72b7063578','1588834747799-82f691b36ff6','1533907650686-70576141c030']},
+  'Anniversary':{emoji:'💕',colors:['Red','Blush','Burgundy','Gold accents'],avoid:['Cool blues (unless specifically their favorite)'],styles:['Dozen red roses','Lush garden vase','Luxury box arrangement'],priceRange:'$75–$250',etiquette:'Red roses for passion, pink for grace, white for devotion. Include the wedding flowers if you can learn what they were. Gold accents for milestone anniversaries (25th, 50th).',flowers:['Red Rose','Peony','Garden Rose','Orchid','Ranunculus','Jasmine'],imgs:['1494972308805-463bc619d34e','1536266694648-914d29a935f9','1511201173873-c327e63eb6c4']},
+  'Get Well':{emoji:'🌻',colors:['Cheerful yellow','Soft pink','Lavender','Peach'],avoid:['Strong fragrance (can trigger nausea)','White (looks clinical)','Very large (hospital rooms are small)'],styles:['Compact vase','Basket arrangement','Small hand-tied'],priceRange:'$35–$80',etiquette:'AVOID strongly scented flowers (lilies, hyacinth) — patients may have sensitivities. Keep it small — hospital rooms are tight. Include bright colors for cheerfulness. No live plants (infection risk in some hospitals).',flowers:['Sunflower','Daisy','Carnation','Alstroemeria','Rose (cheerful colors)','Wax Flower'],imgs:['1588834747799-82f691b36ff6','1531130513023-1b5bb7bcfb9e','1530889117621-680d8584d6b4']},
+  'New Baby':{emoji:'👶',colors:['Soft pink','Baby blue','Yellow','Mint green','Neutral cream'],avoid:['Strong fragrance','Thorny stems','Toxic flowers (foxglove, lily of the valley)'],styles:['Pastel basket','Stuffed animal + flowers','Gender-reveal colors','Neutral garden style'],priceRange:'$45–$120',etiquette:'Check for allergies. Avoid heavily scented flowers. Include a soft toy for extra charm. Yellow or green is perfect if gender is unknown or neutral is preferred.',flowers:['Rose (pastel)','Hydrangea','Carnation','Daisy','Baby\'s Breath','Chamomile'],imgs:['1530906622963-8a60586a49c7','1527061011665-3652c757a4d4','1532774994231-7c01a28457b6']},
+  'Valentine\'s Day':{emoji:'❤️',colors:['Red','Deep pink','Blush + red','All red'],avoid:['Yellow (friendship, not romance)','White alone (can feel cold)'],styles:['Dozen red roses','Heart-shaped box','Lush mixed arrangement','Long-stem presentation'],priceRange:'$50–$200+',etiquette:'Red roses are THE classic but don\'t have to be cliché — mix with garden roses, ranunculus, and greenery. Order early (prices surge 50-100%). Delivery on Feb 13th avoids the rush.',flowers:['Red Rose','Red Ranunculus','Red Tulip','Spray Rose','Eucalyptus','Red Dahlia'],imgs:['1494972308805-463bc619d34e','1536266694648-914d29a935f9','1490750967868-88aa4f44baee']},
+  'Mother\'s Day':{emoji:'👩‍👧',colors:['Pink','Lavender','Blush','Peach','Soft yellow'],avoid:['Very dark/moody tones','Funeral-like arrangements'],styles:['Lush garden bouquet','Luxury vase arrangement','Basket of spring flowers','Orchid plant'],priceRange:'$45–$175',etiquette:'The second-busiest day for florists after Valentine\'s. Order 2 weeks early. Peonies are the ultimate Mother\'s Day flower (if in season). Include something personal — her favorite color or flower.',flowers:['Peony','Garden Rose','Hydrangea','Ranunculus','Lavender','Tulip','Sweet Pea'],imgs:['1511201173873-c327e63eb6c4','1560256608-43f0b6f7588e','1594149596808-e3b6174968b3']}
+};
+function initOccasions(){
+  const el=document.getElementById('occBtns');
+  if(!el)return;
+  el.innerHTML=Object.keys(occData).map(o=>`<button class="btn btn-outline btn-sm" onclick="showOcc('${o}')">${occData[o].emoji} ${o}</button>`).join('');
+}
+function showOcc(occ){
+  const d=occData[occ];if(!d)return;
+  document.getElementById('occResult').innerHTML=`
+    <div class="card" style="margin-bottom:20px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px">
+        <span style="font-size:2.5rem">${d.emoji}</span>
+        <div>
+          <h3 style="color:var(--sky);font-family:'Cormorant Garamond',serif;font-size:1.6rem">${occ}</h3>
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold)">${d.priceRange}</div>
+        </div>
+      </div>
+      <div class="g2" style="margin-bottom:20px">
+        <div>
+          <div style="font-size:0.72rem;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Colors to Use</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">${d.colors.map(c=>`<span style="padding:4px 10px;border-radius:100px;font-size:0.75rem;background:rgba(168,213,186,0.1);color:var(--sage)">${c}</span>`).join('')}</div>
+          <div style="font-size:0.72rem;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px;margin-top:12px;margin-bottom:8px">Colors to Avoid</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">${d.avoid.map(c=>`<span style="padding:4px 10px;border-radius:100px;font-size:0.75rem;background:rgba(255,107,138,0.1);color:var(--rose)">${c}</span>`).join('')}</div>
+        </div>
+        <div>
+          <div style="font-size:0.72rem;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Arrangement Styles</div>
+          <div style="display:flex;flex-direction:column;gap:4px">${d.styles.map(s=>`<div style="font-size:0.82rem;color:var(--dim);padding:4px 10px;border-radius:6px;background:rgba(255,255,255,0.03)">• ${s}</div>`).join('')}</div>
+          <div style="font-size:0.72rem;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px;margin-top:12px;margin-bottom:8px">Recommended Flowers</div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap">${d.flowers.map(f=>`<span style="padding:4px 10px;border-radius:100px;font-size:0.75rem;background:rgba(200,182,255,0.1);color:var(--lavender)">${f}</span>`).join('')}</div>
+        </div>
+      </div>
+      <div style="padding:14px 18px;border-radius:12px;background:rgba(255,209,102,0.06);border:1px solid rgba(255,209,102,0.12);font-size:0.85rem;color:var(--dim);margin-bottom:20px">
+        <strong style="color:var(--gold)">Etiquette & Pro Tips:</strong> ${d.etiquette}
+      </div>
+      <div class="photo-grid" style="grid-template-columns:repeat(auto-fill,minmax(220px,1fr))">
+        ${d.imgs.map(img=>`<div style="border-radius:14px;overflow:hidden;aspect-ratio:4/3"><img src="https://images.unsplash.com/photo-${img}?w=500&q=80" alt="${occ}" style="width:100%;height:100%;object-fit:cover" loading="lazy"></div>`).join('')}
+      </div>
+    </div>
+  `;
+}
+initOccasions();
 </script>
 
 <!-- FIREBASE -->
