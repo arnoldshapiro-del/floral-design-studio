@@ -204,6 +204,8 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
 .sidebar{position:fixed;top:60px;left:0;bottom:0;width:56px;background:rgba(15,10,26,0.97);backdrop-filter:blur(24px);border-right:1px solid rgba(255,255,255,0.06);z-index:999;overflow-y:auto;overflow-x:hidden;transition:width 0.3s cubic-bezier(0.16,1,0.3,1);scrollbar-width:none}
 .sidebar::-webkit-scrollbar{display:none}
 .sidebar.expanded{width:230px}
+@media(min-width:901px){.sidebar:hover:not(.pinned){width:230px}.sidebar:hover:not(.pinned) .sb-label{display:block}.sidebar:hover:not(.pinned) .sidebar-cat-label{display:block}.sidebar:hover:not(.pinned) ~ .main-wrap{margin-left:230px}}
+@media(min-width:1400px){.sidebar.pinned{width:230px}.sidebar.pinned .sb-label{display:block}.sidebar.pinned .sidebar-cat-label{display:block}.sidebar.pinned ~ .main-wrap{margin-left:230px}}
 .sidebar-toggle{width:56px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);font-size:20px;border-bottom:1px solid rgba(255,255,255,0.04);transition:color 0.2s;flex-shrink:0}
 .sidebar-toggle:hover{color:var(--rose)}
 .sidebar-cat{padding:8px 0 4px;margin-top:4px;border-top:1px solid rgba(255,255,255,0.04)}
@@ -2018,9 +2020,20 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
 function toggleSidebar(){
   const sb=document.getElementById('sidebar');
   const ov=document.getElementById('sidebarOverlay');
-  sb.classList.toggle('expanded');
-  if(window.innerWidth<=900) ov.classList.toggle('show');
+  if(window.innerWidth<=900){
+    sb.classList.toggle('expanded');
+    ov.classList.toggle('show');
+  } else {
+    sb.classList.toggle('expanded');
+  }
 }
+// Auto-pin sidebar on wide screens
+function checkSidebarPin(){
+  const sb=document.getElementById('sidebar');
+  if(window.innerWidth>=1400){sb.classList.add('pinned')}else{sb.classList.remove('pinned')}
+}
+checkSidebarPin();
+window.addEventListener('resize',checkSidebarPin);
 // Close sidebar on link click (mobile)
 document.querySelectorAll('.sidebar-item').forEach(a=>{
   a.addEventListener('click',()=>{
