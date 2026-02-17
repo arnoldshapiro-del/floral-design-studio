@@ -100,4 +100,927 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
 .masonry .m-item img{width:100%;display:block}
 .masonry .m-item .m-label{position:absolute;bottom:0;left:0;right:0;padding:16px;background:linear-gradient(transparent,rgba(0,0,0,0.85))}
 .masonry .m-item .m-label h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff}
-.masonry
+.masonry .m-item .m-label p{font-size:0.75rem;color:rgba(255,255,255,0.6)}
+
+/* FULLSCREEN GALLERY SECTION */
+.gallery-section{position:relative;z-index:2;background:var(--bg)}
+.gallery-header{text-align:center;padding:80px 32px 40px}
+
+/* CARDS */
+.card{background:var(--card);border:1px solid var(--bdr);border-radius:20px;padding:28px;backdrop-filter:blur(12px);transition:all 0.4s cubic-bezier(0.16,1,0.3,1)}
+.card:hover{transform:translateY(-5px);border-color:var(--bdr-h);box-shadow:0 25px 60px -15px rgba(0,0,0,0.4)}
+
+/* RECIPE BUILDER */
+.recipe-area{background:var(--card);border:1px solid var(--bdr);border-radius:20px;padding:28px;min-height:200px}
+.recipe-row{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.04);margin-bottom:10px;transition:all 0.2s}
+.recipe-row:hover{background:rgba(255,255,255,0.05)}
+.recipe-thumb{width:50px;height:50px;border-radius:12px;object-fit:cover;flex-shrink:0}
+.recipe-info{flex:1;min-width:0}
+.recipe-name{font-weight:700;font-size:0.9rem}
+.recipe-meta{font-size:0.78rem;color:var(--dim)}
+.qty-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--bdr);background:var(--card);color:var(--txt);font-size:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-family:inherit}
+.qty-btn:hover{background:rgba(255,255,255,0.1)}
+.recipe-cost{font-weight:700;min-width:60px;text-align:right;color:var(--sage)}
+.recipe-remove{width:28px;height:28px;border-radius:8px;border:none;background:rgba(255,107,138,0.1);color:var(--rose);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all 0.2s}
+.recipe-remove:hover{background:rgba(255,107,138,0.25)}
+
+/* COST CALCULATOR */
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.calc-row:last-child{border:none}
+.calc-label{color:var(--dim);font-size:0.9rem}
+.calc-value{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700}
+.calc-total{padding:20px 28px;border-radius:16px;margin-top:16px;background:linear-gradient(135deg,rgba(168,213,186,0.1),rgba(255,209,102,0.1));border:1px solid rgba(168,213,186,0.2)}
+
+/* BUTTONS */
+.btn{padding:12px 28px;border-radius:12px;font-size:0.9rem;font-weight:700;cursor:pointer;border:none;transition:all 0.3s;font-family:inherit;display:inline-flex;align-items:center;gap:8px}
+.btn-primary{background:linear-gradient(135deg,var(--rose),var(--lavender));color:#fff;box-shadow:0 8px 24px rgba(255,107,138,0.2)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,107,138,0.3)}
+.btn-outline{background:transparent;border:1px solid var(--bdr);color:var(--txt)}
+.btn-outline:hover{background:rgba(255,255,255,0.06);border-color:var(--bdr-h)}
+.btn-sm{padding:8px 18px;font-size:0.8rem;border-radius:10px}
+
+/* SEASON TABS */
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.season-tab{padding:10px 24px;border-radius:12px;border:1px solid var(--bdr);background:var(--card);color:var(--dim);font-weight:600;font-size:0.85rem;cursor:pointer;transition:all 0.2s;font-family:inherit}
+.season-tab:hover,.season-tab.active{background:rgba(255,255,255,0.08);color:var(--txt);border-color:var(--bdr-h)}
+
+/* SEARCH */
+.search-wrap{position:relative;max-width:400px}
+.search-wrap input{width:100%;padding:12px 20px 12px 44px;border-radius:14px;border:1px solid var(--bdr);background:var(--card);color:var(--txt);font-size:0.9rem;font-family:inherit;outline:none;transition:all 0.2s}
+.search-wrap input:focus{border-color:var(--lavender);box-shadow:0 0 20px rgba(200,182,255,0.1)}
+
+/* PROPOSAL PREVIEW */
+.proposal-preview{background:linear-gradient(135deg,#fefefe,#faf7f5);border-radius:20px;padding:40px;color:#1a1a2e;overflow:hidden}
+.proposal-preview h3{font-family:'Cormorant Garamond',serif;font-size:2rem;color:#1a0a2e;margin-bottom:20px}
+.proposal-item{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(0,0,0,0.06)}
+.proposal-item-name{font-weight:600;color:#333}
+.proposal-item-detail{font-size:0.85rem;color:#777}
+.proposal-item-price{font-weight:700;color:#1a0a2e}
+
+/* COMPARE TABLE */
+.compare-table{width:100%;border-collapse:collapse}
+.compare-table thead tr{background:rgba(255,255,255,0.04)}
+.compare-table th{padding:16px 20px;text-align:left;font-size:0.8rem;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:1px;border-bottom:1px solid var(--bdr)}
+.compare-table td{padding:14px 20px;font-size:0.9rem;border-bottom:1px solid rgba(255,255,255,0.03)}
+.compare-table tbody tr:hover{background:rgba(255,255,255,0.03)}
+.compare-table .price-col{color:var(--rose);font-weight:700}
+.compare-table .free-col{color:var(--sage);font-weight:700}
+
+/* PILLS */
+.pill-grid{display:flex;flex-wrap:wrap;gap:10px}
+.pill{padding:8px 18px;border-radius:100px;font-size:12px;font-weight:600;background:var(--card);border:1px solid var(--bdr);color:var(--dim);cursor:default;transition:all 0.2s}
+.pill:hover{background:rgba(255,255,255,0.08);color:var(--txt)}
+
+/* DIVIDER */
+.divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.08),transparent);margin:20px 0}
+
+/* PETALS */
+.petals{position:fixed;inset:0;pointer-events:none;z-index:1;overflow:hidden}
+.petal{position:absolute;width:12px;height:12px;border-radius:50% 0 50% 50%;opacity:0.12;animation:fall linear infinite}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0deg);opacity:0}10%{opacity:0.12}90%{opacity:0.12}100%{transform:translateY(110vh) rotate(720deg);opacity:0}}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.8);backdrop-filter:blur(8px);z-index:2000;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--bdr);border-radius:24px;max-width:800px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
+.modal-close{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:10px;border:1px solid var(--bdr);background:rgba(0,0,0,0.5);color:#fff;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;z-index:10;transition:all 0.2s}
+.modal-close:hover{background:rgba(255,255,255,0.2)}
+
+/* old fs-lightbox removed — replaced by lightbox-overlay */
+.modal-img{width:100%;height:350px;object-fit:cover;border-radius:24px 24px 0 0;cursor:zoom-in}
+.btn-fullscreen{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:100px;font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--rose),var(--lavender));color:#fff;border:none;cursor:pointer;transition:all 0.3s}
+.btn-fullscreen:hover{transform:scale(1.05);box-shadow:0 4px 20px rgba(200,160,180,0.4)}
+.modal-body{padding:32px}
+
+/* GRIDS */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+
+/* LIGHTBOX */
+.lightbox-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.96);z-index:5000;display:none;align-items:center;justify-content:center;cursor:zoom-out;animation:lbFadeIn 0.3s ease}
+.lightbox-overlay.open{display:flex}
+@keyframes lbFadeIn{from{opacity:0}to{opacity:1}}
+.lightbox-overlay img{max-width:94vw;max-height:92vh;object-fit:contain;border-radius:12px;box-shadow:0 30px 100px rgba(0,0,0,0.8);animation:lbZoomIn 0.35s cubic-bezier(0.16,1,0.3,1);cursor:default;user-select:none;-webkit-user-select:none}
+@keyframes lbZoomIn{from{transform:scale(0.85);opacity:0}to{transform:scale(1);opacity:1}}
+.lightbox-close{position:fixed;top:20px;right:24px;width:48px;height:48px;border-radius:50%;border:2px solid rgba(255,255,255,0.3);background:rgba(0,0,0,0.6);color:#fff;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5010;transition:all 0.25s;backdrop-filter:blur(8px)}
+.lightbox-close:hover{background:rgba(255,255,255,0.15);border-color:rgba(255,255,255,0.6);transform:scale(1.1)}
+.lightbox-nav{position:fixed;top:50%;transform:translateY(-50%);width:56px;height:56px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);background:rgba(0,0,0,0.5);color:#fff;font-size:28px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:5010;transition:all 0.25s;backdrop-filter:blur(8px)}
+.lightbox-nav:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.5);transform:translateY(-50%) scale(1.1)}
+.lightbox-nav.lb-prev{left:20px}
+.lightbox-nav.lb-next{right:20px}
+.lightbox-caption{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);padding:10px 28px;border-radius:100px;color:rgba(255,255,255,0.85);font-size:0.9rem;font-weight:500;z-index:5010;text-align:center;max-width:80vw;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lightbox-counter{position:fixed;top:24px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.6);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.08);padding:6px 18px;border-radius:100px;color:rgba(255,255,255,0.5);font-size:0.75rem;font-weight:600;z-index:5010;letter-spacing:1px}
+@media(max-width:600px){.lightbox-nav{width:42px;height:42px;font-size:20px}.lightbox-nav.lb-prev{left:8px}.lightbox-nav.lb-next{right:8px}.lightbox-close{top:12px;right:12px;width:40px;height:40px;font-size:20px}.lightbox-caption{font-size:0.78rem;padding:8px 18px;bottom:16px}}
+
+/* USER MANUAL */
+.manual-section{position:relative;z-index:2;padding:80px 32px 60px;max-width:1320px;margin:0 auto}
+.manual-toc{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px;margin:28px 0 40px}
+.manual-toc-item{background:var(--card);border:1px solid var(--bdr);border-radius:16px;padding:20px;cursor:pointer;transition:all 0.3s;display:flex;align-items:center;gap:14px}
+.manual-toc-item:hover{transform:translateY(-4px);border-color:var(--bdr-h);box-shadow:0 20px 50px -15px rgba(0,0,0,0.4)}
+.manual-toc-icon{font-size:1.8rem;flex-shrink:0}
+.manual-toc-item h4{font-size:0.95rem;font-weight:700;margin-bottom:2px}
+.manual-toc-item p{font-size:0.75rem;color:var(--dim)}
+.manual-chapter{background:var(--card);border:1px solid var(--bdr);border-radius:20px;padding:36px;margin-bottom:24px;backdrop-filter:blur(12px)}
+.manual-chapter h3{font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:12px}
+.manual-chapter h4{font-size:1rem;font-weight:700;color:var(--lavender);margin:20px 0 8px}
+.manual-chapter p,.manual-chapter li{font-size:0.9rem;color:rgba(255,255,255,0.7);line-height:1.8}
+.manual-chapter ul,.manual-chapter ol{padding-left:20px;margin:8px 0 16px}
+.manual-chapter li{margin-bottom:6px}
+.manual-tip{background:rgba(168,213,186,0.06);border:1px solid rgba(168,213,186,0.15);border-radius:12px;padding:16px 20px;margin:16px 0;font-size:0.85rem;color:var(--sage)}
+.manual-tip strong{color:var(--sage)}
+.manual-warning{background:rgba(255,107,138,0.06);border:1px solid rgba(255,107,138,0.15);border-radius:12px;padding:16px 20px;margin:16px 0;font-size:0.85rem;color:var(--rose)}
+.manual-warning strong{color:var(--rose)}
+.manual-step{display:flex;gap:14px;margin:12px 0}
+.manual-step-num{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--lavender));color:#fff;font-weight:800;font-size:0.85rem;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.manual-step-text{font-size:0.88rem;color:rgba(255,255,255,0.75);line-height:1.7;padding-top:4px}
+.manual-shortcut{display:inline-flex;align-items:center;gap:6px;padding:3px 10px;border-radius:6px;background:rgba(200,182,255,0.1);border:1px solid rgba(200,182,255,0.2);font-size:0.78rem;font-weight:600;color:var(--lavender);font-family:'Inter',sans-serif;margin:0 2px}
+
+/* FOOTER */
+.footer{text-align:center;padding:60px 32px;border-top:1px solid rgba(255,255,255,0.04);position:relative;z-index:2}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.7s,transform 0.7s cubic-bezier(0.16,1,0.3,1)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.reveal-d1{transition-delay:0.1s}.reveal-d2{transition-delay:0.2s}.reveal-d3{transition-delay:0.3s}
+
+/* SIDEBAR */
+.sidebar{position:fixed;top:60px;left:0;bottom:0;width:56px;background:rgba(15,10,26,0.97);backdrop-filter:blur(24px);border-right:1px solid rgba(255,255,255,0.06);z-index:999;overflow-y:auto;overflow-x:hidden;transition:width 0.3s cubic-bezier(0.16,1,0.3,1);scrollbar-width:none}
+.sidebar::-webkit-scrollbar{display:none}
+.sidebar.expanded{width:230px}
+@media(min-width:901px){.sidebar:hover:not(.pinned){width:230px}.sidebar:hover:not(.pinned) .sb-label{display:block}.sidebar:hover:not(.pinned) .sidebar-cat-label{display:block}.sidebar:hover:not(.pinned) ~ .main-wrap{margin-left:230px}}
+@media(min-width:1400px){.sidebar.pinned{width:230px}.sidebar.pinned .sb-label{display:block}.sidebar.pinned .sidebar-cat-label{display:block}.sidebar.pinned ~ .main-wrap{margin-left:230px}}
+.sidebar-toggle{width:56px;height:48px;display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--dim);font-size:20px;border-bottom:1px solid rgba(255,255,255,0.04);transition:color 0.2s;flex-shrink:0}
+.sidebar-toggle:hover{color:var(--rose)}
+.sidebar-cat{padding:8px 0 4px;margin-top:4px;border-top:1px solid rgba(255,255,255,0.04)}
+.sidebar-cat:first-of-type{border-top:none;margin-top:0}
+.sidebar-cat-label{display:none;padding:2px 16px;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--dimmer)}
+.sidebar.expanded .sidebar-cat-label{display:block}
+.sidebar-item{display:flex;align-items:center;gap:12px;padding:8px 16px;cursor:pointer;transition:all 0.2s;border-radius:0;white-space:nowrap;min-height:38px;text-decoration:none;color:var(--dim)}
+.sidebar-item:hover{background:rgba(255,255,255,0.06);color:var(--txt)}
+.sidebar-item.active{color:var(--rose);background:rgba(255,107,138,0.08)}
+.sidebar-item .sb-icon{width:24px;height:24px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.sidebar-item .sb-label{font-size:12px;font-weight:500;display:none}
+.sidebar.expanded .sb-label{display:block}
+.main-wrap{margin-left:56px;transition:margin-left 0.3s cubic-bezier(0.16,1,0.3,1)}
+.sidebar.expanded ~ .main-wrap{margin-left:230px}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:998}
+
+/* RESPONSIVE */
+@media(max-width:900px){.g2,.g3,.hero-stats,.photo-row{grid-template-columns:1fr}.photo-grid{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}.masonry{columns:2}.nav-links{display:none}.hero-content{padding:80px 24px}
+  .sidebar{left:-230px;width:230px}
+  .sidebar.expanded{left:0}
+  .sidebar.expanded .sb-label{display:block}
+  .sidebar-overlay.show{display:block}
+  .main-wrap{margin-left:0}
+  .sidebar.expanded ~ .main-wrap{margin-left:0}
+}
+@media(max-width:600px){.hero-stats{grid-template-columns:1fr 1fr}.section{padding:80px 16px 40px}.masonry{columns:1}.photo-grid{grid-template-columns:1fr 1fr}}
+
+/* USER MANUAL COLLAPSIBLE GUIDES */
+.guide-open .guide-content{max-height:2000px!important}
+.guide-open>div:first-child span:last-child{transform:rotate(180deg)}
+</style>
+</head>
+<body>
+
+<div class="petals" id="petals"></div>
+
+<!-- NAV -->
+<nav class="nav">
+  <div style="display:flex;align-items:center;gap:12px">
+    <div onclick="toggleSidebar()" style="cursor:pointer;font-size:20px;color:var(--dim);transition:color 0.2s;padding:4px" onmouseover="this.style.color='var(--rose)'" onmouseout="this.style.color='var(--dim)'">☰</div>
+    <div class="nav-logo">Floral Design Studio</div>
+  </div>
+  <div class="nav-links">
+    <a href="#roses" class="active">Galleries</a>
+    <a href="#recipes">Recipes</a>
+    <a href="#crm">CRM</a>
+    <a href="#proposals">Proposals</a>
+    <a href="#contracts">Contracts</a>
+    <a href="#care">Encyclopedia</a>
+    <a href="#analytics">Analytics</a>
+  </div>
+  <div class="nav-r">
+    <span id="user-info"></span>
+    <button class="auth-btn" id="login-btn" onclick="firebaseLogin()">Sign In</button>
+    <button class="auth-btn" id="logout-btn" onclick="firebaseLogout()">Sign Out</button>
+  </div>
+</nav>
+
+<!-- SIDEBAR -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-toggle" onclick="toggleSidebar()">☰</div>
+
+  <div class="sidebar-cat">
+    <div class="sidebar-cat-label">Galleries</div>
+    <a class="sidebar-item" href="#roses"><span class="sb-icon">🌹</span><span class="sb-label">Roses</span></a>
+    <a class="sidebar-item" href="#peonies"><span class="sb-icon">🌸</span><span class="sb-label">Peonies</span></a>
+    <a class="sidebar-item" href="#bouquets"><span class="sb-icon">💐</span><span class="sb-label">Bouquets</span></a>
+    <a class="sidebar-item" href="#wedding"><span class="sb-icon">💒</span><span class="sb-label">Wedding</span></a>
+  </div>
+
+  <div class="sidebar-cat">
+    <div class="sidebar-cat-label">Design Tools</div>
+    <a class="sidebar-item" href="#bouquet-builder"><span class="sb-icon">🎨</span><span class="sb-label">Bouquet Builder</span></a>
+    <a class="sidebar-item" href="#pairing"><span class="sb-icon">💞</span><span class="sb-label">Pairing Engine</span></a>
+    <a class="sidebar-item" href="#colorwheel"><span class="sb-icon">🎡</span><span class="sb-label">Color Wheel</span></a>
+    <a class="sidebar-item" href="#quiz"><span class="sb-icon">❓</span><span class="sb-label">Style Quiz</span></a>
+    <a class="sidebar-item" href="#shapes"><span class="sb-icon">🏺</span><span class="sb-label">Shape Explorer</span></a>
+    <a class="sidebar-item" href="#moodboard"><span class="sb-icon">🖼️</span><span class="sb-label">Mood Board</span></a>
+  </div>
+
+  <div class="sidebar-cat">
+    <div class="sidebar-cat-label">Planning</div>
+    <a class="sidebar-item" href="#seasonal-gen"><span class="sb-icon">📅</span><span class="sb-label">Seasonal Bouquets</span></a>
+    <a class="sidebar-item" href="#budget-calc"><span class="sb-icon">💰</span><span class="sb-label">Budget Calculator</span></a>
+    <a class="sidebar-item" href="#substitutions"><span class="sb-icon">🔄</span><span class="sb-label">Substitutions</span></a>
+    <a class="sidebar-item" href="#occasions"><span class="sb-icon">🎉</span><span class="sb-label">Occasions</span></a>
+    <a class="sidebar-item" href="#recipes"><span class="sb-icon">📋</span><span class="sb-label">Recipe Builder</span></a>
+    <a class="sidebar-item" href="#calculator"><span class="sb-icon">🧮</span><span class="sb-label">Profit Calculator</span></a>
+    <a class="sidebar-item" href="#shopping"><span class="sb-icon">🛒</span><span class="sb-label">Shopping List</span></a>
+  </div>
+
+  <div class="sidebar-cat">
+    <div class="sidebar-cat-label">Knowledge</div>
+    <a class="sidebar-item" href="#care"><span class="sb-icon">📖</span><span class="sb-label">Encyclopedia</span></a>
+    <a class="sidebar-item" href="#seasonal"><span class="sb-icon">🗓️</span><span class="sb-label">Seasonal Guide</span></a>
+    <a class="sidebar-item" href="#texture"><span class="sb-icon">🧵</span><span class="sb-label">Texture Guide</span></a>
+    <a class="sidebar-item" href="#vaselife"><span class="sb-icon">⏳</span><span class="sb-label">Vase Life</span></a>
+    <a class="sidebar-item" href="#scent"><span class="sb-icon">👃</span><span class="sb-label">Scent Guide</span></a>
+    <a class="sidebar-item" href="#principles"><span class="sb-icon">📐</span><span class="sb-label">Design Principles</span></a>
+    <a class="sidebar-item" href="#trends"><span class="sb-icon">🔥</span><span class="sb-label">Trends</span></a>
+  </div>
+
+  <div class="sidebar-cat">
+    <div class="sidebar-cat-label">Business</div>
+    <a class="sidebar-item" href="#crm"><span class="sb-icon">👥</span><span class="sb-label">CRM</span></a>
+    <a class="sidebar-item" href="#proposals"><span class="sb-icon">📄</span><span class="sb-label">Proposals</span></a>
+    <a class="sidebar-item" href="#contracts"><span class="sb-icon">✍️</span><span class="sb-label">Contracts</span></a>
+    <a class="sidebar-item" href="#calendar"><span class="sb-icon">📆</span><span class="sb-label">Calendar</span></a>
+    <a class="sidebar-item" href="#analytics"><span class="sb-icon">📊</span><span class="sb-label">Analytics</span></a>
+    <a class="sidebar-item" href="#production"><span class="sb-icon">🏭</span><span class="sb-label">Production</span></a>
+  </div>
+
+  <div class="sidebar-cat">
+    <div class="sidebar-cat-label">Help</div>
+    <a class="sidebar-item" href="#user-manual"><span class="sb-icon">📖</span><span class="sb-label">User Manual</span></a>
+  </div>
+</aside>
+
+<!-- MAIN CONTENT WRAPPER -->
+<div class="main-wrap">
+
+<!-- ================= HERO — FULL BLEED GORGEOUS PHOTO ================= -->
+<section class="hero">
+  <div class="hero-bg">
+    <img src="https://images.unsplash.com/photo-1634291196724-742f2a32463c?w=1920&q=85" alt="Stunning floral arrangement" loading="eager">
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge"><div class="dot"></div> Premium Features, Completely Free</div>
+    <h1>The Art of<br>Floral Design</h1>
+    <p>Pages and pages of stunning real flower photography. Every feature that Curate ($275/mo) and Details Flowers ($150/mo) charge for — recipe building, stem counting, profit tracking, gorgeous proposals — all free.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num" style="color:var(--rose)">80+</div><div class="hero-stat-lbl">Real Photos</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" style="color:var(--lavender)">12</div><div class="hero-stat-lbl">Galleries</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" style="color:var(--sage)">$0</div><div class="hero-stat-lbl">Monthly Cost</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" style="color:var(--gold)">All</div><div class="hero-stat-lbl">Pro Features</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PHOTO BANNER 1 ============= -->
+<div class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1594149596808-e3b6174968b3?w=1920&q=85" alt="Gorgeous rose bouquet" loading="lazy">
+  <div class="overlay-text"><h2>Pages of Real Flower Photography</h2></div>
+</div>
+
+<!-- ================= ROSES GALLERY ================= -->
+<section class="section" id="roses">
+  <span class="tag tag-rose">Roses</span>
+  <h2 class="grad">The Queen of Flowers</h2>
+  <p class="sub" style="margin-bottom:36px">Every shade, every variety — from garden roses to David Austin, spray roses to Juliets. Real, breathtaking photography.</p>
+  <div class="photo-grid">
+    <div class="photo-card" onclick="openModal('Garden Rose','A lush, romantic bloom with layer upon layer of soft petals. The most beloved wedding flower in the world.','https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800&q=85','$4.50/stem','Spring & Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=600&q=80" alt="Garden Rose" loading="lazy">
+      <div class="card-badge">Spring</div><div class="card-price">$4.50/stem</div>
+      <div class="card-overlay"><h4>Garden Rose</h4><p>Lush romantic blooms with vintage charm</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Pink Rose Bouquet','Soft pink roses arranged in a classic hand-tied bouquet. Timeless elegance for any occasion.','https://images.unsplash.com/photo-1503652601-557d07733ddc?w=800&q=85','$3.50/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1503652601-557d07733ddc?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1503652601-557d07733ddc?w=600&q=80" alt="Pink Rose Bouquet" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$3.50/stem</div>
+      <div class="card-overlay"><h4>Pink Rose Bouquet</h4><p>Classic soft pink — timeless elegance</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Red Roses','Deep crimson perfection. The eternal symbol of passionate love and devotion.','https://images.unsplash.com/photo-1530906622963-8a60586a49c7?w=800&q=85','$3.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1530906622963-8a60586a49c7?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1530906622963-8a60586a49c7?w=600&q=80" alt="Red Roses" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$3.00/stem</div>
+      <div class="card-overlay"><h4>Red Roses</h4><p>Deep crimson — the symbol of love</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('White Roses','Pure, pristine white roses. The foundation of elegant bridal arrangements.','https://images.unsplash.com/photo-1592125661285-79820f2fdf7a?w=800&q=85','$3.50/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1592125661285-79820f2fdf7a?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1592125661285-79820f2fdf7a?w=600&q=80" alt="White Roses" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$3.50/stem</div>
+      <div class="card-overlay"><h4>White Roses</h4><p>Pristine purity for bridal elegance</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Peach Roses','Warm peach tones — romantic, soft, and endlessly photographable.','https://images.unsplash.com/photo-1589458456444-f7158a7e8a4f?w=800&q=85','$4.00/stem','Spring & Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1589458456444-f7158a7e8a4f?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1589458456444-f7158a7e8a4f?w=600&q=80" alt="Peach Roses" loading="lazy">
+      <div class="card-badge">Spring</div><div class="card-price">$4.00/stem</div>
+      <div class="card-overlay"><h4>Peach Roses</h4><p>Warm romantic tones, endlessly photographable</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('David Austin Rose','The most luxurious rose variety. Incredible scent with layers of delicate petals forming a perfect cup shape.','https://images.unsplash.com/photo-1581938165093-050aeb5ef218?w=800&q=85','$8.00/stem','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1581938165093-050aeb5ef218?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1581938165093-050aeb5ef218?w=600&q=80" alt="David Austin Rose" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$8.00/stem</div>
+      <div class="card-overlay"><h4>David Austin Rose</h4><p>The most luxurious rose variety on earth</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Spray Roses','Multiple delicate blooms on each stem. Perfect for filling arrangements with romantic texture.','https://images.unsplash.com/photo-1536266694648-914d29a935f9?w=800&q=85','$3.25/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1536266694648-914d29a935f9?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1536266694648-914d29a935f9?w=600&q=80" alt="Spray Roses" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$3.25/stem</div>
+      <div class="card-overlay"><h4>Spray Roses</h4><p>Multiple blooms per stem — romantic texture</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Yellow Roses','Sunshine and joy captured in petals. Cheerful and bright for celebrations.','https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=800&q=85','$3.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1494972308805-463bc619d34e?w=600&q=80" alt="Yellow Roses" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$3.00/stem</div>
+      <div class="card-overlay"><h4>Yellow Roses</h4><p>Sunshine and joy captured in petals</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PHOTO BANNER 2 ============= -->
+<div class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1626322751456-777779e0c4ae?w=1920&q=85" alt="Stunning peonies" loading="lazy">
+  <div class="overlay-text"><h2>Peonies, Dahlias & Garden Favorites</h2></div>
+</div>
+
+<!-- ================= PEONIES & DAHLIAS ================= -->
+<section class="section" id="peonies">
+  <span class="tag tag-lavender">Peonies & Dahlias</span>
+  <h2 class="grad">Breathtaking Show-Stoppers</h2>
+  <p class="sub" style="margin-bottom:36px">The flowers that make brides gasp. Enormous, lush, and impossibly romantic.</p>
+  <div class="photo-grid">
+    <div class="photo-card" onclick="openModal('Pink Peony','Enormous fluffy blooms that steal every show. The Sarah Bernhardt peony — the most popular variety in the world.','https://images.unsplash.com/photo-1511201173873-c327e63eb6c4?w=800&q=85','$6.00/stem','Spring Only')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1511201173873-c327e63eb6c4?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1511201173873-c327e63eb6c4?w=600&q=80" alt="Pink Peony" loading="lazy">
+      <div class="card-badge">Spring Only</div><div class="card-price">$6.00/stem</div>
+      <div class="card-overlay"><h4>Pink Peony</h4><p>Enormous fluffy blooms — the bride's dream</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('White Peony','Pure white layers of delicate petals. The most requested flower for luxury weddings.','https://images.unsplash.com/photo-1560256608-43f0b6f7588e?w=800&q=85','$7.00/stem','Spring Only')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1560256608-43f0b6f7588e?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1560256608-43f0b6f7588e?w=600&q=80" alt="White Peony" loading="lazy">
+      <div class="card-badge">Spring Only</div><div class="card-price">$7.00/stem</div>
+      <div class="card-overlay"><h4>White Peony</h4><p>Pure luxury — most requested for weddings</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Cafe au Lait Dahlia','The most Instagrammed flower in the world. Enormous blush-to-cream blooms that photograph like a dream.','https://images.unsplash.com/photo-1601021215663-ee72b7063578?w=800&q=85','$5.50/stem','Summer & Fall')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1601021215663-ee72b7063578?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1601021215663-ee72b7063578?w=600&q=80" alt="Cafe au Lait Dahlia" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$5.50/stem</div>
+      <div class="card-overlay"><h4>Cafe au Lait Dahlia</h4><p>The most Instagrammed flower ever</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Dinner Plate Dahlia','Massive blooms up to 12 inches across. A bold, architectural statement flower.','https://images.unsplash.com/photo-1533907650686-70576141c030?w=800&q=85','$6.00/stem','Summer & Fall')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1533907650686-70576141c030?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1533907650686-70576141c030?w=600&q=80" alt="Dinner Plate Dahlia" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$6.00/stem</div>
+      <div class="card-overlay"><h4>Dinner Plate Dahlia</h4><p>Massive 12-inch blooms — pure drama</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Ranunculus','Layer upon layer of paper-thin petals. Like tiny roses made of the finest tissue.','https://images.unsplash.com/photo-1530906622963-8a60586a49c7?w=800&q=85','$3.00/stem','Spring')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1634291196724-742f2a32463c?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1634291196724-742f2a32463c?w=600&q=80" alt="Ranunculus" loading="lazy">
+      <div class="card-badge">Spring</div><div class="card-price">$3.00/stem</div>
+      <div class="card-overlay"><h4>Ranunculus</h4><p>Paper-thin petals in perfect layers</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Anemone','Dark mysterious centers with delicate white petals. Dramatic and impossibly photogenic.','https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=800&q=85','$4.50/stem','Winter & Spring')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=600&q=80" alt="Anemone" loading="lazy">
+      <div class="card-badge">Winter</div><div class="card-price">$4.50/stem</div>
+      <div class="card-overlay"><h4>Anemone</h4><p>Dark centers, delicate petals — dramatic</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PHOTO BANNER 3 ============= -->
+<div class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1556066138-cfac27159329?w=1920&q=85" alt="Wedding flower arrangement" loading="lazy">
+  <div class="overlay-text"><h2>Gorgeous Wedding Arrangements</h2></div>
+</div>
+
+<!-- ================= BOUQUETS & WEDDING ================= -->
+<section class="section" id="bouquets">
+  <span class="tag tag-peach">Bouquets & Arrangements</span>
+  <h2 class="grad">Stunning Floral Arrangements</h2>
+  <p class="sub" style="margin-bottom:36px">Bridal bouquets, centerpieces, ceremony installations — every arrangement style, photographed in jaw-dropping detail.</p>
+  <div class="photo-grid">
+    <div class="photo-card" style="aspect-ratio:auto" onclick="openModal('Bridal Bouquet','A cascading garden-style bridal bouquet with roses, peonies, ranunculus, and trailing eucalyptus. The centerpiece of the entire wedding.','https://images.unsplash.com/photo-1521520368710-3ab197656d60?w=800&q=85','$250-$500','Bridal')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1521520368710-3ab197656d60?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1521520368710-3ab197656d60?w=600&q=80" alt="Bridal Bouquet" loading="lazy">
+      <div class="card-badge">Bridal</div><div class="card-price">$250-$500</div>
+      <div class="card-overlay"><h4>Bridal Bouquet</h4><p>The centerpiece of the entire wedding</p></div>
+    </div>
+    <div class="photo-card" style="aspect-ratio:auto" onclick="openModal('Garden Centerpiece','Low, lush centerpiece in a gold compote. Mixed garden style with roses, dahlias, and cascading greenery.','https://images.unsplash.com/photo-1690974549931-74d9f436434c?w=800&q=85','$120-$200','Centerpiece')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1690974549931-74d9f436434c?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1690974549931-74d9f436434c?w=600&q=80" alt="Garden Centerpiece" loading="lazy">
+      <div class="card-badge">Centerpiece</div><div class="card-price">$120-$200</div>
+      <div class="card-overlay"><h4>Garden Centerpiece</h4><p>Low and lush — mixed garden style</p></div>
+    </div>
+    <div class="photo-card" style="aspect-ratio:auto" onclick="openModal('Ceremony Flowers','Dramatic ceremony installation framing the couple with cascading florals. The most photographed arrangement of any wedding.','https://images.unsplash.com/photo-1552222661-467bd51aa1f4?w=800&q=85','$800-$3000','Ceremony')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1552222661-467bd51aa1f4?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1552222661-467bd51aa1f4?w=600&q=80" alt="Ceremony Flowers" loading="lazy">
+      <div class="card-badge">Ceremony</div><div class="card-price">$800-$3,000</div>
+      <div class="card-overlay"><h4>Ceremony Installation</h4><p>Dramatic, cascading — the most-photographed piece</p></div>
+    </div>
+    <div class="photo-card" style="aspect-ratio:auto" onclick="openModal('Wildflower Bouquet','A loose, organic arrangement mixing wildflowers, garden roses, and flowing grasses. Effortlessly romantic.','https://images.unsplash.com/photo-1594149596808-e3b6174968b3?w=800&q=85','$150-$300','Garden')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1594149596808-e3b6174968b3?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1594149596808-e3b6174968b3?w=600&q=80" alt="Wildflower Bouquet" loading="lazy">
+      <div class="card-badge">Garden</div><div class="card-price">$150-$300</div>
+      <div class="card-overlay"><h4>Wildflower Bouquet</h4><p>Loose, organic — effortlessly romantic</p></div>
+    </div>
+    <div class="photo-card" style="aspect-ratio:auto" onclick="openModal('Table Runner','Lush garland-style table runner with mixed blooms and cascading greenery.','https://images.unsplash.com/photo-1620704033114-028772aa85ae?w=800&q=85','$35-$75/foot','Reception')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1620704033114-028772aa85ae?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1620704033114-028772aa85ae?w=600&q=80" alt="Table Runner" loading="lazy">
+      <div class="card-badge">Reception</div><div class="card-price">$35-$75/ft</div>
+      <div class="card-overlay"><h4>Floral Table Runner</h4><p>Lush garland with cascading greenery</p></div>
+    </div>
+    <div class="photo-card" style="aspect-ratio:auto" onclick="openModal('Pastel Arrangement','Soft pastel colors in a refined arrangement — pinks, lavenders, and creams.','https://images.unsplash.com/photo-1626322751456-777779e0c4ae?w=800&q=85','$80-$150','All Occasions')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1626322751456-777779e0c4ae?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1626322751456-777779e0c4ae?w=600&q=80" alt="Pastel Arrangement" loading="lazy">
+      <div class="card-badge">All Occasions</div><div class="card-price">$80-$150</div>
+      <div class="card-overlay"><h4>Pastel Dream</h4><p>Soft pinks, lavenders, and creams</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MORE GORGEOUS FLOWERS ================= -->
+<section class="section" id="wedding">
+  <span class="tag tag-mauve">Tulips, Lilies & More</span>
+  <h2 class="grad">Every Flower a Florist Needs</h2>
+  <p class="sub" style="margin-bottom:36px">Tulips, sunflowers, hydrangeas, orchids, lilies, lavender, eucalyptus — all captured in breathtaking real photography.</p>
+  <div class="photo-grid">
+    <div class="photo-card" onclick="openModal('Tulips','Elegantly arching French tulips. Spring\'s most beloved flower — graceful, colorful, and endlessly versatile.','https://images.unsplash.com/photo-1559150180-2467f804f9bf?w=800&q=85','$2.50/stem','Spring')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1559150180-2467f804f9bf?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1559150180-2467f804f9bf?w=600&q=80" alt="Tulips" loading="lazy">
+      <div class="card-badge">Spring</div><div class="card-price">$2.50/stem</div>
+      <div class="card-overlay"><h4>Tulips</h4><p>Spring's most beloved — graceful and versatile</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Sunflowers','Pure happiness in flower form. Bold, cheerful, and impossible to ignore.','https://images.unsplash.com/photo-1588834747799-82f691b36ff6?w=800&q=85','$2.00/stem','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1588834747799-82f691b36ff6?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1588834747799-82f691b36ff6?w=600&q=80" alt="Sunflowers" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$2.00/stem</div>
+      <div class="card-overlay"><h4>Sunflowers</h4><p>Pure happiness — bold and cheerful</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Hydrangea','One stem fills an entire vase. The ultimate volume flower in blue, pink, green, and white.','https://images.unsplash.com/photo-1623201530307-c1d678f68459?w=800&q=85','$5.00/stem','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1623201530307-c1d678f68459?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1623201530307-c1d678f68459?w=600&q=80" alt="Hydrangea" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$5.00/stem</div>
+      <div class="card-overlay"><h4>Hydrangea</h4><p>One stem fills an entire vase</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Orchid','Exotic, architectural, and breathtakingly elegant. The ultimate luxury flower.','https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=800&q=85','$15.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=600&q=80" alt="Orchid" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$15.00/stem</div>
+      <div class="card-overlay"><h4>Orchid</h4><p>Exotic, architectural — ultimate luxury</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Lily','Dramatic star-shaped blooms with intoxicating fragrance. A staple of elegant arrangements.','https://images.unsplash.com/photo-1605485236949-5775b9676c78?w=800&q=85','$4.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1605485236949-5775b9676c78?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1605485236949-5775b9676c78?w=600&q=80" alt="Lily" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$4.00/stem</div>
+      <div class="card-overlay"><h4>Lily</h4><p>Star-shaped blooms with intoxicating scent</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Lavender','Fragrant purple spikes. Adds scent, color, and rustic Provencal charm to any arrangement.','https://images.unsplash.com/photo-1477511801984-4ad318ed9846?w=800&q=85','$2.50/stem','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1477511801984-4ad318ed9846?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1477511801984-4ad318ed9846?w=600&q=80" alt="Lavender" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$2.50/stem</div>
+      <div class="card-overlay"><h4>Lavender</h4><p>Fragrant purple — rustic Provencal charm</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Eucalyptus','Silvery, cascading greenery. The most popular wedding greenery — it makes everything else look better.','https://images.unsplash.com/photo-1577238063601-573282246970?w=800&q=85','$2.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1577238063601-573282246970?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1577238063601-573282246970?w=600&q=80" alt="Eucalyptus" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$2.00/stem</div>
+      <div class="card-overlay"><h4>Eucalyptus</h4><p>Most popular wedding greenery on earth</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Cherry Blossom','Ethereal branches of pale pink blossoms. The symbol of spring and new beginnings.','https://images.unsplash.com/photo-1556066138-cfac27159329?w=800&q=85','$12.00/branch','Spring')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1556066138-cfac27159329?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1556066138-cfac27159329?w=600&q=80" alt="Cherry Blossom" loading="lazy">
+      <div class="card-badge">Spring</div><div class="card-price">$12/branch</div>
+      <div class="card-overlay"><h4>Cherry Blossom</h4><p>Ethereal branches — spring and new beginnings</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WILDFLOWERS & COTTAGE ================= -->
+<section class="section">
+  <span class="tag tag-gold">Wildflowers & Cottage</span>
+  <h2 class="grad">Romantic Wildflower Gardens</h2>
+  <p class="sub" style="margin-bottom:36px">Loose, organic, dreamy. The flowers that look like they were just gathered from an English countryside meadow.</p>
+  <div class="photo-grid">
+    <div class="photo-card" onclick="openModal('Cosmos','Delicate daisy-like blooms that dance in the breeze. Light, airy, and utterly charming in cottage arrangements.','https://images.unsplash.com/photo-1505990482843-ba05d52c02c7?w=800&q=85','$1.50/stem','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1505990482843-ba05d52c02c7?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1505990482843-ba05d52c02c7?w=600&q=80" alt="Cosmos" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$1.50/stem</div>
+      <div class="card-overlay"><h4>Cosmos</h4><p>Delicate and dancing — cottage garden charm</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Wildflower Mix','A gathered-from-the-meadow look with daisies, Queen Anne lace, cornflowers, and buttercups.','https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800&q=85','$8/bunch','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1532774994231-7c01a28457b6?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1532774994231-7c01a28457b6?w=600&q=80" alt="Wildflower Mix" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$8/bunch</div>
+      <div class="card-overlay"><h4>Wildflower Meadow Mix</h4><p>Gathered from the meadow — effortless beauty</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Foxglove','Tall spires of bell-shaped blooms. Dramatic vertical accent that adds height and whimsy.','https://images.unsplash.com/photo-1531130513023-1b5bb7bcfb9e?w=800&q=85','$3.50/stem','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1531130513023-1b5bb7bcfb9e?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1531130513023-1b5bb7bcfb9e?w=600&q=80" alt="Foxglove" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$3.50/stem</div>
+      <div class="card-overlay"><h4>Foxglove</h4><p>Tall spires of bell-shaped whimsy</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Delphiniums','Towering spikes of intense blue, purple, and white. The ultimate statement for tall arrangements.','https://images.unsplash.com/photo-1530889117621-680d8584d6b4?w=800&q=85','$4.00/stem','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1530889117621-680d8584d6b4?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1530889117621-680d8584d6b4?w=600&q=80" alt="Delphiniums" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$4.00/stem</div>
+      <div class="card-overlay"><h4>Delphiniums</h4><p>Towering blue spikes — dramatic height</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Scabiosa','Pin-cushion flowers with wiry stems. Whimsical, textural, and utterly unique.','https://images.unsplash.com/photo-1589458456444-f7158a7e8a4f?w=800&q=85','$3.00/stem','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=600&q=80" alt="Scabiosa" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$3.00/stem</div>
+      <div class="card-overlay"><h4>Scabiosa</h4><p>Pin-cushion texture — utterly unique</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Stock','Fragrant spikes of ruffled double blooms. Old-fashioned charm with incredible scent.','https://images.unsplash.com/photo-1503652601-557d07733ddc?w=800&q=85','$3.00/stem','Spring')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1503652601-557d07733ddc?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1503652601-557d07733ddc?w=600&q=80" alt="Stock" loading="lazy">
+      <div class="card-badge">Spring</div><div class="card-price">$3.00/stem</div>
+      <div class="card-overlay"><h4>Stock</h4><p>Ruffled double blooms — incredible scent</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PHOTO BANNER — TROPICAL ============= -->
+<div class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1560313793-2f4383450a3b?w=1920&q=85" alt="Tropical flowers" loading="lazy">
+  <div class="overlay-text"><h2>Exotic Tropical Blooms</h2></div>
+</div>
+
+<!-- ================= TROPICAL FLOWERS ================= -->
+<section class="section">
+  <span class="tag tag-peach">Tropical & Exotic</span>
+  <h2 class="grad">Stunning Tropical Flowers</h2>
+  <p class="sub" style="margin-bottom:36px">Bold, dramatic, and unforgettable. These exotic blooms bring the tropics to any arrangement.</p>
+  <div class="photo-grid">
+    <div class="photo-card" onclick="openModal('Bird of Paradise','The most architectural flower in existence. Electric orange and blue blooms that look like exotic birds in flight.','https://images.unsplash.com/photo-1622110084090-c83d2d627aa1?w=800&q=85','$8.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1622110084090-c83d2d627aa1?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1622110084090-c83d2d627aa1?w=600&q=80" alt="Bird of Paradise" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$8.00/stem</div>
+      <div class="card-overlay"><h4>Bird of Paradise</h4><p>Electric orange and blue — exotic birds in flight</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Protea King','Prehistoric-looking blooms with fuzzy centers surrounded by stiff petals. Bold architectural drama.','https://images.unsplash.com/photo-1536266694648-914d29a935f9?w=800&q=85','$12.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1536266694648-914d29a935f9?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1536266694648-914d29a935f9?w=600&q=80" alt="King Protea" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$12.00/stem</div>
+      <div class="card-overlay"><h4>King Protea</h4><p>Prehistoric drama — bold architectural bloom</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Anthurium','Glossy, heart-shaped tropical blooms in vivid red, pink, or white. Ultra-modern and long-lasting.','https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=800&q=85','$6.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=600&q=80" alt="Anthurium" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$6.00/stem</div>
+      <div class="card-overlay"><h4>Anthurium</h4><p>Glossy heart-shaped — ultra-modern luxury</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Plumeria','Hawaiian lei flowers with intoxicating sweet fragrance. Creamy white with yellow centers.','https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=800&q=85','$3.00/stem','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=600&q=80" alt="Plumeria" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$3.00/stem</div>
+      <div class="card-overlay"><h4>Plumeria</h4><p>Hawaiian lei flower — intoxicating fragrance</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Heliconia','Lobster-claw shaped tropical blooms in vivid red and yellow. Spectacular and long-lasting.','https://images.unsplash.com/photo-1560313793-2f4383450a3b?w=800&q=85','$10.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1560313793-2f4383450a3b?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1560313793-2f4383450a3b?w=600&q=80" alt="Heliconia" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$10.00/stem</div>
+      <div class="card-overlay"><h4>Heliconia</h4><p>Lobster-claw blooms — vivid and spectacular</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Ginger Flower','Exotic torch-like blooms. Dramatic texture and bold presence for statement arrangements.','https://images.unsplash.com/photo-1601021215663-ee72b7063578?w=800&q=85','$7.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1601021215663-ee72b7063578?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1601021215663-ee72b7063578?w=600&q=80" alt="Ginger Flower" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$7.00/stem</div>
+      <div class="card-overlay"><h4>Ginger Flower</h4><p>Exotic torch — dramatic statement piece</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PHOTO BANNER — GREENERY ============= -->
+<div class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1577238063601-573282246970?w=1920&q=85" alt="Lush greenery" loading="lazy">
+  <div class="overlay-text"><h2>Lush Greenery & Foliage</h2></div>
+</div>
+
+<!-- ================= GREENERY & FOLIAGE ================= -->
+<section class="section">
+  <span class="tag tag-sage">Greenery & Foliage</span>
+  <h2 class="grad">The Foundation of Every Arrangement</h2>
+  <p class="sub" style="margin-bottom:36px">No arrangement is complete without stunning greenery. These are the textures and shapes that make flowers sing.</p>
+  <div class="photo-grid">
+    <div class="photo-card" onclick="openModal('Silver Dollar Eucalyptus','Round, silvery-blue leaves on graceful stems. The most popular wedding greenery in the world.','https://images.unsplash.com/photo-1577238063601-573282246970?w=800&q=85','$2.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1577238063601-573282246970?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1577238063601-573282246970?w=600&q=80" alt="Silver Dollar Eucalyptus" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$2.00/stem</div>
+      <div class="card-overlay"><h4>Silver Dollar Eucalyptus</h4><p>Round silvery leaves — the #1 wedding green</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Italian Ruscus','Dark, glossy leaves on arching branches. The workhorse greenery that lasts for weeks.','https://images.unsplash.com/photo-1634291196724-742f2a32463c?w=800&q=85','$2.50/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1634291196724-742f2a32463c?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1634291196724-742f2a32463c?w=600&q=80" alt="Italian Ruscus" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$2.50/stem</div>
+      <div class="card-overlay"><h4>Italian Ruscus</h4><p>Glossy arching branches — lasts for weeks</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Monstera Leaf','Giant tropical split-leaf. One leaf makes a bold, modern statement in contemporary arrangements.','https://images.unsplash.com/photo-1560313793-2f4383450a3b?w=800&q=85','$5.00/leaf','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1560313793-2f4383450a3b?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1560313793-2f4383450a3b?w=600&q=80" alt="Monstera" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$5.00/leaf</div>
+      <div class="card-overlay"><h4>Monstera Leaf</h4><p>Giant split-leaf — bold modern statement</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Ferns','Delicate fronds that add movement and softness. From sword fern to maidenhair — every texture imaginable.','https://images.unsplash.com/photo-1532774994231-7c01a28457b6?w=800&q=85','$1.50/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1532774994231-7c01a28457b6?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1532774994231-7c01a28457b6?w=600&q=80" alt="Ferns" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$1.50/stem</div>
+      <div class="card-overlay"><h4>Ferns</h4><p>Delicate fronds — movement and softness</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Olive Branches','Mediterranean elegance with silvery-green leaves. Rustic, refined, and trending for weddings.','https://images.unsplash.com/photo-1559150180-2467f804f9bf?w=800&q=85','$4.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1559150180-2467f804f9bf?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1559150180-2467f804f9bf?w=600&q=80" alt="Olive Branch" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$4.00/stem</div>
+      <div class="card-overlay"><h4>Olive Branches</h4><p>Mediterranean silver-green elegance</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Dusty Miller','Soft, velvety silver foliage. The perfect complement to blush and burgundy palettes.','https://images.unsplash.com/photo-1592125661285-79820f2fdf7a?w=800&q=85','$1.50/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1592125661285-79820f2fdf7a?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1592125661285-79820f2fdf7a?w=600&q=80" alt="Dusty Miller" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$1.50/stem</div>
+      <div class="card-overlay"><h4>Dusty Miller</h4><p>Velvety silver — perfect for blush palettes</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PHOTO BANNER — DRIED ============= -->
+<div class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1605485236949-5775b9676c78?w=1920&q=85" alt="Elegant dried flowers" loading="lazy">
+  <div class="overlay-text"><h2>Dried & Preserved Flowers</h2></div>
+</div>
+
+<!-- ================= DRIED & PRESERVED ================= -->
+<section class="section">
+  <span class="tag tag-gold">Dried & Preserved</span>
+  <h2 class="grad">Everlasting Beauty</h2>
+  <p class="sub" style="margin-bottom:36px">The hottest trend in floral design. Dried and preserved flowers last months or years — and they're stunning.</p>
+  <div class="photo-grid">
+    <div class="photo-card" onclick="openModal('Pampas Grass','The Instagram icon. Towering plumes of creamy white that make any space feel bohemian-luxe.','https://images.unsplash.com/photo-1626322751456-777779e0c4ae?w=800&q=85','$8.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1626322751456-777779e0c4ae?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1626322751456-777779e0c4ae?w=600&q=80" alt="Pampas Grass" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$8.00/stem</div>
+      <div class="card-overlay"><h4>Pampas Grass</h4><p>The Instagram icon — bohemian luxe</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Dried Lavender','Preserved fragrant bundles in deep purple. Beautiful alone or mixed into dried arrangements.','https://images.unsplash.com/photo-1477511801984-4ad318ed9846?w=800&q=85','$6.00/bunch','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1477511801984-4ad318ed9846?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1477511801984-4ad318ed9846?w=600&q=80" alt="Dried Lavender" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$6.00/bunch</div>
+      <div class="card-overlay"><h4>Dried Lavender</h4><p>Preserved fragrance — deep purple beauty</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Dried Roses','Preserved in their peak beauty. Vintage, romantic, and they last forever.','https://images.unsplash.com/photo-1530906622963-8a60586a49c7?w=800&q=85','$4.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1530906622963-8a60586a49c7?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1530906622963-8a60586a49c7?w=600&q=80" alt="Dried Roses" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$4.00/stem</div>
+      <div class="card-overlay"><h4>Preserved Roses</h4><p>Peak beauty frozen in time — last forever</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Bunny Tails','Soft, fluffy grass plumes in natural or dyed colors. Playful texture for whimsical arrangements.','https://images.unsplash.com/photo-1581938165093-050aeb5ef218?w=800&q=85','$5.00/bunch','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1581938165093-050aeb5ef218?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1581938165093-050aeb5ef218?w=600&q=80" alt="Bunny Tails" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$5.00/bunch</div>
+      <div class="card-overlay"><h4>Bunny Tails</h4><p>Soft fluffy plumes — playful whimsy</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Craspedia (Billy Balls)','Perfectly round yellow globes on wiry stems. Cheerful, modern, and utterly unique.','https://images.unsplash.com/photo-1588834747799-82f691b36ff6?w=800&q=85','$2.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1588834747799-82f691b36ff6?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1588834747799-82f691b36ff6?w=600&q=80" alt="Billy Balls" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$2.00/stem</div>
+      <div class="card-overlay"><h4>Craspedia (Billy Balls)</h4><p>Perfectly round yellow globes — modern cheer</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Dried Hydrangea','Papery, muted tones of blue, green, and mauve. Elegant volume that lasts all year.','https://images.unsplash.com/photo-1623201530307-c1d678f68459?w=800&q=85','$6.00/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1623201530307-c1d678f68459?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1623201530307-c1d678f68459?w=600&q=80" alt="Dried Hydrangea" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$6.00/stem</div>
+      <div class="card-overlay"><h4>Dried Hydrangea</h4><p>Papery muted tones — elegant volume</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PHOTO BANNER — COLOR PALETTES ============= -->
+<div class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1620704033114-028772aa85ae?w=1920&q=85" alt="Color palette flowers" loading="lazy">
+  <div class="overlay-text"><h2>Color Palette Inspiration</h2></div>
+</div>
+
+<!-- ================= COLOR PALETTES ================= -->
+<section class="section">
+  <span class="tag tag-lavender">Color Palettes</span>
+  <h2 class="grad">Designer Color Combinations</h2>
+  <p class="sub" style="margin-bottom:36px">The color stories that top wedding designers charge thousands for. Curated palette combinations with the perfect flowers for each.</p>
+  <div class="g3">
+    <div class="card" style="border-top:3px solid var(--blush)">
+      <h3 style="color:var(--blush)">Blush & Burgundy</h3>
+      <p style="font-size:0.85rem;color:var(--dim);margin:8px 0 12px">The most requested wedding palette of the decade.</p>
+      <div class="pill-grid"><div class="pill" style="border-color:rgba(255,143,175,0.3);color:var(--pink)">Garden Roses</div><div class="pill" style="border-color:rgba(114,47,55,0.3);color:var(--wine)">Burgundy Dahlias</div><div class="pill" style="border-color:rgba(255,194,209,0.3);color:var(--blush)">Ranunculus</div><div class="pill" style="border-color:rgba(168,213,186,0.3);color:var(--sage)">Eucalyptus</div></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--sage)">
+      <h3 style="color:var(--sage)">Sage & White</h3>
+      <p style="font-size:0.85rem;color:var(--dim);margin:8px 0 12px">Clean, modern, and eternally elegant.</p>
+      <div class="pill-grid"><div class="pill" style="border-color:rgba(168,213,186,0.3);color:var(--sage)">White Roses</div><div class="pill" style="border-color:rgba(168,213,186,0.3);color:var(--sage)">Eucalyptus</div><div class="pill" style="border-color:rgba(255,255,255,0.2);color:var(--txt)">White Peonies</div><div class="pill" style="border-color:rgba(168,213,186,0.3);color:var(--sage)">Olive Branch</div></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--gold)">
+      <h3 style="color:var(--gold)">Sunset Terracotta</h3>
+      <p style="font-size:0.85rem;color:var(--dim);margin:8px 0 12px">Warm, earthy, and trending for fall weddings.</p>
+      <div class="pill-grid"><div class="pill" style="border-color:rgba(255,180,162,0.3);color:var(--peach)">Peach Roses</div><div class="pill" style="border-color:rgba(255,209,102,0.3);color:var(--gold)">Sunflowers</div><div class="pill" style="border-color:rgba(229,152,155,0.3);color:var(--coral)">Dahlias</div><div class="pill" style="border-color:rgba(168,213,186,0.3);color:var(--sage)">Pampas Grass</div></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--lavender)">
+      <h3 style="color:var(--lavender)">Lavender Dream</h3>
+      <p style="font-size:0.85rem;color:var(--dim);margin:8px 0 12px">Soft, romantic, ethereal purple tones.</p>
+      <div class="pill-grid"><div class="pill" style="border-color:rgba(200,182,255,0.3);color:var(--lavender)">Lavender</div><div class="pill" style="border-color:rgba(224,170,255,0.3);color:var(--lilac)">Lilac</div><div class="pill" style="border-color:rgba(221,160,221,0.3);color:var(--mauve)">Sweet Peas</div><div class="pill" style="border-color:rgba(200,182,255,0.3);color:var(--lavender)">Clematis</div></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--rose)">
+      <h3 style="color:var(--rose)">Bold Jewel Tones</h3>
+      <p style="font-size:0.85rem;color:var(--dim);margin:8px 0 12px">Rich, saturated, and dramatically luxurious.</p>
+      <div class="pill-grid"><div class="pill" style="border-color:rgba(255,107,138,0.3);color:var(--rose)">Hot Pink Roses</div><div class="pill" style="border-color:rgba(114,47,55,0.3);color:var(--wine)">Deep Red Dahlia</div><div class="pill" style="border-color:rgba(200,182,255,0.3);color:var(--lavender)">Purple Orchid</div><div class="pill" style="border-color:rgba(255,209,102,0.3);color:var(--gold)">Gold Accents</div></div>
+    </div>
+    <div class="card" style="border-top:3px solid var(--sky)">
+      <h3 style="color:var(--sky)">Coastal Blue</h3>
+      <p style="font-size:0.85rem;color:var(--dim);margin:8px 0 12px">Beach wedding perfection — ocean blues and whites.</p>
+      <div class="pill-grid"><div class="pill" style="border-color:rgba(137,196,244,0.3);color:var(--sky)">Blue Hydrangea</div><div class="pill" style="border-color:rgba(137,196,244,0.3);color:var(--sky)">Delphiniums</div><div class="pill" style="border-color:rgba(255,255,255,0.2);color:var(--txt)">White Roses</div><div class="pill" style="border-color:rgba(152,245,225,0.3);color:var(--mint)">Sea Holly</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PHOTO BANNER 4 ============= -->
+<div class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1521520368710-3ab197656d60?w=1920&q=85" alt="Bridal bouquet" loading="lazy">
+  <div class="overlay-text"><h2>Professional Florist Tools — Free</h2></div>
+</div>
+
+<!-- ================= WEDDING STYLES GALLERY ================= -->
+<section class="section">
+  <span class="tag tag-rose">Wedding Styles</span>
+  <h2 class="grad">Every Wedding Floral Style</h2>
+  <p class="sub" style="margin-bottom:36px">From romantic garden to minimalist modern, boho chic to classic glamour — every wedding style with the perfect flowers.</p>
+  <div class="photo-grid">
+    <div class="photo-card" onclick="openModal('Romantic Garden','Overflowing with roses, peonies, and trailing greenery. The most popular wedding style — lush, abundant, and timelessly beautiful.','https://images.unsplash.com/photo-1521520368710-3ab197656d60?w=800&q=85','$350-$600','Bridal')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1521520368710-3ab197656d60?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1521520368710-3ab197656d60?w=600&q=80" alt="Romantic Garden" loading="lazy">
+      <div class="card-badge">Romantic</div><div class="card-price">$350-$600</div>
+      <div class="card-overlay"><h4>Romantic Garden</h4><p>Lush, abundant, timelessly beautiful</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Boho Chic','Wild, asymmetric, and free-spirited. Pampas grass, dried elements, and loose flowing blooms.','https://images.unsplash.com/photo-1626322751456-777779e0c4ae?w=800&q=85','$200-$400','Boho')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1626322751456-777779e0c4ae?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1626322751456-777779e0c4ae?w=600&q=80" alt="Boho Chic" loading="lazy">
+      <div class="card-badge">Boho</div><div class="card-price">$200-$400</div>
+      <div class="card-overlay"><h4>Boho Chic</h4><p>Wild, free-spirited — pampas and dried blooms</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Classic Glamour','All-white with lush greenery. Structured, elegant, and refined. Think Meghan Markle.','https://images.unsplash.com/photo-1552222661-467bd51aa1f4?w=800&q=85','$400-$800','Classic')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1552222661-467bd51aa1f4?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1552222661-467bd51aa1f4?w=600&q=80" alt="Classic Glamour" loading="lazy">
+      <div class="card-badge">Classic</div><div class="card-price">$400-$800</div>
+      <div class="card-overlay"><h4>Classic Glamour</h4><p>All-white elegance — structured and refined</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Rustic Charm','Mason jars, burlap, and wildflowers. Farm-to-table warmth with sunflowers, dahlias, and wheat.','https://images.unsplash.com/photo-1690974549931-74d9f436434c?w=800&q=85','$150-$300','Rustic')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1690974549931-74d9f436434c?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1690974549931-74d9f436434c?w=600&q=80" alt="Rustic" loading="lazy">
+      <div class="card-badge">Rustic</div><div class="card-price">$150-$300</div>
+      <div class="card-overlay"><h4>Rustic Charm</h4><p>Farm-to-table warmth — sunflowers and dahlias</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Modern Minimalist','Single-variety, monochromatic. Sleek orchids or calla lilies. Less is more taken to perfection.','https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=800&q=85','$200-$450','Modern')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=600&q=80" alt="Modern Minimalist" loading="lazy">
+      <div class="card-badge">Modern</div><div class="card-price">$200-$450</div>
+      <div class="card-overlay"><h4>Modern Minimalist</h4><p>Sleek single-variety — less is perfection</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Tropical Paradise','Bird of paradise, anthuriums, monstera leaves. Bold color and dramatic shapes for destination weddings.','https://images.unsplash.com/photo-1560313793-2f4383450a3b?w=800&q=85','$300-$600','Tropical')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1560313793-2f4383450a3b?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1560313793-2f4383450a3b?w=600&q=80" alt="Tropical" loading="lazy">
+      <div class="card-badge">Tropical</div><div class="card-price">$300-$600</div>
+      <div class="card-overlay"><h4>Tropical Paradise</h4><p>Bold and dramatic — destination wedding dream</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Moody Romance','Deep burgundy, plum, and nearly-black dahlias. Dramatic, luxurious, and mysteriously gorgeous.','https://images.unsplash.com/photo-1594149596808-e3b6174968b3?w=800&q=85','$400-$700','Moody')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1594149596808-e3b6174968b3?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1594149596808-e3b6174968b3?w=600&q=80" alt="Moody Romance" loading="lazy">
+      <div class="card-badge">Moody</div><div class="card-price">$400-$700</div>
+      <div class="card-overlay"><h4>Moody Romance</h4><p>Deep burgundy and plum — mysteriously gorgeous</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Pastel Fairy Tale','Soft pinks, lavenders, and creams. Sweet, romantic, and like walking into a dream.','https://images.unsplash.com/photo-1511201173873-c327e63eb6c4?w=800&q=85','$300-$500','Pastel')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1511201173873-c327e63eb6c4?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1511201173873-c327e63eb6c4?w=600&q=80" alt="Pastel Fairy Tale" loading="lazy">
+      <div class="card-badge">Pastel</div><div class="card-price">$300-$500</div>
+      <div class="card-overlay"><h4>Pastel Fairy Tale</h4><p>Soft pinks and lavenders — walking into a dream</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============= PHOTO BANNER — LUXURY ============= -->
+<div class="photo-banner">
+  <img src="https://images.unsplash.com/photo-1560256608-43f0b6f7588e?w=1920&q=85" alt="Luxury flowers" loading="lazy">
+  <div class="overlay-text"><h2>Luxury Statement Flowers</h2></div>
+</div>
+
+<!-- ================= LUXURY STATEMENT ================= -->
+<section class="section">
+  <span class="tag tag-mauve">Luxury Blooms</span>
+  <h2 class="grad">The Most Luxurious Flowers on Earth</h2>
+  <p class="sub" style="margin-bottom:36px">The flowers that designers charge premium prices for. Show-stopping, jaw-dropping, and worth every penny.</p>
+  <div class="photo-grid">
+    <div class="photo-card" onclick="openModal('Juliet Rose','David Austin\\'s $5 million rose. Took 15 years to breed. The most expensive rose variety ever created — and it\\'s breathtaking.','https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=800&q=85','$10-15/stem','Limited')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=1600&q=90')" alt="Juliet Rose" loading="lazy">
+      <div class="card-badge">Rare</div><div class="card-price">$10-15/stem</div>
+      <div class="card-overlay"><h4>Juliet Rose</h4><p>$5 million to create — 15 years of breeding</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Phalaenopsis Orchid','The queen of luxury flowers. Long-lasting, sculptural, and impossibly elegant.','https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=800&q=85','$15-25/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1599463740831-a5015ef7b65a?w=1600&q=90')" alt="Phalaenopsis Orchid" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$15-25/stem</div>
+      <div class="card-overlay"><h4>Phalaenopsis Orchid</h4><p>The queen of luxury — sculptural elegance</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Coral Charm Peony','The coveted color-shifting peony that opens coral and fades to champagne. Florists fight over these.','https://images.unsplash.com/photo-1560256608-43f0b6f7588e?w=800&q=85','$12-18/stem','Spring Only')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1560256608-43f0b6f7588e?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1560256608-43f0b6f7588e?w=600&q=80')" alt="Coral Charm" loading="lazy">
+      <div class="card-badge">Rare</div><div class="card-price">$12-18/stem</div>
+      <div class="card-overlay"><h4>Coral Charm Peony</h4><p>Color-shifting — florists fight over these</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Lily of the Valley','The flower of royalty. Kate Middleton\\'s bridal flower. Tiny bells with an intoxicating scent.','https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=800&q=85','$15-30/bunch','Spring Only')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=600&q=80')" alt="Lily of the Valley" loading="lazy">
+      <div class="card-badge">Spring Only</div><div class="card-price">$15-30/bunch</div>
+      <div class="card-overlay"><h4>Lily of the Valley</h4><p>Flower of royalty — Kate Middleton's choice</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Calla Lily','Sleek, sculptural, and impossibly chic. One of the most photographed flowers in fashion and design.','https://images.unsplash.com/photo-1605485236949-5775b9676c78?w=800&q=85','$5-8/stem','Year-Round')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1605485236949-5775b9676c78?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1605485236949-5775b9676c78?w=600&q=80')" alt="Calla Lily" loading="lazy">
+      <div class="card-badge">Year-Round</div><div class="card-price">$5-8/stem</div>
+      <div class="card-overlay"><h4>Calla Lily</h4><p>Sleek and sculptural — impossibly chic</p></div>
+    </div>
+    <div class="photo-card" onclick="openModal('Gardenias','Creamy white petals with the most intoxicating fragrance of any flower. Pure, romantic luxury.','https://images.unsplash.com/photo-1592125661285-79820f2fdf7a?w=800&q=85','$6-12/stem','Summer')">
+      <img onclick="event.stopPropagation();openLightbox('https://images.unsplash.com/photo-1592125661285-79820f2fdf7a?w=1600&q=90')" style="cursor:zoom-in" src="https://images.unsplash.com/photo-1592125661285-79820f2fdf7a?w=600&q=80')" alt="Gardenia" loading="lazy">
+      <div class="card-badge">Summer</div><div class="card-price">$6-12/stem</div>
+      <div class="card-overlay"><h4>Gardenias</h4><p>Most intoxicating fragrance — pure romantic luxury</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MOOD BOARD BUILDER ================= -->
+<section class="section" id="moodboard">
+  <span class="tag tag-lavender">Mood Board</span>
+  <h2 class="grad">Mood Board Builder</h2>
+  <p class="sub" style="margin-bottom:32px">Create stunning visual mood boards for client presentations. What Curate's drag-and-drop board and Details Flowers' Design Board charge premium prices for.</p>
+  <div class="g2">
+    <div class="card">
+      <h3 style="color:var(--lavender);margin-bottom:16px">Create Mood Board</h3>
+      <input type="text" placeholder="Board Name (e.g., 'Mitchell Wedding - Romantic Garden')" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--bdr);background:var(--card);color:var(--txt);font-family:inherit;margin-bottom:12px">
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+        <button class="btn btn-outline btn-sm" onclick="alert('In the full version, this opens your device photo library')">Upload Photos</button>
+        <button class="btn btn-outline btn-sm" onclick="alert('In the full version, paste a Pinterest URL to import')">Import from Pinterest</button>
+        <button class="btn btn-outline btn-sm" onclick="alert('In the full version, this opens the flower library to add')">Add from Library</button>
+      </div>
+      <div style="font-size:0.82rem;color:var(--dim);margin-bottom:12px">Color Palette for this Board:</div>
+      <div style="display:flex;gap:8px;margin-bottom:16px">
+        <div style="width:40px;height:40px;border-radius:10px;background:#f4c2c2;cursor:pointer;border:2px solid rgba(255,255,255,0.2)" title="Blush"></div>
+        <div style="width:40px;height:40px;border-radius:10px;background:#722f37;cursor:pointer;border:2px solid rgba(255,255,255,0.2)" title="Burgundy"></div>
+        <div style="width:40px;height:40px;border-radius:10px;background:#faf0e6;cursor:pointer;border:2px solid rgba(255,255,255,0.2)" title="Cream"></div>
+        <div style="width:40px;height:40px;border-radius:10px;background:#4a7c59;cursor:pointer;border:2px solid rgba(255,255,255,0.2)" title="Forest Green"></div>
+        <div style="width:40px;height:40px;border-radius:10px;background:#b08d57;cursor:pointer;border:2px solid rgba(255,255,255,0.2)" title="Antique Gold"></div>
+        <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#f4c2c2,#722f37,#faf0e6);cursor:pointer;border:2px solid var(--lavender)" title="Add Color">
+          <div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:18px;color:#fff">+</div>
+        </div>
+      </div>
+      <textarea placeholder="Designer Notes: Style vision, texture preferences, key inspiration sources..." rows="3" style="width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--bdr);background:var(--card);color:var(--txt);font-family:inherit;resize:vertical;margin-bottom:12px"></textarea>
+      <button class="btn btn-primary">Save Mood Board</button>
+    </div>
+    <div>
+      <h3 style="color:var(--peach);margin-bottom:16px">Preview: "Mitchell Wedding"</h3>
+      <div style="background:linear-gradient(135deg,#faf0e6,#f4c2c2,#e8d5d1);border-radius:20px;padding:24px;min-height:360px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="border-radius:14px;overflow:hidden;aspect-ratio:1"><img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?w=400&q=80" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="border-radius:14px;overflow:hidden;aspect-ratio:1"><img src="https://images.unsplash.com/photo-1511201173873-c327e63eb6c4?w=400&q=80" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="border-radius:14px;overflow:hidden;aspect-ratio:1"><img src="https://images.unsplash.com/photo-1521520368710-3ab197656d60?w=400&q=80" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+          <div style="border-radius:14px;overflow:hidden;aspect-ratio:1"><img src="https://images.unsplash.com/photo-1577238063601-573282246970?w=400&q=80" alt="" style="width:100%;height:100%;object-fit:cover"></div>
+        </div>
+        <div style="margin-top:16px;text-align:center">
+          <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:#1a0a2e">Mitchell Wedding</div>
+          <div style="font-size:0.8rem;color:#666;margin-top:4px">Romantic Garden · Blush & Burgundy</div>
+          <div style="display:flex;justify-content:center;gap:6px;margin-top:10px">
+            <div style="width:20px;height:20px;border-radius:50%;background:#f4c2c2"></div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#722f37"></div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#faf0e6"></div>
+            <div style="width:20px;height:20px;border-radius:50%;background:#4a7c59"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= SHOPPING LIST & WHOLESALE ================= -->
+<section class="section" id="shopping">
+  <span class="tag tag-sage">Wholesale Ordering</span>
+  <h2 class="grad">Shopping List & Wholesale Orders</h2>
+  <p class="sub" style="margin-bottom:32px">Auto-generate wholesale shopping lists across all events for the week. What Details Flowers and EveryStem charge for — consolidated ordering with bunch rounding.</p>
+  <div class="g2">
+    <div class="card">
+      <h3 style="color:var(--sage);margin-bottom:16px">Weekend Shopping List (Mar 20-22)</h3>
+      <div style="font-size:0.75rem;color:var(--dimmer);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;font-weight:700">Consolidated across 3 events</div>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:8px 12px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:0.75rem;font-weight:700;color:var(--dimmer);text-transform:uppercase;letter-spacing:1px">
+          <span>Flower</span><span>Stems</span><span>Bunches</span><span>Cost</span>
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:10px 12px;border-radius:8px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03)">
+          <span style="font-weight:600">Garden Rose (Blush)</span><span>45</span><span style="color:var(--sage)">9 × 5</span><span style="font-weight:600">$202.50</span>
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:10px 12px;border-radius:8px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03)">
+          <span style="font-weight:600">Peony (White)</span><span>28</span><span style="color:var(--sage)">6 × 5</span><span style="font-weight:600">$168.00</span>
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:10px 12px;border-radius:8px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03)">
+          <span style="font-weight:600">Eucalyptus (Silver)</span><span>60</span><span style="color:var(--sage)">12 × 5</span><span style="font-weight:600">$120.00</span>
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:10px 12px;border-radius:8px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03)">
+          <span style="font-weight:600">Ranunculus (Blush)</span><span>35</span><span style="color:var(--sage)">7 × 5</span><span style="font-weight:600">$105.00</span>
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:10px 12px;border-radius:8px;font-size:0.85rem;border-bottom:1px solid rgba(255,255,255,0.03)">
+          <span style="font-weight:600">Dahlia (Cafe au Lait)</span><span>20</span><span style="color:var(--sage)">4 × 5</span><span style="font-weight:600">$110.00</span>
+        </div>
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:10px 12px;border-radius:8px;font-size:0.85rem">
+          <span style="font-weight:600">Sweet Pea (White)</span><span>40</span><span style="color:var(--sage)">4 bch</span><span style="font-weight:600">$48.00</span>
+        </div>
+      </div>
+      <div class="calc-total" style="margin-top:16px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:700">Total Wholesale</span>
+          <span style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--sage)">$753.50</span>
+        </div>
+        <div style="font-size:0.8rem;color:var(--dim);margin-top:4px">228 stems · 2 extra stems waste ($9 value)</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-top:16px">
+        <button class="btn btn-primary btn-sm">Export Shopping List</button>
+        <button class="btn btn-outline btn-sm">Send to Wholesaler</button>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="color:var(--gold);margin-bottom:16px">Vendor Price Comparison</h3>
+      <div style="font-size:0.75rem;color:var(--dimmer);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;font-weight:700">Same order, different vendors</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="padding:16px;border-radius:14px;background:rgba(168,213,186,0.08);border:2px solid rgba(168,213,186,0.2)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-weight:700;font-size:0.95rem">Mayflower Wholesale</div><div style="font-size:0.78rem;color:var(--dim)">Ships Mon & Thu · Free delivery over $500</div></div>
+            <div style="text-align:right"><div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--sage)">$712</div><div style="font-size:0.7rem;color:var(--sage)">BEST PRICE</div></div>
+          </div>
+        </div>
+        <div style="padding:16px;border-radius:14px;background:rgba(255,255,255,0.02);border:1px solid var(--bdr)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-weight:700;font-size:0.95rem">FernTrust Farms</div><div style="font-size:0.78rem;color:var(--dim)">Ships daily · $45 delivery</div></div>
+            <div style="text-align:right"><div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--peach)">$798</div></div>
+          </div>
+        </div>
+        <div style="padding:16px;border-radius:14px;background:rgba(255,255,255,0.02);border:1px solid var(--bdr)">
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <div><div style="font-weight:700;font-size:0.95rem">Valley Flora Direct</div><div style="font-size:0.78rem;color:var(--dim)">Ships Wed · $25 delivery</div></div>
+            <div style="text-align:right"><div style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:var(--dim)">$845</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
