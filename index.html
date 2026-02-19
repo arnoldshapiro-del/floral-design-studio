@@ -279,6 +279,29 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
 /* USER MANUAL COLLAPSIBLE GUIDES */
 .guide-open .guide-content{max-height:2000px!important}
 .guide-open>div:first-child span:last-child{transform:rotate(180deg)}
+
+/* GLOBAL FLOWER SEARCH */
+.flower-search-wrap{position:relative;display:flex;align-items:center;margin:0 16px}
+.flower-search-input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:7px 16px 7px 36px;color:var(--txt);font-size:0.82rem;width:220px;transition:all 0.3s;outline:none;font-family:inherit}
+.flower-search-input::placeholder{color:var(--dim);font-size:0.78rem}
+.flower-search-input:focus{width:300px;border-color:var(--rose);background:rgba(255,255,255,0.1);box-shadow:0 0 20px rgba(255,107,138,0.15)}
+.flower-search-icon{position:absolute;left:12px;color:var(--dim);font-size:13px;pointer-events:none;transition:color 0.2s}
+.flower-search-input:focus~.flower-search-icon,.flower-search-input:focus+.flower-search-icon{color:var(--rose)}
+.flower-search-results{position:absolute;top:calc(100% + 8px);left:0;right:0;min-width:320px;background:rgba(15,10,26,0.98);border:1px solid rgba(255,255,255,0.1);border-radius:14px;max-height:400px;overflow-y:auto;z-index:9999;box-shadow:0 20px 60px rgba(0,0,0,0.5);backdrop-filter:blur(20px);display:none;scrollbar-width:thin}
+.flower-search-results.visible{display:block}
+.fsr-item{padding:12px 16px;cursor:pointer;transition:background 0.15s;border-bottom:1px solid rgba(255,255,255,0.04)}
+.fsr-item:hover{background:rgba(255,107,138,0.08)}
+.fsr-item:last-child{border-bottom:none}
+.fsr-name{font-weight:600;color:var(--txt);font-size:0.88rem}
+.fsr-section{font-size:0.72rem;color:var(--dim);margin-top:2px}
+.fsr-tag{display:inline-block;padding:1px 8px;border-radius:8px;font-size:0.65rem;font-weight:700;margin-left:8px}
+.fsr-tag-gallery{background:rgba(255,107,138,0.15);color:var(--rose)}
+.fsr-tag-care{background:rgba(168,213,186,0.15);color:var(--sage)}
+.fsr-tag-tool{background:rgba(178,160,255,0.15);color:var(--lavender)}
+.fsr-tag-recipe{background:rgba(255,209,102,0.15);color:var(--gold)}
+.fsr-empty{padding:20px;text-align:center;color:var(--dim);font-size:0.85rem}
+@media(max-width:900px){.flower-search-wrap{margin:0 8px}.flower-search-input{width:150px}.flower-search-input:focus{width:200px}.flower-search-results{min-width:260px;left:-40px}}
+
 </style>
 </head>
 <body>
@@ -290,6 +313,11 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
   <div style="display:flex;align-items:center;gap:12px">
     <div onclick="toggleSidebar()" style="cursor:pointer;font-size:20px;color:var(--dim);transition:color 0.2s;padding:4px" onmouseover="this.style.color='var(--rose)'" onmouseout="this.style.color='var(--dim)'">☰</div>
     <div class="nav-logo">Floral Design Studio</div>
+  </div>
+  <div class="flower-search-wrap">
+    <input type="text" class="flower-search-input" id="globalFlowerSearch" placeholder="Search flowers... (e.g., rose, peony, hydrangea)" autocomplete="off" oninput="globalFlowerSearchHandler(this.value)" onkeydown="if(event.key==='Escape'){this.value='';globalFlowerSearchHandler('');this.blur()}">
+    <span class="flower-search-icon">🔍</span>
+    <div class="flower-search-results" id="globalSearchResults"></div>
   </div>
   <div class="nav-links">
     <a href="#roses" class="active">Galleries</a>
@@ -3353,6 +3381,150 @@ onAuthStateChanged(auth,async u=>{
     try{await setDoc(doc(db,'users',u.uid),{name:u.displayName||'',email:u.email||'',photoURL:u.photoURL||'',lastVisit:serverTimestamp(),app:'floral-design-studio'},{merge:true})}catch(e){console.error(e)}
   }else{lb.style.display='inline-block';lo.style.display='none';ui.style.display='none';ui.textContent=''}
 });
+
+// ========================================================================
+// GLOBAL FLOWER SEARCH
+// ========================================================================
+function globalFlowerSearchHandler(query) {
+  const resultsDiv = document.getElementById('globalSearchResults');
+  if (!query || query.length < 2) {
+    resultsDiv.classList.remove('visible');
+    resultsDiv.innerHTML = '';
+    return;
+  }
+  const q = query.toLowerCase().trim();
+  const results = [];
+
+  // Search gallery photo cards (h3/h4/p text inside gallery sections)
+  const gallerySections = [
+    {id:'roses',label:'Rose Gallery'},
+    {id:'peonies',label:'Peony Gallery'},
+    {id:'bouquets',label:'Bouquets'},
+    {id:'wedding',label:'Wedding Flowers'},
+    {id:'seasonal',label:'Seasonal Flowers'}
+  ];
+  gallerySections.forEach(gs => {
+    const sec = document.getElementById(gs.id);
+    if (!sec) return;
+    const cards = sec.querySelectorAll('.card, .photo-card, [class*="card"]');
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(q)) {
+        const h3 = card.querySelector('h3,h4,.photo-title');
+        const name = h3 ? h3.textContent.trim() : text.substring(0, 40).trim();
+        if (!results.find(r => r.name === name && r.sectionId === gs.id)) {
+          results.push({name, section: gs.label, sectionId: gs.id, type: 'gallery', el: card});
+        }
+      }
+    });
+  });
+
+  // Search care encyclopedia cards
+  const careCards = document.querySelectorAll('#careCards .care-card, #careCards .card');
+  careCards.forEach(card => {
+    const text = card.textContent.toLowerCase();
+    if (text.includes(q)) {
+      const h3 = card.querySelector('h3');
+      const name = h3 ? h3.textContent.trim() : text.substring(0, 40).trim();
+      results.push({name, section: 'Encyclopedia', sectionId: 'care', type: 'care', el: card});
+    }
+  });
+
+  // Search tool sections (bouquet builder flowers, pairing engine, substitutions, etc.)
+  const toolSections = [
+    {id:'bouquet-builder',label:'Bouquet Builder'},
+    {id:'pairing',label:'Flower Pairing'},
+    {id:'substitutions',label:'Substitution Finder'},
+    {id:'occasions',label:'Occasion Gallery'},
+    {id:'scent',label:'Scent Guide'},
+    {id:'vaselife',label:'Vase Life'}
+  ];
+  toolSections.forEach(ts => {
+    const sec = document.getElementById(ts.id);
+    if (!sec) return;
+    const cards = sec.querySelectorAll('.card, [class*="card"]');
+    cards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(q)) {
+        const h3 = card.querySelector('h3,h4,strong');
+        const name = h3 ? h3.textContent.trim() : text.substring(0, 40).trim();
+        if (!results.find(r => r.name === name && r.sectionId === ts.id)) {
+          results.push({name, section: ts.label, sectionId: ts.id, type: 'tool', el: card});
+        }
+      }
+    });
+  });
+
+  // Search recipe cards
+  const recipeSec = document.getElementById('recipes');
+  if (recipeSec) {
+    const rCards = recipeSec.querySelectorAll('.card, [class*="card"]');
+    rCards.forEach(card => {
+      const text = card.textContent.toLowerCase();
+      if (text.includes(q)) {
+        const h3 = card.querySelector('h3,h4');
+        const name = h3 ? h3.textContent.trim() : text.substring(0, 40).trim();
+        if (!results.find(r => r.name === name && r.sectionId === 'recipes')) {
+          results.push({name, section: 'Recipes', sectionId: 'recipes', type: 'recipe', el: card});
+        }
+      }
+    });
+  }
+
+  // Render results
+  if (results.length === 0) {
+    resultsDiv.innerHTML = '<div class="fsr-empty">No results found 🌺</div>';
+  } else {
+    // Limit to 15 results
+    const shown = results.slice(0, 15);
+    resultsDiv.innerHTML = shown.map((r, i) => {
+      const tagClass = r.type === 'gallery' ? 'fsr-tag-gallery' : r.type === 'care' ? 'fsr-tag-care' : r.type === 'recipe' ? 'fsr-tag-recipe' : 'fsr-tag-tool';
+      const tagLabel = r.type === 'gallery' ? 'Gallery' : r.type === 'care' ? 'Encyclopedia' : r.type === 'recipe' ? 'Recipes' : 'Tool';
+      return '<div class="fsr-item" onclick="jumpToSearchResult('+i+',\''+r.sectionId+'\')"><div class="fsr-name">' + r.name + '<span class="fsr-tag ' + tagClass + '">' + tagLabel + '</span></div><div class="fsr-section">in ' + r.section + '</div></div>';
+    }).join('');
+  }
+  resultsDiv.classList.add('visible');
+
+  // Store results for click handling
+  window._searchResults = results;
+}
+
+function jumpToSearchResult(index, sectionId) {
+  const results = window._searchResults || [];
+  const r = results[index];
+
+  // Close search dropdown
+  document.getElementById('globalSearchResults').classList.remove('visible');
+
+  // Scroll to section
+  const section = document.getElementById(sectionId);
+  if (section) {
+    section.scrollIntoView({behavior: 'smooth', block: 'start'});
+
+    // If there's a specific card, highlight it after scrolling
+    if (r && r.el) {
+      setTimeout(() => {
+        r.el.style.outline = '2px solid var(--rose)';
+        r.el.style.outlineOffset = '4px';
+        r.el.style.transition = 'outline 0.3s, outline-offset 0.3s';
+        r.el.scrollIntoView({behavior: 'smooth', block: 'center'});
+        setTimeout(() => {
+          r.el.style.outline = 'none';
+          r.el.style.outlineOffset = '0';
+        }, 3000);
+      }, 500);
+    }
+  }
+}
+
+// Close search results when clicking outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('.flower-search-wrap')) {
+    const r = document.getElementById('globalSearchResults');
+    if (r) r.classList.remove('visible');
+  }
+});
+
 </script>
 <script src="lightbox-fix.js"></script>
 </body>
