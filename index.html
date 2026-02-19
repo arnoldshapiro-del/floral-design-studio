@@ -280,28 +280,28 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
 .guide-open .guide-content{max-height:2000px!important}
 .guide-open>div:first-child span:last-child{transform:rotate(180deg)}
 
-/* GLOBAL FLOWER SEARCH */
-.flower-search-wrap{position:relative;display:flex;align-items:center;margin:0 16px}
-.flower-search-input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:7px 38px 7px 16px;color:var(--txt);font-size:0.82rem;width:220px;transition:all 0.3s;outline:none;font-family:inherit}
-.flower-search-input::placeholder{color:var(--dim);font-size:0.78rem}
-.flower-search-input:focus{width:300px;border-color:var(--rose);background:rgba(255,255,255,0.1);box-shadow:0 0 20px rgba(255,107,138,0.15)}
-.flower-search-btn{position:absolute;right:4px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;border:none;background:rgba(255,107,138,0.2);color:var(--rose);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;font-weight:700}
-.flower-search-btn:hover{background:var(--rose);color:#fff;transform:translateY(-50%) scale(1.1)}
-.flower-search-input{padding-right:38px}
-.flower-search-results{position:absolute;top:calc(100% + 8px);left:0;right:0;min-width:320px;background:rgba(15,10,26,0.98);border:1px solid rgba(255,255,255,0.1);border-radius:14px;max-height:400px;overflow-y:auto;z-index:9999;box-shadow:0 20px 60px rgba(0,0,0,0.5);backdrop-filter:blur(20px);display:none;scrollbar-width:thin}
-.flower-search-results.visible{display:block}
-.fsr-item{padding:12px 16px;cursor:pointer;transition:background 0.15s;border-bottom:1px solid rgba(255,255,255,0.04)}
-.fsr-item:hover{background:rgba(255,107,138,0.08)}
-.fsr-item:last-child{border-bottom:none}
-.fsr-name{font-weight:600;color:var(--txt);font-size:0.88rem}
-.fsr-section{font-size:0.72rem;color:var(--dim);margin-top:2px}
-.fsr-tag{display:inline-block;padding:1px 8px;border-radius:8px;font-size:0.65rem;font-weight:700;margin-left:8px}
-.fsr-tag-gallery{background:rgba(255,107,138,0.15);color:var(--rose)}
-.fsr-tag-care{background:rgba(168,213,186,0.15);color:var(--sage)}
-.fsr-tag-tool{background:rgba(178,160,255,0.15);color:var(--lavender)}
-.fsr-tag-recipe{background:rgba(255,209,102,0.15);color:var(--gold)}
-.fsr-empty{padding:20px;text-align:center;color:var(--dim);font-size:0.85rem}
-@media(max-width:900px){.flower-search-wrap{margin:0 8px}.flower-search-input{width:150px}.flower-search-input:focus{width:200px}.flower-search-results{min-width:260px;left:-40px}}
+
+
+/* FLOWER SEARCH BAR */
+.fsb-wrap{position:relative;display:flex;align-items:center;margin:0 12px}
+.fsb-input{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:24px;padding:7px 40px 7px 14px;color:var(--txt);font-size:0.82rem;width:200px;transition:all 0.3s;outline:none;font-family:inherit}
+.fsb-input::placeholder{color:var(--dim);font-size:0.78rem}
+.fsb-input:focus{width:280px;border-color:var(--rose);background:rgba(255,255,255,0.1);box-shadow:0 0 20px rgba(255,107,138,0.15)}
+.fsb-btn{position:absolute;right:3px;top:50%;transform:translateY(-50%);width:30px;height:30px;border-radius:50%;border:none;background:rgba(255,107,138,0.2);color:var(--rose);font-size:15px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s}
+.fsb-btn:hover{background:var(--rose);color:#fff;transform:translateY(-50%) scale(1.1)}
+.fsb-results{position:absolute;top:calc(100% + 8px);left:0;min-width:320px;background:rgba(15,10,26,0.98);border:1px solid rgba(255,255,255,0.12);border-radius:14px;max-height:380px;overflow-y:auto;z-index:9999;box-shadow:0 20px 60px rgba(0,0,0,0.6);backdrop-filter:blur(20px);display:none;scrollbar-width:thin}
+.fsb-results.open{display:block}
+.fsb-hit{padding:12px 16px;cursor:pointer;transition:background 0.15s;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;justify-content:space-between;align-items:center}
+.fsb-hit:hover{background:rgba(255,107,138,0.1)}
+.fsb-hit:last-child{border-bottom:none}
+.fsb-hit-name{font-weight:600;color:var(--txt);font-size:0.88rem}
+.fsb-hit-loc{font-size:0.72rem;color:var(--dim);margin-top:2px}
+.fsb-badge{padding:2px 8px;border-radius:8px;font-size:0.62rem;font-weight:700;white-space:nowrap}
+.fsb-badge-g{background:rgba(255,107,138,0.15);color:var(--rose)}
+.fsb-badge-e{background:rgba(168,213,186,0.15);color:var(--sage)}
+.fsb-badge-t{background:rgba(178,160,255,0.15);color:var(--lavender)}
+.fsb-none{padding:20px;text-align:center;color:var(--dim);font-size:0.85rem}
+@media(max-width:900px){.fsb-wrap{margin:0 6px}.fsb-input{width:140px}.fsb-input:focus{width:180px}.fsb-results{min-width:260px;left:-30px}}
 
 </style>
 </head>
@@ -315,10 +315,10 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
     <div onclick="toggleSidebar()" style="cursor:pointer;font-size:20px;color:var(--dim);transition:color 0.2s;padding:4px" onmouseover="this.style.color='var(--rose)'" onmouseout="this.style.color='var(--dim)'">☰</div>
     <div class="nav-logo">Floral Design Studio</div>
   </div>
-  <div class="flower-search-wrap">
-    <input type="text" class="flower-search-input" id="globalFlowerSearch" placeholder="Search flowers... (e.g., rose, peony, hydrangea)" autocomplete="off" oninput="globalFlowerSearchHandler(this.value)" onkeydown="handleSearchKey(event)">
-    <button class="flower-search-btn" onclick="executeFlowerSearch()" title="Search">→</button>
-    <div class="flower-search-results" id="globalSearchResults"></div>
+  <div class="fsb-wrap" id="fsbWrap">
+    <input type="text" class="fsb-input" id="fsbInput" placeholder="Search flowers..." autocomplete="off">
+    <button class="fsb-btn" id="fsbBtn" title="Search">🔍</button>
+    <div class="fsb-results" id="fsbResults"></div>
   </div>
   <div class="nav-links">
     <a href="#roses" class="active">Galleries</a>
@@ -335,6 +335,227 @@ h3{font-size:1.05rem;font-weight:700;margin-bottom:6px}
     <button class="auth-btn" id="logout-btn" onclick="firebaseLogout()">Sign Out</button>
   </div>
 </nav>
+<script>
+(function(){
+  // Build flower search index after DOM loads
+  var _idx = [];
+
+  function buildIndex() {
+    _idx = [];
+
+    // 1. Gallery photo-cards (h4 titles)
+    var gallerySections = [
+      {id:'roses',label:'Roses'},
+      {id:'peonies',label:'Peonies'},
+      {id:'bouquets',label:'Bouquets'},
+      {id:'wedding',label:'Wedding'},
+      {id:'seasonal',label:'Seasonal'}
+    ];
+    gallerySections.forEach(function(gs) {
+      var sec = document.getElementById(gs.id);
+      if (!sec) return;
+      var cards = sec.querySelectorAll('.photo-card');
+      cards.forEach(function(card) {
+        var h4 = card.querySelector('h4');
+        if (h4) {
+          var name = h4.textContent.trim();
+          _idx.push({name:name, section:gs.label, sectionId:gs.id, type:'g', el:card});
+        }
+      });
+    });
+
+    // 2. Care encyclopedia cards
+    var careBox = document.getElementById('careCards');
+    if (careBox) {
+      var cCards = careBox.querySelectorAll('.card');
+      cCards.forEach(function(card) {
+        var h3 = card.querySelector('h3');
+        if (h3) {
+          _idx.push({name:h3.textContent.trim(), section:'Encyclopedia', sectionId:'care', type:'e', el:card});
+        }
+      });
+    }
+
+    // 3. Key tool sections
+    var toolSecs = [
+      {id:'bouquet-builder',label:'Bouquet Builder'},
+      {id:'pairing',label:'Pairing'},
+      {id:'substitutions',label:'Substitutions'},
+      {id:'occasions',label:'Occasions'},
+      {id:'scent',label:'Scent'},
+      {id:'vaselife',label:'Vase Life'}
+    ];
+    toolSecs.forEach(function(ts) {
+      var sec = document.getElementById(ts.id);
+      if (!sec) return;
+      var cards = sec.querySelectorAll('.card');
+      cards.forEach(function(card) {
+        var h = card.querySelector('h3,h4,strong');
+        if (h) {
+          var name = h.textContent.trim();
+          if (name.length > 2 && name.length < 60) {
+            _idx.push({name:name, section:ts.label, sectionId:ts.id, type:'t', el:card});
+          }
+        }
+      });
+    });
+  }
+
+  function doSearch(query) {
+    if (!_idx.length) buildIndex();
+    var q = query.toLowerCase().trim();
+    if (q.length < 2) return [];
+    var hits = [];
+    var seen = {};
+    _idx.forEach(function(item) {
+      if (item.name.toLowerCase().indexOf(q) !== -1) {
+        var key = item.name + '|' + item.sectionId;
+        if (!seen[key]) {
+          seen[key] = true;
+          hits.push(item);
+        }
+      }
+    });
+    // Also search full text content of care cards for partial matches
+    var careBox = document.getElementById('careCards');
+    if (careBox) {
+      var cCards = careBox.querySelectorAll('.card');
+      cCards.forEach(function(card) {
+        if (card.textContent.toLowerCase().indexOf(q) !== -1) {
+          var h3 = card.querySelector('h3');
+          if (h3) {
+            var key = h3.textContent.trim() + '|care';
+            if (!seen[key]) {
+              seen[key] = true;
+              hits.push({name:h3.textContent.trim(), section:'Encyclopedia', sectionId:'care', type:'e', el:card});
+            }
+          }
+        }
+      });
+    }
+    return hits;
+  }
+
+  function showResults(hits, query) {
+    var box = document.getElementById('fsbResults');
+    if (!hits.length) {
+      box.innerHTML = '<div class="fsb-none">No results for "' + query + '" 🌺</div>';
+      box.classList.add('open');
+      return;
+    }
+    var html = '';
+    hits.slice(0, 12).forEach(function(h, i) {
+      var badge = h.type === 'g' ? 'fsb-badge-g' : h.type === 'e' ? 'fsb-badge-e' : 'fsb-badge-t';
+      var label = h.type === 'g' ? 'Gallery' : h.type === 'e' ? 'Encyclopedia' : 'Tool';
+      html += '<div class="fsb-hit" data-i="' + i + '"><div><div class="fsb-hit-name">' + h.name + '</div><div class="fsb-hit-loc">in ' + h.section + '</div></div><span class="fsb-badge ' + badge + '">' + label + '</span></div>';
+    });
+    box.innerHTML = html;
+    box.classList.add('open');
+    window._fsbHits = hits;
+  }
+
+  function jumpTo(index) {
+    var hits = window._fsbHits || [];
+    var h = hits[index];
+    if (!h) return;
+    document.getElementById('fsbResults').classList.remove('open');
+
+    // Scroll to section first
+    var sec = document.getElementById(h.sectionId);
+    if (sec) sec.scrollIntoView({behavior:'smooth', block:'start'});
+
+    // Then highlight the specific card
+    if (h.el) {
+      setTimeout(function() {
+        h.el.scrollIntoView({behavior:'smooth', block:'center'});
+        h.el.style.outline = '3px solid var(--rose)';
+        h.el.style.outlineOffset = '6px';
+        h.el.style.boxShadow = '0 0 30px rgba(255,107,138,0.3)';
+        h.el.style.transition = 'outline 0.3s, outline-offset 0.3s, box-shadow 0.3s';
+        setTimeout(function() {
+          h.el.style.outline = 'none';
+          h.el.style.outlineOffset = '0';
+          h.el.style.boxShadow = '';
+        }, 3500);
+      }, 600);
+    }
+  }
+
+  // Wire up events after DOM ready
+  function init() {
+    buildIndex();
+    var input = document.getElementById('fsbInput');
+    var btn = document.getElementById('fsbBtn');
+    var box = document.getElementById('fsbResults');
+
+    if (!input || !btn) return;
+
+    // Type to see dropdown results
+    input.addEventListener('input', function() {
+      var q = this.value.trim();
+      if (q.length < 2) { box.classList.remove('open'); box.innerHTML = ''; return; }
+      var hits = doSearch(q);
+      showResults(hits, q);
+    });
+
+    // Enter = jump to first result
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        var q = this.value.trim();
+        if (q.length < 2) return;
+        var hits = doSearch(q);
+        if (hits.length > 0) {
+          window._fsbHits = hits;
+          jumpTo(0);
+        } else {
+          showResults([], q);
+        }
+      } else if (e.key === 'Escape') {
+        this.value = '';
+        box.classList.remove('open');
+        this.blur();
+      }
+    });
+
+    // Button click = same as Enter
+    btn.addEventListener('click', function() {
+      var q = input.value.trim();
+      if (q.length < 2) { input.focus(); return; }
+      var hits = doSearch(q);
+      if (hits.length > 0) {
+        window._fsbHits = hits;
+        jumpTo(0);
+      } else {
+        showResults([], q);
+      }
+    });
+
+    // Click result in dropdown
+    box.addEventListener('click', function(e) {
+      var item = e.target.closest('.fsb-hit');
+      if (item) {
+        var i = parseInt(item.getAttribute('data-i'));
+        jumpTo(i);
+      }
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('#fsbWrap')) {
+        box.classList.remove('open');
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+
 
 <!-- SIDEBAR -->
 <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
@@ -3387,175 +3608,6 @@ onAuthStateChanged(auth,async u=>{
 // GLOBAL FLOWER SEARCH
 // ========================================================================
 
-// Handle Enter key in search — jump to first result
-function handleSearchKey(event) {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-    executeFlowerSearch();
-  } else if (event.key === 'Escape') {
-    event.target.value = '';
-    globalFlowerSearchHandler('');
-    event.target.blur();
-  }
-}
-
-// Execute search — trigger search and jump to first result
-function executeFlowerSearch() {
-  const input = document.getElementById('globalFlowerSearch');
-  const query = input.value.trim();
-  if (!query || query.length < 2) return;
-
-  // Make sure search results are populated
-  globalFlowerSearchHandler(query);
-
-  // Jump to first result
-  const results = window._searchResults || [];
-  if (results.length > 0) {
-    jumpToSearchResult(0, results[0].sectionId);
-    // Clear the dropdown
-    document.getElementById('globalSearchResults').classList.remove('visible');
-  }
-}
-
-function globalFlowerSearchHandler(query) {
-  const resultsDiv = document.getElementById('globalSearchResults');
-  if (!query || query.length < 2) {
-    resultsDiv.classList.remove('visible');
-    resultsDiv.innerHTML = '';
-    return;
-  }
-  const q = query.toLowerCase().trim();
-  const results = [];
-
-  // Search gallery photo cards (h3/h4/p text inside gallery sections)
-  const gallerySections = [
-    {id:'roses',label:'Rose Gallery'},
-    {id:'peonies',label:'Peony Gallery'},
-    {id:'bouquets',label:'Bouquets'},
-    {id:'wedding',label:'Wedding Flowers'},
-    {id:'seasonal',label:'Seasonal Flowers'}
-  ];
-  gallerySections.forEach(gs => {
-    const sec = document.getElementById(gs.id);
-    if (!sec) return;
-    const cards = sec.querySelectorAll('.card, .photo-card, [class*="card"]');
-    cards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      if (text.includes(q)) {
-        const h3 = card.querySelector('h3,h4,.photo-title');
-        const name = h3 ? h3.textContent.trim() : text.substring(0, 40).trim();
-        if (!results.find(r => r.name === name && r.sectionId === gs.id)) {
-          results.push({name, section: gs.label, sectionId: gs.id, type: 'gallery', el: card});
-        }
-      }
-    });
-  });
-
-  // Search care encyclopedia cards
-  const careCards = document.querySelectorAll('#careCards .care-card, #careCards .card');
-  careCards.forEach(card => {
-    const text = card.textContent.toLowerCase();
-    if (text.includes(q)) {
-      const h3 = card.querySelector('h3');
-      const name = h3 ? h3.textContent.trim() : text.substring(0, 40).trim();
-      results.push({name, section: 'Encyclopedia', sectionId: 'care', type: 'care', el: card});
-    }
-  });
-
-  // Search tool sections (bouquet builder flowers, pairing engine, substitutions, etc.)
-  const toolSections = [
-    {id:'bouquet-builder',label:'Bouquet Builder'},
-    {id:'pairing',label:'Flower Pairing'},
-    {id:'substitutions',label:'Substitution Finder'},
-    {id:'occasions',label:'Occasion Gallery'},
-    {id:'scent',label:'Scent Guide'},
-    {id:'vaselife',label:'Vase Life'}
-  ];
-  toolSections.forEach(ts => {
-    const sec = document.getElementById(ts.id);
-    if (!sec) return;
-    const cards = sec.querySelectorAll('.card, [class*="card"]');
-    cards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      if (text.includes(q)) {
-        const h3 = card.querySelector('h3,h4,strong');
-        const name = h3 ? h3.textContent.trim() : text.substring(0, 40).trim();
-        if (!results.find(r => r.name === name && r.sectionId === ts.id)) {
-          results.push({name, section: ts.label, sectionId: ts.id, type: 'tool', el: card});
-        }
-      }
-    });
-  });
-
-  // Search recipe cards
-  const recipeSec = document.getElementById('recipes');
-  if (recipeSec) {
-    const rCards = recipeSec.querySelectorAll('.card, [class*="card"]');
-    rCards.forEach(card => {
-      const text = card.textContent.toLowerCase();
-      if (text.includes(q)) {
-        const h3 = card.querySelector('h3,h4');
-        const name = h3 ? h3.textContent.trim() : text.substring(0, 40).trim();
-        if (!results.find(r => r.name === name && r.sectionId === 'recipes')) {
-          results.push({name, section: 'Recipes', sectionId: 'recipes', type: 'recipe', el: card});
-        }
-      }
-    });
-  }
-
-  // Render results
-  if (results.length === 0) {
-    resultsDiv.innerHTML = '<div class="fsr-empty">No results found 🌺</div>';
-  } else {
-    // Limit to 15 results
-    const shown = results.slice(0, 15);
-    resultsDiv.innerHTML = shown.map((r, i) => {
-      const tagClass = r.type === 'gallery' ? 'fsr-tag-gallery' : r.type === 'care' ? 'fsr-tag-care' : r.type === 'recipe' ? 'fsr-tag-recipe' : 'fsr-tag-tool';
-      const tagLabel = r.type === 'gallery' ? 'Gallery' : r.type === 'care' ? 'Encyclopedia' : r.type === 'recipe' ? 'Recipes' : 'Tool';
-      return '<div class="fsr-item" onclick="jumpToSearchResult('+i+',\''+r.sectionId+'\')"><div class="fsr-name">' + r.name + '<span class="fsr-tag ' + tagClass + '">' + tagLabel + '</span></div><div class="fsr-section">in ' + r.section + '</div></div>';
-    }).join('');
-  }
-  resultsDiv.classList.add('visible');
-
-  // Store results for click handling
-  window._searchResults = results;
-}
-
-function jumpToSearchResult(index, sectionId) {
-  const results = window._searchResults || [];
-  const r = results[index];
-
-  // Close search dropdown
-  document.getElementById('globalSearchResults').classList.remove('visible');
-
-  // Scroll to section
-  const section = document.getElementById(sectionId);
-  if (section) {
-    section.scrollIntoView({behavior: 'smooth', block: 'start'});
-
-    // If there's a specific card, highlight it after scrolling
-    if (r && r.el) {
-      setTimeout(() => {
-        r.el.style.outline = '2px solid var(--rose)';
-        r.el.style.outlineOffset = '4px';
-        r.el.style.transition = 'outline 0.3s, outline-offset 0.3s';
-        r.el.scrollIntoView({behavior: 'smooth', block: 'center'});
-        setTimeout(() => {
-          r.el.style.outline = 'none';
-          r.el.style.outlineOffset = '0';
-        }, 3000);
-      }, 500);
-    }
-  }
-}
-
-// Close search results when clicking outside
-document.addEventListener('click', e => {
-  if (!e.target.closest('.flower-search-wrap')) {
-    const r = document.getElementById('globalSearchResults');
-    if (r) r.classList.remove('visible');
-  }
-});
 
 </script>
 <script src="lightbox-fix.js"></script>
